@@ -69,7 +69,9 @@ const TextCard = (props) => {
           <Divider />
         </CardContent>
         <CardActions>
-          <Button size="small" className="service-card-button">Tamamla</Button>
+          <Button size="small" className="service-card-button" onClick={props.onClick}>
+            Tamamla
+          </Button>
         </CardActions>
       </Grid>
     </React.Fragment>

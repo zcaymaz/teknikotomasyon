@@ -7,6 +7,7 @@ router.route('/service')
 
 router.route('/service/:id')
     .get(ServiceCtrl.getServiceById)
+    .put(ServiceCtrl.updateService)
 
 router.route('/service/email')
     .post(ServiceCtrl.getServicesUser)

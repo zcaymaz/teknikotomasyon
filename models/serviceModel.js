@@ -25,6 +25,10 @@ const serviceSchema = new mongoose.Schema({
     servicePrice:{
         type: Number,
     },
+    isArchived: {
+        type: Boolean,
+        default: false
+    },
 }, {
     timestamps: true
 })

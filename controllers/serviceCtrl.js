@@ -48,6 +48,17 @@ const ServiceCtrl = {
             return res.status(500).json({ msg: err.message })
         }
     },
+    updateService: async (req, res) => {
+        try {
+          const { isArchived } = req.body;
+          const service = await Service.findByIdAndUpdate(req.params.id, { isArchived: true }, { new: true });
+          if (!service) return res.status(404).json({ msg: 'Servis bulunamadı' });
+          res.json(service);
+        } catch (err) {
+          return res.status(500).json({ msg: err.message })
+        }
+      }
+      
     // deleteTask: async (req, res) => {
     //     try {
     //         await Task.findByIdAndDelete(req.params.id)
