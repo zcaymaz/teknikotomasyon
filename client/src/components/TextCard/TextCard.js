@@ -5,43 +5,71 @@ import {
   CardActions,
   Button,
   Grid,
+  CardHeader,
+  Divider,
 } from "@mui/material";
 
-const TextCard = () => {
+const TextCard = (props) => {
   return (
     <React.Fragment>
-      <Grid p={1} sx={{bgcolor:'#dedede', minWidth:'275px'}}>
+      <Grid p={1} className="service-card">
+        <CardHeader
+          disableTypography
+          sx={{ textAlign: "right", height: "0px", fontSize: "16px" }}
+          title={"Tarih: " + props.serviceDate}
+        />
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Müşteri İsmi
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label">Ad Soyad: </span>
+            <br />
+            {props.serviceName}
           </Typography>
-          <Typography variant="h5" component="div">
-            Müşteri Adres
+          <Divider />
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label">Tel No: </span>
+            <br />
+            {props.serviceGsmno}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Müşteri Gsm
+          <Divider />
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label">Adres: </span>
+            <br />
+            {props.serviceAddress}
           </Typography>
-          <Typography variant="body2">
-            Açıklama
+          <Divider />
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label">Açıklama: </span>
+            <br />
+            {props.serviceDesc}
           </Typography>
-          <Typography variant="body2">
-            Marka
+          <Divider />
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label">Marka: </span>
+            <br />
+            {props.serviceBrand}
           </Typography>
-          <Typography variant="body2">
-            Ürün Modeli
+          <Divider />
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label">Ürün Modeli: </span>
+            <br />
+            {props.serviceModel}
           </Typography>
-          <Typography variant="body2">
-            Tarih
+          <Divider />
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label">Atölye/Servis: </span>
+            <br />
+            {props.serviceType}
           </Typography>
-          <Typography variant="body2">
-            Ücret
+          <Divider />
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label">Ücret: </span>
+            <br />
+            {props.servicePrice}
           </Typography>
-          <Typography variant="body2">
-            Atölye mi Servis mi
-          </Typography>
+          <Divider />
         </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button size="small" className="service-card-button">Tamamla</Button>
         </CardActions>
       </Grid>
     </React.Fragment>

@@ -3,14 +3,25 @@ import React from "react";
 import TextCard from "../../components/TextCard/TextCard";
 
 const Home = () => {
+  
   return (
     <>
-      <Grid container direction="row" justifyContent="center" bgcolor="">
+      <Grid container direction="row" justifyContent="center">
         <Typography pt={5} pb={1} sx={{fontSize:'32px', color:'#0f0f0f'}}>Mevcut Servisler</Typography>
         <Divider sx={{width:'100%', border:'1px solid #dedede'}}/>
       </Grid>
-      <Grid container direction="row" p={7}>
-        <TextCard />
+      <Grid container direction="row" p={7} justifyContent="center" gap={3}>
+        <TextCard
+        serviceDate="25.05.2023"
+        serviceName="Selamlar"
+        serviceGsmno="2"
+        serviceAddress="s"
+        serviceDesc="s"
+        serviceBrand="s"
+        serviceModel="s"
+        serviceType="s"
+        servicePrice="s"
+        />
       </Grid>
     </>
   );
