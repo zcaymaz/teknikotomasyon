@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Stack, Button, Typography, Divider } from "@mui/material";
-import { FormInput, MultilineFormInput } from "../../components/common/Inputs";
+import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
 import axios from "axios";
 
 const ServiceAdd = () => {
@@ -15,10 +15,17 @@ const ServiceAdd = () => {
 
   const createService = async (e) => {
     e.preventDefault();
-    try { 
-      await axios.post("http://localhost:3001/api/service",
-        { serviceName: serviceName, serviceGsmno: serviceGsmno, serviceAddress: serviceAddress, serviceDesc: serviceDesc, serviceBrand: serviceBrand, serviceModel: serviceModel, serviceType: serviceType, servicePrice: servicePrice, },
-      );
+    try {
+      await axios.post("http://localhost:3001/api/service", {
+        serviceName: serviceName,
+        serviceGsmno: serviceGsmno,
+        serviceAddress: serviceAddress,
+        serviceDesc: serviceDesc,
+        serviceBrand: serviceBrand,
+        serviceModel: serviceModel,
+        serviceType: serviceType,
+        servicePrice: servicePrice,
+      });
 
       setserviceName("");
       setserviceGsmno("");
@@ -60,8 +67,13 @@ const ServiceAdd = () => {
                 name="serviceGsmno"
                 id="serviceGsmno"
                 value={serviceGsmno}
+                type="number"
                 required
-                onChange={(e) => setserviceGsmno(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value.length <= 11) {
+                    setserviceGsmno(e.target.value);
+                  }
+                }}
               />
             </Stack>
             <Stack direction="row" spacing={3} padding={1}>
@@ -101,13 +113,8 @@ const ServiceAdd = () => {
                 required
                 onChange={(e) => setserviceModel(e.target.value)}
               />
-              <FormInput
-                size="medium"
-                label="Atölye/Servis"
-                name="serviceType"
-                id="serviceType"
+              <ServiceTypeInput
                 value={serviceType}
-                required
                 onChange={(e) => setserviceType(e.target.value)}
               />
               <FormInput

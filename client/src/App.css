@@ -11,7 +11,7 @@ body {
 .service-card {
   border: 2px solid #dedede;
   border-radius: 17px;
-  min-width: 350px;
+  max-width: 330px;
 }
 .service-card-label {
   font-size: 14px;
@@ -20,6 +20,7 @@ body {
 .service-card-content {
   color:#1570EF;
   font-size: 19px !important;
+  overflow-wrap: break-word !important;
 }
 .service-card-button {
   padding: 8px 20px !important;
@@ -50,4 +51,7 @@ body {
   margin-top: 3rem !important;
   height: 50px;
   width: 30%;
+}
+.archive-table {
+  overflow-wrap: break-word !important;
 }
