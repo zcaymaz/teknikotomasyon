@@ -19,10 +19,10 @@ const ArchivedServices = () => {
   const fetchArchivedServices = async () => {
     try {
       const response = await axios.get("http://89.116.52.58:3001/api/service/");
-      const filteredServices = response.data.filter(
-        (service) => service.isArchived
-      );
-      setArchivedServices(filteredServices);
+      const filteredServices = response.data.filter((service) => service.isArchived);
+      
+      const sortedServices = filteredServices.reverse();
+      setArchivedServices(sortedServices);      
     } catch (error) {
       console.error(error);
     }
