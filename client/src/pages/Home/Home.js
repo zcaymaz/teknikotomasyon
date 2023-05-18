@@ -10,11 +10,10 @@ const Home = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/service/");
+      const response = await axios.get("http://89.116.52.58:3001/api/service/");
       const filteredServices = response.data.filter((service) => !service.isArchived);
       const reversedServices = filteredServices.reverse();
       setServices(reversedServices);
-      console.log(reversedServices)
     } catch (error) {
       console.error(error);
     }
