@@ -16,7 +16,7 @@ const ServiceAdd = () => {
   const createService = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://89.116.52.58:3001/api/service", {
+      await axios.post("http://89.116.52.58:3001/api/service/", {
         serviceName: serviceName,
         serviceGsmno: serviceGsmno,
         serviceAddress: serviceAddress,
@@ -35,7 +35,7 @@ const ServiceAdd = () => {
       setserviceModel("");
       setserviceType("");
       setservicePrice("");
-      window.location.href = "http://localhost:3000/";
+      window.location.href = "/";
     } catch (err) {
       alert(err.response.data.msg);
     }
@@ -51,7 +51,7 @@ const ServiceAdd = () => {
         </Grid>
         <Grid p={5} item xs={12} bgcolor="#f0f0f0">
           <form onSubmit={createService}>
-            <Stack direction="row" spacing={3} padding={1}>
+            <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2} padding={1}>
               <FormInput
                 size="medium"
                 label="Müşteri İsmi"
@@ -76,7 +76,7 @@ const ServiceAdd = () => {
                 }}
               />
             </Stack>
-            <Stack direction="row" spacing={3} padding={1}>
+            <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2} padding={1}>
               <MultilineFormInput
                 label="Açıklama"
                 name="serviceDesc"
@@ -94,7 +94,7 @@ const ServiceAdd = () => {
                 onChange={(e) => setserviceAddress(e.target.value)}
               />
             </Stack>
-            <Stack direction="row" spacing={3} padding={1}>
+            <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2}padding={1}>
               <FormInput
                 size="medium"
                 label="Ürün Markası"
@@ -113,10 +113,6 @@ const ServiceAdd = () => {
                 required
                 onChange={(e) => setserviceModel(e.target.value)}
               />
-              <ServiceTypeInput
-                value={serviceType}
-                onChange={(e) => setserviceType(e.target.value)}
-              />
               <FormInput
                 size="medium"
                 type="number"
@@ -126,6 +122,10 @@ const ServiceAdd = () => {
                 value={servicePrice}
                 required
                 onChange={(e) => setservicePrice(e.target.value)}
+              />
+              <ServiceTypeInput
+                value={serviceType}
+                onChange={(e) => setserviceType(e.target.value)}
               />
             </Stack>
             <center>

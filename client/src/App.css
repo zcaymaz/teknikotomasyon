@@ -52,6 +52,15 @@ body {
   height: 50px;
   width: 30%;
 }
+.serviceadd-button-update {
+  background-color: #d1a507 !important;
+  color : #fff !important;
+  text-decoration: none;
+  font-size: large;
+  margin-left: 1rem !important;
+  height: 45px !important;
+  width: 50%;
+}
 .archive-table {
   overflow-wrap: break-word !important;
 }

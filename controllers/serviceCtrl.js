@@ -57,8 +57,27 @@ const ServiceCtrl = {
         } catch (err) {
           return res.status(500).json({ msg: err.message })
         }
-      }
+    },
+    
+    updateServiceData: async (req, res) => {
+        try {
+          const { serviceName, serviceGsmno, serviceAddress, serviceDesc, serviceBrand, serviceModel, serviceType, servicePrice } = req.body;
       
+          const service = await Service.findByIdAndUpdate(
+            req.params.id,
+            { serviceName, serviceGsmno, serviceAddress, serviceDesc, serviceBrand, serviceModel, serviceType, servicePrice},
+            { new: true }
+          );
+      
+          if (!service) {
+            return res.status(404).json({ msg: 'Servis bulunamadı' });
+          }
+      
+          res.json(service);
+        } catch (err) {
+          return res.status(500).json({ msg: err.message });
+        }
+    }
     // deleteTask: async (req, res) => {
     //     try {
     //         await Task.findByIdAndDelete(req.params.id)

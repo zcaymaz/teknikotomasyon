@@ -8,6 +8,7 @@ import {
   CardHeader,
   Divider,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const TextCard = (props) => {
   return (
@@ -71,6 +72,9 @@ const TextCard = (props) => {
         <CardActions>
           <Button size="small" className="service-card-button" onClick={props.onClick}>
             Tamamla
+          </Button>
+          <Button size="small" className="serviceadd-button-update" component={Link} to={`/update/${props.serviceId}`}>
+            Düzenle
           </Button>
         </CardActions>
       </Grid>
