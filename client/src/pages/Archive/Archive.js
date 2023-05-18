@@ -18,7 +18,7 @@ const ArchivedServices = () => {
 
   const fetchArchivedServices = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/service/");
+      const response = await axios.get("http://89.116.52.58:3001/api/service/");
       const filteredServices = response.data.filter(
         (service) => service.isArchived
       );
