@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const TextCard = (props) => {
   return (
     <React.Fragment>
-      <Grid p={1} className="service-card">
+      <Grid p={1} className="service-card">       
         <CardHeader
           disableTypography
           sx={{ textAlign: "right", height: "0px", fontSize: "16px" }}
@@ -76,7 +76,7 @@ const TextCard = (props) => {
           <Button size="small" className="serviceadd-button-update" component={Link} to={`/update/${props.serviceId}`}>
             Düzenle
           </Button>
-        </CardActions>
+        </CardActions>       
       </Grid>
     </React.Fragment>
   );

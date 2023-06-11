@@ -11,7 +11,7 @@ body {
 .service-card {
   border: 2px solid #dedede;
   border-radius: 17px;
-  max-width: 330px;
+  width: 330px;
 }
 .service-card-label {
   font-size: 14px;

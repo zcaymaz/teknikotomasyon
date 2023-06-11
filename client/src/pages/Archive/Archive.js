@@ -47,7 +47,7 @@ const ArchivedServices = () => {
   const handleSearch = async () => {
     if (searchTerm !== "") {
       try {
-        const response = await axios.get("http://localhost:3001/api/service/");
+        const response = await axios.get("http://89.116.52.58:3001/api/service/");
         const filteredServices = response.data.filter(
           (service) =>
             service.isArchived &&
@@ -83,8 +83,8 @@ const ArchivedServices = () => {
         onChange={handleChangeSearchTerm}
       />
       <TableContainer
-        sx={{ height: "82vh", overflowX: "scroll" }}>
-        <Table sx={{ tableLayout: "fixed" }}>
+        sx={{ height: "82vh", width:"100%", overflowX: "scroll", overflowY:"scroll" }}>
+        <Table>
           <TableHead>
             <TableRow>
               <TableCell>Ad Soyad</TableCell>
