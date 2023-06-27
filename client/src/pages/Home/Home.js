@@ -4,6 +4,7 @@ import TextCard from "../../components/TextCard/TextCard";
 import axios from "axios";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
+import { formatPhoneNumber } from "../../components/common/FormatNumber";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -54,7 +55,7 @@ const Home = () => {
             serviceId={service._id}
             serviceDate={formatDate(service.createdAt)}
             serviceName={service.serviceName}
-            serviceGsmno={service.serviceGsmno}
+            serviceGsmno={formatPhoneNumber(service.serviceGsmno)}
             serviceAddress={service.serviceAddress}
             serviceDesc={service.serviceDesc}
             serviceBrand={service.serviceBrand}
