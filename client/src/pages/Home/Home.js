@@ -24,6 +24,9 @@ const Home = () => {
     fetchServices();
   }, []);
 
+  const printService = (service) => {
+    window.print();
+  }
   const handleCompleteService = (service) => {
     const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
     const result = window.confirm(confirmMessage);
@@ -63,6 +66,7 @@ const Home = () => {
             serviceType={service.serviceType}
             servicePrice={formatPrice(service.servicePrice)}
             onClick={() => handleCompleteService(service)}
+            yazdir={() => printService(service)}
           />
         ))}
       </Grid>
