@@ -24,8 +24,8 @@ const Home = () => {
     fetchServices();
   }, []);
 
-  const printService = (service) => {
-    window.print();
+  const printService = (service_id) => {
+    window.print(service_id);
   }
   const handleCompleteService = (service) => {
     const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
