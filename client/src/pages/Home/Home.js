@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Divider, Grid, Typography } from "@mui/material";
 import TextCard from "../../components/TextCard/TextCard";
 import axios from "axios";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
 import { formatPhoneNumber } from "../../components/common/FormatNumber";
+import { useReactToPrint } from "react-to-print";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -24,9 +25,6 @@ const Home = () => {
     fetchServices();
   }, []);
 
-  const printService = (service_id) => {
-    window.print(service_id);
-  }
   const handleCompleteService = (service) => {
     const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
     const result = window.confirm(confirmMessage);
@@ -42,7 +40,16 @@ const Home = () => {
         });
     }
   };
+  const componentRef = useRef();
 
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  // const printService = (service_id) => {
+  //   window.print(service_id)
+  // }
+  
   return (
     <>
       <Grid container direction="row" justifyContent="center" mb={2}>
@@ -53,8 +60,8 @@ const Home = () => {
       </Grid>
       <Grid container direction="row" p={{ xs: 0, sm: 7 }} justifyContent="center" gap={3}>
         {services.map((service) => (
+          <div key={service._id} ref={componentRef}>
           <TextCard
-            key={service._id}
             serviceId={service._id}
             serviceDate={formatDate(service.createdAt)}
             serviceName={service.serviceName}
@@ -66,8 +73,9 @@ const Home = () => {
             serviceType={service.serviceType}
             servicePrice={formatPrice(service.servicePrice)}
             onClick={() => handleCompleteService(service)}
-            yazdir={() => printService(service)}
+            yazdir={() => handlePrint()}
           />
+        </div>
         ))}
       </Grid>
     </>

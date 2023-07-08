@@ -17,7 +17,7 @@ const TextCard = (props) => {
       <Grid p={1} className="service-card">       
         <CardHeader
           disableTypography
-          sx={{ textAlign: "right", height: "0px", fontSize: "16px" }}
+          sx={{ textAlign: "right", height: "0px", fontSize: "16px", marginRight:"1rem" }}
           title={"Tarih: " + props.serviceDate}
         />
         <CardContent>
@@ -79,9 +79,11 @@ const TextCard = (props) => {
           </Button>
         </CardActions>
         <CardActions>
-          <Button sx={{border:'3px solid red'}} onClick={props.yazdir}>
-            Yazdır
-          </Button>
+        <Button
+          sx={{ border: '3px solid red' }}
+          onClick={() => {props.yazdir()}}>
+          Yazdır
+        </Button>
         </CardActions>
       </Grid>
     </React.Fragment>
