@@ -23,9 +23,27 @@ body {
   overflow-wrap: break-word !important;
 }
 .service-card-button {
-  padding: 8px 20px !important;
+  padding: 1rem !important;
   height: 45px !important;
   background: #039855 !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  color: white !important;
+  font-family: 'Roboto' !important;
+}
+.service-card-button-update {
+  padding: 1rem !important;
+  height: 45px !important;
+  background: #d1a507 !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  color: white !important;
+  font-family: 'Roboto' !important;
+}
+.service-card-button-print {
+  padding: 1rem !important;
+  height: 45px !important;
+  background: teal !important;
   border-radius: 8px !important;
   font-size: 16px !important;
   color: white !important;
@@ -63,4 +81,25 @@ body {
 }
 .archive-table {
   overflow-wrap: break-word !important;
+}
+.receipt-right-side {
+  padding: 6px;
+  text-align: right;
+}
+.receipt-left-side {
+  padding: 6px;
+  text-align: left;
+}
+.receipt-print-button {
+  padding: 1rem !important;
+  height: 45px !important;
+  background: teal !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  color: white !important;
+  font-family: 'Roboto' !important;
+  margin-top: 1.5rem !important;
+}
+.receipt-table {
+  width: 100%;
 }

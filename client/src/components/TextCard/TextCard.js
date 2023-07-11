@@ -9,6 +9,7 @@ import {
   Divider,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import ServiceModal from "../common/ServiceModal";
 
 const TextCard = (props) => {
 
@@ -70,20 +71,16 @@ const TextCard = (props) => {
           </Typography>
           <Divider />
         </CardContent>
-        <CardActions>
+        <CardActions sx={{gap:'1.5rem', justifyContent:'center'}}>
           <Button size="small" className="service-card-button" onClick={props.onClick}>
             Tamamla
           </Button>
-          <Button size="small" className="serviceadd-button-update" component={Link} to={`/update/${props.serviceId}`}>
+          <Button size="small" className="service-card-button-update" component={Link} to={`/update/${props.serviceId}`}>
             Düzenle
           </Button>
         </CardActions>
-        <CardActions>
-        <Button
-          sx={{ border: '3px solid red' }}
-          onClick={() => {props.yazdir()}}>
-          Yazdır
-        </Button>
+        <CardActions sx={{gap:'1.5rem', justifyContent:'center'}}>
+          <ServiceModal id={props.serviceId}/>
         </CardActions>
       </Grid>
     </React.Fragment>

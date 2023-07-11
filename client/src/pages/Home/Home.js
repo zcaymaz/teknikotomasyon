@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Divider, Grid, Typography } from "@mui/material";
 import TextCard from "../../components/TextCard/TextCard";
 import axios from "axios";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
 import { formatPhoneNumber } from "../../components/common/FormatNumber";
-import { useReactToPrint } from "react-to-print";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -40,15 +39,6 @@ const Home = () => {
         });
     }
   };
-  const componentRef = useRef();
-
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
-
-  // const printService = (service_id) => {
-  //   window.print(service_id)
-  // }
   
   return (
     <>
@@ -60,7 +50,6 @@ const Home = () => {
       </Grid>
       <Grid container direction="row" p={{ xs: 0, sm: 7 }} justifyContent="center" gap={3}>
         {services.map((service) => (
-          <div key={service._id} ref={componentRef}>
           <TextCard
             serviceId={service._id}
             serviceDate={formatDate(service.createdAt)}
@@ -73,9 +62,7 @@ const Home = () => {
             serviceType={service.serviceType}
             servicePrice={formatPrice(service.servicePrice)}
             onClick={() => handleCompleteService(service)}
-            yazdir={() => handlePrint()}
           />
-        </div>
         ))}
       </Grid>
     </>
