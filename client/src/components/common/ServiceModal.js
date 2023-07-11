@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { formatPrice } from "./FormatPrice";
 import { formatPhoneNumber } from "./FormatNumber";
+import { formatDate } from "./FormatDate";
 import { useReactToPrint } from "react-to-print";
 
 const style = {
@@ -56,6 +57,11 @@ export default function ServiceModal(props) {
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <table className="receipt-table" ref={componentRef}>
+            <tr>
+              <th className="receipt-right-side">Fiş Tarihi: </th>
+              <th className="receipt-right-side">{service ? formatDate(service.createdAt) : null}</th>
+            </tr>
+            <br/>
             <tr>
               <th className="receipt-left-side">Ad Soyad: </th>
               <th className="receipt-right-side">{service?.serviceName}</th>
