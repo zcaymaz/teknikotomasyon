@@ -85,10 +85,13 @@ body {
 .receipt-right-side {
   padding: 6px;
   text-align: right;
+  font-size: 12px;
 }
 .receipt-left-side {
   padding: 6px;
   text-align: left;
+  font-size: 12px;
+
 }
 .receipt-print-button {
   padding: 1rem !important;

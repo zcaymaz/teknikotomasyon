@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Modal, Button, Box } from "@mui/material";
+import { Modal, Button, Box, Typography } from "@mui/material";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { formatPrice } from "./FormatPrice";
@@ -15,7 +15,7 @@ const style = {
   width: 300,
   bgcolor: "background.paper",
   border: "1px solid #000",
-  borderRadius:"7px",
+  borderRadius: "7px",
   boxShadow: 24,
   p: 1,
 };
@@ -57,44 +57,37 @@ export default function ServiceModal(props) {
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <table className="receipt-table" ref={componentRef}>
-            <tr>
-              <th className="receipt-right-side">Fiş Tarihi: </th>
-              <th className="receipt-right-side">{service ? formatDate(service.createdAt) : null}</th>
-            </tr>
-            <br/>
-            <tr>
-              <th className="receipt-left-side">Ad Soyad: </th>
-              <th className="receipt-right-side">{service?.serviceName}</th>
-            </tr>
-            <tr>
-              <th className="receipt-left-side">Telefon No: </th>
-              <th className="receipt-right-side">{service ? formatPhoneNumber(service.serviceGsmno) : null}</th>
-            </tr>
-            <tr>
-              <th className="receipt-left-side">Adres: </th>
-              <th className="receipt-right-side">{service?.serviceAddress}</th>
-            </tr>
-            <tr>
-              <th className="receipt-left-side">Açıklama: </th>
-              <th className="receipt-right-side">{service?.serviceDesc}</th>
-            </tr>
-            <tr>
-              <th className="receipt-left-side">Ürün Marka: </th>
-              <th className="receipt-right-side">{service?.serviceBrand}</th>
-            </tr>
-            <tr>
-              <th className="receipt-left-side">Ürün Model: </th>
-              <th className="receipt-right-side">{service?.serviceModel}</th>
-            </tr>
-            <tr>
-              <th className="receipt-left-side">Servis Ücreti: </th>
-              <th className="receipt-right-side">{service ? formatPrice(service.servicePrice) : null}</th>
-            </tr>
+            <center>
+              <Typography sx={{padding:'1.2rem', fontSize:'14px', fontWeight:'bold'}}>
+                Fiş Tarihi: {service ? formatDate(service.createdAt) : null}
+                <br />
+                <br />
+                Ad Soyad: {service?.serviceName}
+                <br />
+                <br />
+                Telefon No: {service ? formatPhoneNumber(service.serviceGsmno) : null}
+                <br />
+                <br />
+                Adres: {service?.serviceAddress}
+                <br />
+                <br />
+                Açıklama: {service?.serviceDesc}
+                <br />
+                <br />
+                Ürün Marka: {service?.serviceBrand}
+                <br />
+                <br />
+                Ürün Model: {service?.serviceModel}
+                <br />
+                <br />
+                Tutar: {service ? formatPrice(service.servicePrice) : null}
+              </Typography>
+            </center>
           </table>
           <center>
-          <Button className="receipt-print-button" onClick={handlePrint}>
-            Yazdır
-          </Button>
+            <Button className="receipt-print-button" onClick={handlePrint}>
+              Yazdır
+            </Button>
           </center>
         </Box>
       </Modal>
