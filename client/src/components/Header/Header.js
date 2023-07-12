@@ -15,8 +15,8 @@ const Header = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Grid p={3}><span><Link className="navbar-link" to="/">Ana Sayfa</Link></span></Grid>
-            <Grid p={3}><span><Link className="navbar-link" to="/add">İlan Ekle</Link></span></Grid>
-            <Grid p={3}><span><Link className="navbar-link" to="/archive">Arşiv</Link></span></Grid>
+            <Grid p={3}><span><Link className="navbar-link" to="/add">Servis Ekle</Link></span></Grid>
+            <Grid p={3}><span><Link className="navbar-link" to="/archive">Tamamlanmış Servisler</Link></span></Grid>
           </Toolbar>
         </Container>
       </AppBar>
