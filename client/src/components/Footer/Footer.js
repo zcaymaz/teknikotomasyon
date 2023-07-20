@@ -13,6 +13,7 @@ export default function Footer() {
             ? theme.palette.grey[200]
             : theme.palette.grey[800],
         p: 4,
+        
       }}
       component="footer"
     >

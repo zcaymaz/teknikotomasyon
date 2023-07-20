@@ -106,3 +106,17 @@ body {
 .receipt-table {
   width: 100%;
 }
+
+.login-card {
+  background-color: whitesmoke !important; 
+  width: 330px;
+  height: 380px;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.login-stack {
+  justify-content: center !important;
+  align-items: center !important;
+  
+}
+

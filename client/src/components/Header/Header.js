@@ -30,6 +30,7 @@ function Header() {
               <MenuItem component="a" href='/archive' onClick={handleCloseNavMenu}>Arşiv</MenuItem>
               <MenuItem component="a" href='/test' onClick={handleCloseNavMenu}>Test</MenuItem>
               <MenuItem component="a" href='/archive' onClick={handleCloseNavMenu}>Çıkış Yap</MenuItem>
+              <MenuItem component="a" href='/login' onClick={handleCloseNavMenu}>Giriş Yap</MenuItem>
             </Menu>
           </Box>
           <PrecisionManufacturingIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -46,6 +47,7 @@ function Header() {
             <Button href="/add" sx={{ m: 0.5, color: 'white' }}>Servis Ekle</Button>
             <Button href="/archive" sx={{ m: 0.5, color: 'white' }}>Arşiv</Button>
             <Button href="/test" sx={{ m: 0.5, color: 'white' }}>Test</Button>
+            <Button href="/login" sx={{ m: 0.5, color: 'white' }}>Giriş Yap</Button>
             <Button sx={{ m: 0.5, color: 'white' }}>Çıkış Yap</Button>
           </Box>
         </Toolbar>
