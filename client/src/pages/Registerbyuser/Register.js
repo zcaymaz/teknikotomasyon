@@ -9,7 +9,7 @@ const Register = () => {
     const registerSubmit = async e => {
         e.preventDefault()
         try {
-            await axios.post('http://localhost:3001/user/register', { ...user }).then((res) => {
+            await axios.post('http://89.116.52.58:3001/user/register', { ...user }).then((res) => {
                 window.location.href = "/";
             })
             const userParams = ['name'];

@@ -16,7 +16,7 @@ const ServiceAdd = () => {
   const createService = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3001/api/service/", {
+      await axios.post("http://89.116.52.58:3001/api/service/", {
         name: localStorage.getItem('name'),
         serviceName: serviceName,
         serviceGsmno: serviceGsmno,

@@ -55,7 +55,7 @@ export default function FullWidthTabs() {
 
     const fetchServices = async () => {
         try {
-            await axios.post(`http://localhost:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterService(res.data) });
+            await axios.post(`http://89.116.52.58:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterService(res.data) });
             const filteredServices = nonFilterService.filter((service) => service.serviceType === "Servis");
             const filteredServicess = filteredServices.filter((service) => !service.isArchived);
             const reversedServices = filteredServicess.reverse();
@@ -66,7 +66,7 @@ export default function FullWidthTabs() {
     };
     const fetchWorkshops = async () => {
         try {
-            await axios.post(`http://localhost:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterWorkshop(res.data) });
+            await axios.post(`http://89.116.52.58:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterWorkshop(res.data) });
             const filteredWorkshops = nonFilterWorkshop.filter((service) => service.serviceType === "Atölye");
             const filteredWorkshopsNotArchive = filteredWorkshops.filter((service) => !service.isArchived);
             const reservedWorkshops = filteredWorkshopsNotArchive.reverse();
