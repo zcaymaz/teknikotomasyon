@@ -170,7 +170,14 @@ export default function FullWidthTabs() {
     const nonLoggedRouter = () => {
         return (
             <>
-              Lütfen Giriş Yapınız.
+            <Grid container alignItems={'center'} sx={{ height: '70vh' }}>
+                <Grid xs={12}>
+                    <Typography variant='h2' className='animate-charcter'
+                    sx={{ textAlign: 'center', width:'100%', height:'100%', fontWeight:'700', textTransform:'capitalize' }}>
+                        Giriş Yapınız...
+                    </Typography>
+                </Grid>
+            </Grid>
             </>
         )
       }
