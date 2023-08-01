@@ -11,13 +11,12 @@ const ServiceCtrl = {
     },
     getServicesUser: async (req, res) => {
         try {
-            const services = await Service.find({ serviceName: req.body.serviceName })
+            const services = await Service.find({ name: req.body.name })
             res.json(services)
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
     },
-
     getServiceById: async (req, res) => {
         try {
             const serviceId = req.params.id; // URL'den kartın MongoDB ID'sini alın
@@ -36,10 +35,10 @@ const ServiceCtrl = {
     },
     createService: async (req, res) => {
         try {
-            const { serviceName, serviceGsmno, serviceAddress, serviceDesc, serviceBrand, serviceModel, serviceType, servicePrice } = req.body;
+            const { name, serviceName, serviceGsmno, serviceAddress, serviceDesc, serviceBrand, serviceModel, serviceType, servicePrice } = req.body;
 
             const newService = new Service({
-                serviceName, serviceGsmno, serviceAddress, serviceDesc, serviceBrand, serviceModel, serviceType, servicePrice
+                name, serviceName, serviceGsmno, serviceAddress, serviceDesc, serviceBrand, serviceModel, serviceType, servicePrice
             })
 
             await newService.save()

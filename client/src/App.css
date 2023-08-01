@@ -108,15 +108,15 @@ body {
 }
 
 .login-card {
-  background-color: whitesmoke !important; 
   width: 330px;
   height: 380px;
+  border: #c0c0c0 2px solid !important;
   align-items: center !important;
   justify-content: center !important;
+  text-align: center !important;
 }
 .login-stack {
   justify-content: center !important;
   align-items: center !important;
-  
 }
 

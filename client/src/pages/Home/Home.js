@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
@@ -8,6 +9,7 @@ import axios from "axios";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
 import { formatPhoneNumber } from "../../components/common/FormatNumber";
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -43,16 +45,18 @@ function a11yProps(index) {
 }
 
 export default function FullWidthTabs() {
+    const isLogged = localStorage.getItem('name') ? true : false
     const theme = useTheme();
-    const [value, setValue] = React.useState(0);
-
+    const [value, setValue] = useState(0);
+    const [nonFilterService, setNonFilterService] = useState([]);
+    const [nonFilterWorkshop, setNonFilterWorkshop] = useState([]);
     const [services, setServices] = useState([]);
     const [workshop, setWorkshop] = useState([]);
 
     const fetchServices = async () => {
         try {
-            const response = await axios.get("http://89.116.52.58:3001/api/service/");
-            const filteredServices = response.data.filter((service) => service.serviceType === "Servis");
+            await axios.post(`http://localhost:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterService(res.data) });
+            const filteredServices = nonFilterService.filter((service) => service.serviceType === "Servis");
             const filteredServicess = filteredServices.filter((service) => !service.isArchived);
             const reversedServices = filteredServicess.reverse();
             setServices(reversedServices);
@@ -62,8 +66,8 @@ export default function FullWidthTabs() {
     };
     const fetchWorkshops = async () => {
         try {
-            const response = await axios.get("http://89.116.52.58:3001/api/service/");
-            const filteredWorkshops = response.data.filter((service) => service.serviceType === "Atölye");
+            await axios.post(`http://localhost:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterWorkshop(res.data) });
+            const filteredWorkshops = nonFilterWorkshop.filter((service) => service.serviceType === "Atölye");
             const filteredWorkshopsNotArchive = filteredWorkshops.filter((service) => !service.isArchived);
             const reservedWorkshops = filteredWorkshopsNotArchive.reverse();
             setWorkshop(reservedWorkshops);
@@ -75,7 +79,7 @@ export default function FullWidthTabs() {
     useEffect(() => {
         fetchServices();
         fetchWorkshops();
-    }, []);
+    }, [fetchServices, fetchWorkshops]);
 
     const handleCompleteService = (service) => {
         const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
@@ -100,10 +104,10 @@ export default function FullWidthTabs() {
     const handleChangeIndex = (index) => {
         setValue(index);
     };
-
-    return (
-        <Box sx={{ bgcolor: 'background.paper', margin: '10px', border: '2px solid #dedede' }}>
-            <AppBar position="static">
+    const LoggedRouter = () => {
+        return (
+            <>
+              <AppBar position="static">
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -156,10 +160,23 @@ export default function FullWidthTabs() {
                                 servicePrice={formatPrice(service.servicePrice)}
                                 onClick={() => handleCompleteService(service)}
                             />
-                        ))}w
+                        ))}
                     </Grid>
                 </TabPanel>
             </SwipeableViews>
+            </>
+        )
+      }
+    const nonLoggedRouter = () => {
+        return (
+            <>
+              Lütfen Giriş Yapınız.
+            </>
+        )
+      }
+    return (
+        <Box sx={{ bgcolor: 'background.paper', margin: '10px', border: '2px solid #dedede' }}>
+            {isLogged ? LoggedRouter() : nonLoggedRouter()}
         </Box>
     );
 }

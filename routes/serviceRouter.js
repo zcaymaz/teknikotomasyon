@@ -12,7 +12,7 @@ router.route('/service/:id')
 router.route('/service/:id/archive')
     .put(ServiceCtrl.updateService)
 
-router.route('/service/email')
+router.route('/service/name')
     .post(ServiceCtrl.getServicesUser);
 
 module.exports = router;
