@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import {
   Table,
@@ -13,14 +14,15 @@ import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
 
 const ArchivedServices = () => {
+  const isLogged = localStorage.getItem('name') ? true : false
+  const [nonFilterService, setNonFilterService] = useState([]);
   const [archivedServices, setArchivedServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchArchivedServices = async () => {
     try {
-      const response = await axios.get("http://89.116.52.58:3001/api/service/");
-      const filteredServices = response.data.filter((service) => service.isArchived);
-      
+      await axios.post(`http://localhost:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterService(res.data) });
+      const filteredServices = nonFilterService.filter((service) => service.isArchived);
       const sortedServices = filteredServices.sort((a, b) => {
         const updatedAtA = new Date(a.updatedAt);
         const updatedAtB = new Date(b.updatedAt);
@@ -42,7 +44,7 @@ const ArchivedServices = () => {
 
   useEffect(() => {
     fetchArchivedServices();
-  }, []);
+  }, [fetchArchivedServices()]);
 
   const handleSearch = async () => {
     if (searchTerm !== "") {
@@ -73,8 +75,9 @@ const ArchivedServices = () => {
     }
   };
 
-  return (
-    <>
+  const LoggedRouter = () => {
+    return (
+      <>
       <TextField
         sx={{marginTop:'1rem'}}
         size="small"
@@ -121,6 +124,19 @@ const ArchivedServices = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      </>
+    )
+  }
+  const nonLoggedRouter = () => {
+    return (
+        <>
+          Lütfen Giriş Yapınız.
+        </>
+    )
+  }
+  return (
+    <>
+    {isLogged ? LoggedRouter() : nonLoggedRouter()}
     </>
   );
 };
