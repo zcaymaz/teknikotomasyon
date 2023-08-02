@@ -8,7 +8,6 @@ import Archive from "./Archive/Archive";
 import Footer from "../components/Footer/Footer";
 import Test from "../pages/Test/Test";
 import Login from "./Login/Login";
-import Register from "./Registerbyuser/Register";
 
 const Mainpages = () => {
   return (
@@ -23,7 +22,6 @@ const Mainpages = () => {
             <Route exact path="/archive" element={<Archive />} />
             <Route exact path="/test" element={<Test />} />
             <Route exact path="/login" element={<Login />} />
-            <Route exact path="/register" element={<Register />} />
           </Routes>
         </div>
         <Footer />

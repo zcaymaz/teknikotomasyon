@@ -6,9 +6,6 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Typography, AppBar, Tabs, Tab, Box } from '@mui/material';
 import TextCard from "../../components/TextCard/TextCard";
 import axios from "axios";
-import { formatDate } from "../../components/common/FormatDate";
-import { formatPrice } from "../../components/common/FormatPrice";
-import { formatPhoneNumber } from "../../components/common/FormatNumber";
 
 
 function TabPanel(props) {
@@ -45,41 +42,37 @@ function a11yProps(index) {
 }
 
 export default function FullWidthTabs() {
+    const apiBaseUrl = "http://89.116.52.58:3001";
     const isLogged = localStorage.getItem('name') ? true : false
     const theme = useTheme();
     const [value, setValue] = useState(0);
-    const [nonFilterService, setNonFilterService] = useState([]);
-    const [nonFilterWorkshop, setNonFilterWorkshop] = useState([]);
     const [services, setServices] = useState([]);
     const [workshop, setWorkshop] = useState([]);
 
     const fetchServices = async () => {
         try {
-            await axios.post(`http://89.116.52.58:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterService(res.data) });
-            const filteredServices = nonFilterService.filter((service) => service.serviceType === "Servis");
-            const filteredServicess = filteredServices.filter((service) => !service.isArchived);
-            const reversedServices = filteredServicess.reverse();
-            setServices(reversedServices);
+            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: localStorage.getItem('name') });
+            const filteredServices = res.data.filter((service) => service.serviceType === "Servis" && !service.isArchived);
+            setServices(filteredServices.reverse());
         } catch (error) {
             console.error(error);
         }
     };
+    
     const fetchWorkshops = async () => {
         try {
-            await axios.post(`http://89.116.52.58:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterWorkshop(res.data) });
-            const filteredWorkshops = nonFilterWorkshop.filter((service) => service.serviceType === "Atölye");
-            const filteredWorkshopsNotArchive = filteredWorkshops.filter((service) => !service.isArchived);
-            const reservedWorkshops = filteredWorkshopsNotArchive.reverse();
-            setWorkshop(reservedWorkshops);
+            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: localStorage.getItem('name') });
+            const filteredWorkshops = res.data.filter((service) => service.serviceType === "Atölye" && !service.isArchived);
+            setWorkshop(filteredWorkshops.reverse());
         } catch (error) {
             console.error(error);
         }
     };
-
     useEffect(() => {
         fetchServices();
         fetchWorkshops();
-    }, [fetchServices, fetchWorkshops]);
+    }, []);
+    
 
     const handleCompleteService = (service) => {
         const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
@@ -87,7 +80,7 @@ export default function FullWidthTabs() {
 
         if (result) {
             axios
-                .put(`http://89.116.52.58:3001/api/service/${service._id}/archive`, { archived: true })
+                .put(`${apiBaseUrl}/api/service/${service._id}/archive`, { archived: true })
                 .then(() => {
                     fetchServices();
                 })
@@ -130,15 +123,15 @@ export default function FullWidthTabs() {
                         {services.map((service) => (
                             <TextCard
                                 serviceId={service._id}
-                                serviceDate={formatDate(service.createdAt)}
+                                serviceDate={service.createdAt}
                                 serviceName={service.serviceName}
-                                serviceGsmno={formatPhoneNumber(service.serviceGsmno)}
+                                serviceGsmno={service.serviceGsmno}
                                 serviceAddress={service.serviceAddress}
                                 serviceDesc={service.serviceDesc}
                                 serviceBrand={service.serviceBrand}
                                 serviceModel={service.serviceModel}
                                 serviceType={service.serviceType}
-                                servicePrice={formatPrice(service.servicePrice)}
+                                servicePrice={service.servicePrice}
                                 onClick={() => handleCompleteService(service)}
                             />
                         ))}
@@ -149,15 +142,15 @@ export default function FullWidthTabs() {
                         {workshop.map((service) => (
                             <TextCard
                                 serviceId={service._id}
-                                serviceDate={formatDate(service.createdAt)}
+                                serviceDate={service.createdAt}
                                 serviceName={service.serviceName}
-                                serviceGsmno={formatPhoneNumber(service.serviceGsmno)}
+                                serviceGsmno={service.serviceGsmno}
                                 serviceAddress={service.serviceAddress}
                                 serviceDesc={service.serviceDesc}
                                 serviceBrand={service.serviceBrand}
                                 serviceModel={service.serviceModel}
                                 serviceType={service.serviceType}
-                                servicePrice={formatPrice(service.servicePrice)}
+                                servicePrice={service.servicePrice}
                                 onClick={() => handleCompleteService(service)}
                             />
                         ))}

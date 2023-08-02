@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import ServiceModal from "../common/ServiceModal";
+import { formatDate } from "../../components/common/FormatDate";
+import { formatPhoneNumber } from "../../components/common/FormatNumber";
+import { formatPrice } from "../../components/common/FormatPrice";
 
 const TextCard = (props) => {
 
@@ -19,7 +22,7 @@ const TextCard = (props) => {
         <CardHeader
           disableTypography
           sx={{ textAlign: "right", height: "0px", fontSize: "16px", marginRight:"1rem" }}
-          title={"Tarih: " + props.serviceDate}
+          title={"Tarih: " + formatDate(props.serviceDate)}
         />
         <CardContent>
           <Typography p={0.5} className="service-card-content">
@@ -31,7 +34,7 @@ const TextCard = (props) => {
           <Typography p={0.5} className="service-card-content">
             <span className="service-card-label">Tel No: </span>
             <br />
-            {props.serviceGsmno}
+            {formatPhoneNumber(props.serviceGsmno)}
           </Typography>
           <Divider />
           <Typography p={0.5} className="service-card-content">
@@ -67,7 +70,7 @@ const TextCard = (props) => {
           <Typography p={0.5} className="service-card-content">
             <span className="service-card-label">Ücret: </span>
             <br />
-            {props.servicePrice}
+            {formatPrice(props.servicePrice)}
           </Typography>
           <Divider />
         </CardContent>
