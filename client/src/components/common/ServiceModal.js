@@ -58,7 +58,11 @@ export default function ServiceModal(props) {
         <Box sx={style}>
           <table className="receipt-table" ref={componentRef}>
             <center>
-              <Typography sx={{padding:'1.2rem', fontSize:'14px', fontWeight:'bold'}}>
+              <Typography sx={{ padding: '1.2rem', fontSize: '14px', fontWeight: 'bold'}}>
+                <Typography sx={{ textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '2px', lineHeight: '10px' }}>{localStorage.getItem('name')}</Typography>
+                BEYAZ EŞYA TEKNİK SERVİS
+                <br />
+                <br />
                 Fiş Tarihi: {service ? formatDate(service.createdAt) : null}
                 <br />
                 <br />
