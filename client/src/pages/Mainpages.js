@@ -14,10 +14,11 @@ const isLogged = localStorage.getItem('name') ? true : false;
 const Mainpages = () => {
   return (
     <Router>
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        <Header />
-        <div style={{ flex: 1 }}>
-          {isLogged ? (
+
+      {isLogged ? (
+        <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+          <Header />
+          <div style={{ flex: 1 }}>
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/add" element={<ServiceAdd />} />
@@ -25,14 +26,15 @@ const Mainpages = () => {
               <Route exact path="/archive" element={<Archive />} />
               <Route exact path="/test" element={<Test />} />
             </Routes>
-          ) : (
-            <Routes>
-              <Route exact path="/" element={<Login />} />
-            </Routes>
-          )}
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      ) : (
+        <Routes>
+          <Route exact path="/" element={<Login />} />
+        </Routes>
+      )}
+
     </Router>
   );
 };
