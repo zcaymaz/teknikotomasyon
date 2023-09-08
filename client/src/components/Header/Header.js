@@ -10,7 +10,7 @@ function Header() {
 
     localStorage.clear()
 
-    window.location.href = "/login";
+    window.location.href = "/";
 }
 const LoggedRouter = () => {
   return (
