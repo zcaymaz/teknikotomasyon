@@ -4,8 +4,6 @@ import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../component
 import axios from "axios";
 
 const ServiceAdd = () => {
-  const isLogged = localStorage.getItem('name') ? true : false
-
   const [serviceName, setserviceName] = useState("");
   const [serviceGsmno, setserviceGsmno] = useState("");
   const [serviceAddress, setserviceAddress] = useState("");
@@ -43,10 +41,10 @@ const ServiceAdd = () => {
       alert(err.response.data.msg);
     }
   };
-  const LoggedRouter = () => {
-    return (
-        <>
-<Grid container direction="row" p={3}>
+
+  return (
+    <>
+      <Grid container direction="row" p={3}>
         <Grid container direction="row" justifyContent="center" pb={2}>
           <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f" }}>
             Servis Ekle
@@ -55,7 +53,7 @@ const ServiceAdd = () => {
         </Grid>
         <Grid p={5} item xs={12} bgcolor="#f0f0f0">
           <form onSubmit={createService}>
-            <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2} padding={1}>
+            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
               <FormInput
                 size="medium"
                 label="Müşteri İsmi"
@@ -80,7 +78,7 @@ const ServiceAdd = () => {
                 }}
               />
             </Stack>
-            <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2} padding={1}>
+            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
               <MultilineFormInput
                 label="Açıklama"
                 name="serviceDesc"
@@ -98,7 +96,7 @@ const ServiceAdd = () => {
                 onChange={(e) => setserviceAddress(e.target.value)}
               />
             </Stack>
-            <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2}padding={1}>
+            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
               <FormInput
                 size="medium"
                 label="Ürün Markası"
@@ -140,28 +138,8 @@ const ServiceAdd = () => {
           </form>
         </Grid>
       </Grid>
-        </>
-    )
-  }
-  const nonLoggedRouter = () => {
-    return (
-        <>
-            <Grid container alignItems={'center'} sx={{ height: '70vh' }}>
-                <Grid xs={12}>
-                    <Typography variant='h2' className='animate-charcter'
-                    sx={{ textAlign: 'center', width:'100%', height:'100%', fontWeight:'700', textTransform:'capitalize' }}>
-                        Giriş Yapınız...
-                    </Typography>
-                </Grid>
-            </Grid>
-        </>
-    )
-  }
-  return (
-    <>
-      {isLogged ? LoggedRouter() : nonLoggedRouter()}
     </>
-  );
+  )
 };
 
 export default ServiceAdd;

@@ -8,15 +8,12 @@ import {
   TableCell,
   TableBody,
   TextField,
-  Grid,
-  Typography
 } from "@mui/material";
 import axios from "axios";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
 
 const ArchivedServices = () => {
-  const isLogged = localStorage.getItem('name') ? true : false
   const [nonFilterService, setNonFilterService] = useState([]);
   const [archivedServices, setArchivedServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,7 +25,7 @@ const ArchivedServices = () => {
       const sortedServices = filteredServices.sort((a, b) => {
         const updatedAtA = new Date(a.updatedAt);
         const updatedAtB = new Date(b.updatedAt);
-      
+
         if (updatedAtA > updatedAtB) {
           return -1;
         } else if (updatedAtA < updatedAtB) {
@@ -37,8 +34,8 @@ const ArchivedServices = () => {
           return 0;
         }
       });
-    
-      setArchivedServices(sortedServices);         
+
+      setArchivedServices(sortedServices);
     } catch (error) {
       console.error(error);
     }
@@ -77,18 +74,17 @@ const ArchivedServices = () => {
     }
   };
 
-  const LoggedRouter = () => {
-    return (
-      <>
+  return (
+    <>
       <TextField
-        sx={{marginTop:'1rem'}}
+        sx={{ marginTop: '1rem' }}
         size="small"
         label="Arama"
         value={searchTerm}
         onChange={handleChangeSearchTerm}
       />
       <TableContainer
-        sx={{ height: "82vh", width:"100%", overflowX: "scroll", overflowY:"scroll" }}>
+        sx={{ height: "82vh", width: "100%", overflowX: "scroll", overflowY: "scroll" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -126,28 +122,8 @@ const ArchivedServices = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      </>
-    )
-  }
-  const nonLoggedRouter = () => {
-    return (
-        <>
-            <Grid container alignItems={'center'} sx={{ height: '70vh' }}>
-                <Grid xs={12}>
-                    <Typography variant='h2' className='animate-charcter'
-                    sx={{ textAlign: 'center', width:'100%', height:'100%', fontWeight:'700', textTransform:'capitalize' }}>
-                        Giriş Yapınız...
-                    </Typography>
-                </Grid>
-            </Grid>
-        </>
-    )
-  }
-  return (
-    <>
-    {isLogged ? LoggedRouter() : nonLoggedRouter()}
     </>
-  );
+  )
 };
 
 export default ArchivedServices;

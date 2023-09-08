@@ -10,7 +10,7 @@ function Header() {
 
     localStorage.clear()
 
-    window.location.href = "/";
+    window.location.href = "/login";
 }
 const LoggedRouter = () => {
   return (
@@ -21,7 +21,7 @@ const LoggedRouter = () => {
               <MenuItem component="a" href='/add' onClick={handleCloseNavMenu}>Servis Ekle</MenuItem>
               <MenuItem component="a" href='/archive' onClick={handleCloseNavMenu}>Arşiv</MenuItem>
               {/* <MenuItem component="a" href='/test' onClick={handleCloseNavMenu}>Test</MenuItem> */}
-              <MenuItem component="a" href='/' onClick={logoutUser}>Çıkış Yap</MenuItem>
+              <MenuItem component="a" onClick={logoutUser}>Çıkış Yap</MenuItem>
             </Menu>
           </Box>
           <PrecisionManufacturingIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -48,7 +48,6 @@ const nonLoggedRouter = () => {
       <>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left' }} open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' } }}>
-              <MenuItem component="a" href='/' onClick={handleCloseNavMenu}>Ana Sayfa</MenuItem>
               {/* <MenuItem component="a" href='/test' onClick={handleCloseNavMenu}>Test</MenuItem> */}
               <MenuItem component="a" href='/login' onClick={handleCloseNavMenu}>Giriş Yap</MenuItem>
             </Menu>
@@ -63,7 +62,6 @@ const nonLoggedRouter = () => {
             </IconButton>
           </Box>
           <Box sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
-            <Button href="/" sx={{ m: 1, color: 'white' }}>Ana Sayfa</Button>
             {/* <Button href="/test" sx={{ m: 0.5, color: 'white' }}>Test</Button> */}
             <Button href="/login" sx={{ m: 0.5, color: 'white' }}>Giriş Yap</Button>
           </Box>

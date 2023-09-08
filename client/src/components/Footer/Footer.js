@@ -21,7 +21,7 @@ export default function Footer() {
         <Typography variant="body2" color="text.secondary" align="center">
           {"Copyright © "}
           <Link color="inherit">
-            OutPoint Software
+            CodeAxi Software
           </Link>{" "}
           {new Date().getFullYear()}
           {"."}

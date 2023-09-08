@@ -43,7 +43,6 @@ function a11yProps(index) {
 
 export default function FullWidthTabs() {
     const apiBaseUrl = "http://89.116.52.58:3001";
-    const isLogged = localStorage.getItem('name') ? true : false
     const theme = useTheme();
     const [value, setValue] = useState(0);
     const [services, setServices] = useState([]);
@@ -58,7 +57,7 @@ export default function FullWidthTabs() {
             console.error(error);
         }
     };
-    
+
     const fetchWorkshops = async () => {
         try {
             const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: localStorage.getItem('name') });
@@ -72,7 +71,7 @@ export default function FullWidthTabs() {
         fetchServices();
         fetchWorkshops();
     }, []);
-    
+
 
     const handleCompleteService = (service) => {
         const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
@@ -97,10 +96,10 @@ export default function FullWidthTabs() {
     const handleChangeIndex = (index) => {
         setValue(index);
     };
-    const LoggedRouter = () => {
-        return (
-            <>
-              <AppBar position="static">
+    return (
+        <>
+            <br />
+            <AppBar position="static">
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -138,7 +137,7 @@ export default function FullWidthTabs() {
                     </Grid>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                <Grid container direction="row" justifyContent="center" gap={3}>
+                    <Grid container direction="row" justifyContent="center" gap={3}>
                         {workshop.map((service) => (
                             <TextCard
                                 serviceId={service._id}
@@ -157,26 +156,6 @@ export default function FullWidthTabs() {
                     </Grid>
                 </TabPanel>
             </SwipeableViews>
-            </>
-        )
-      }
-    const nonLoggedRouter = () => {
-        return (
-            <>
-            <Grid container alignItems={'center'} sx={{ height: '70vh' }}>
-                <Grid xs={12}>
-                    <Typography variant='h2' className='animate-charcter'
-                    sx={{ textAlign: 'center', width:'100%', height:'100%', fontWeight:'700', textTransform:'capitalize' }}>
-                        Giriş Yapınız...
-                    </Typography>
-                </Grid>
-            </Grid>
-            </>
-        )
-      }
-    return (
-        <Box sx={{ bgcolor: 'background.paper', margin: '10px', border: '2px solid #dedede' }}>
-            {isLogged ? LoggedRouter() : nonLoggedRouter()}
-        </Box>
-    );
-}
+        </>
+    )
+};
