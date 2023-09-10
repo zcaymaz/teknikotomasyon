@@ -404,3 +404,6 @@ img {
     display: none;
   }
 }
+.archive-box {
+  float: left !important;
+}
