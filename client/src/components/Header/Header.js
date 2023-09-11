@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
 
 function Header() {
-  const isLogged = localStorage.getItem('name') ? true : false
+  const isLogged = localStorage.getItem('token') ? true : false
 
   const logoutUser = async () => {
 

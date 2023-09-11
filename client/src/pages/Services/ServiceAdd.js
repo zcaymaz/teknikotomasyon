@@ -4,56 +4,61 @@ import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../component
 import axios from "axios";
 
 const ServiceAdd = () => {
-  const [serviceName, setserviceName] = useState("");
-  const [serviceGsmno, setserviceGsmno] = useState("");
-  const [serviceAddress, setserviceAddress] = useState("");
-  const [serviceDesc, setserviceDesc] = useState("");
-  const [serviceBrand, setserviceBrand] = useState("");
-  const [serviceModel, setserviceModel] = useState("");
-  const [serviceType, setserviceType] = useState("");
-  const [servicePrice, setservicePrice] = useState("");
+  const [serviceName, setServiceName] = useState("");
+  const [serviceGsmno, setServiceGsmno] = useState("");
+  const [serviceAddress, setServiceAddress] = useState("");
+  const [serviceDesc, setServiceDesc] = useState("");
+  const [serviceBrand, setServiceBrand] = useState("");
+  const [serviceModel, setServiceModel] = useState("");
+  const [serviceType, setServiceType] = useState("");
+  const [servicePrice, setServicePrice] = useState("");
 
   const createService = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://89.116.52.58:3001/api/service/", {
-        name: localStorage.getItem('name'),
-        serviceName: serviceName,
-        serviceGsmno: serviceGsmno,
-        serviceAddress: serviceAddress,
-        serviceDesc: serviceDesc,
-        serviceBrand: serviceBrand,
-        serviceModel: serviceModel,
-        serviceType: serviceType,
-        servicePrice: servicePrice,
-      });
-
-      setserviceName("");
-      setserviceGsmno("");
-      setserviceAddress("");
-      setserviceDesc("");
-      setserviceBrand("");
-      setserviceModel("");
-      setserviceType("");
-      setservicePrice("");
-      window.location.href = "/";
+      const token = localStorage.getItem("token"); // JWT token'ını buradan alın
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`, // JWT tokenini Authorization başlığına ekleyin
+        },
+      };
+  
+      await axios.post(
+        "http://localhost/teknikoto/service.php",
+        {
+          servicename: serviceName,
+          servicegsmno: serviceGsmno,
+          serviceaddress: serviceAddress,
+          servicedesc: serviceDesc,
+          servicebrand: serviceBrand,
+          servicemodel: serviceModel,
+          servicetype: serviceType,
+          serviceprice: servicePrice,
+        },
+        config // Config nesnesini isteğe ekleyin
+      );
+  
+      // İşlemlerinizi burada tamamlayın
     } catch (err) {
       alert(err.response.data.msg);
     }
   };
+  
 
   return (
     <>
       <Grid container direction="row" p={3}>
         <Grid container direction="row" justifyContent="center" pb={2}>
           <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f" }}>
-            Servis Ekle
+            Yeni Servis Ekle
           </Typography>
           <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
         </Grid>
         <Grid p={5} item xs={12} bgcolor="#f0f0f0">
           <form onSubmit={createService}>
             <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
+              {/* Kullanıcı adı yerine JWT token'ı kullanılıyor */}
               <FormInput
                 size="medium"
                 label="Müşteri İsmi"
@@ -61,7 +66,7 @@ const ServiceAdd = () => {
                 id="serviceName"
                 value={serviceName}
                 required
-                onChange={(e) => setserviceName(e.target.value)}
+                onChange={(e) => setServiceName(e.target.value)}
               />
               <FormInput
                 size="medium"
@@ -73,7 +78,7 @@ const ServiceAdd = () => {
                 required
                 onChange={(e) => {
                   if (e.target.value.length <= 11) {
-                    setserviceGsmno(e.target.value);
+                    setServiceGsmno(e.target.value);
                   }
                 }}
               />
@@ -85,7 +90,7 @@ const ServiceAdd = () => {
                 id="serviceDesc"
                 value={serviceDesc}
                 required
-                onChange={(e) => setserviceDesc(e.target.value)}
+                onChange={(e) => setServiceDesc(e.target.value)}
               />
               <MultilineFormInput
                 label="Adres"
@@ -93,7 +98,7 @@ const ServiceAdd = () => {
                 id="serviceAddress"
                 value={serviceAddress}
                 required
-                onChange={(e) => setserviceAddress(e.target.value)}
+                onChange={(e) => setServiceAddress(e.target.value)}
               />
             </Stack>
             <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
@@ -104,7 +109,7 @@ const ServiceAdd = () => {
                 id="serviceBrand"
                 value={serviceBrand}
                 required
-                onChange={(e) => setserviceBrand(e.target.value)}
+                onChange={(e) => setServiceBrand(e.target.value)}
               />
               <FormInput
                 size="medium"
@@ -113,7 +118,7 @@ const ServiceAdd = () => {
                 id="serviceModel"
                 value={serviceModel}
                 required
-                onChange={(e) => setserviceModel(e.target.value)}
+                onChange={(e) => setServiceModel(e.target.value)}
               />
               <FormInput
                 size="medium"
@@ -123,11 +128,11 @@ const ServiceAdd = () => {
                 id="servicePrice"
                 value={servicePrice}
                 required
-                onChange={(e) => setservicePrice(e.target.value)}
+                onChange={(e) => setServicePrice(e.target.value)}
               />
               <ServiceTypeInput
                 value={serviceType}
-                onChange={(e) => setserviceType(e.target.value)}
+                onChange={(e) => setServiceType(e.target.value)}
               />
             </Stack>
             <center>
