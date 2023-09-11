@@ -2,19 +2,20 @@ import React, { useState, useEffect } from "react";
 import { TextField, Grid, Stack, Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
 
-const ArchivedServices = () => {
+const ArchivedServices = (props) => {
   const [archivedServices, setArchivedServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [addressFilter, setAddressFilter] = useState(""); // Adres filtresi
+  const [addressFilter, setAddressFilter] = useState("");
 
   const fetchArchivedServices = async () => {
     try {
-      const response = await axios.get("http://89.116.52.58:3001/api/service/");
+      const response = await axios.post("http://89.116.52.58:3001/api/service/name", { name: localStorage.getItem('name') });
       const filteredServices = response.data.filter((service) => service.isArchived);
 
       let filteredBySearch = [...filteredServices];
@@ -87,7 +88,7 @@ const ArchivedServices = () => {
       renderCell: (params) => (
         <>
           {formatDate(params.row.createdAt)}
-          <hr />
+          <br/>
           {formatDate(params.row.updatedAt)}
         </>
       ),
@@ -122,7 +123,8 @@ const ArchivedServices = () => {
         <Button
           variant="outlined"
           className="archived-button"
-          // onClick={() => handleDugmeTiklama(params.row)} // Düğme tıklama olayını burada tanımlayabilirsiniz
+          component={Link} 
+          to={`/update/${params.row.id}`}
         >
           Düzenle
         </Button>
