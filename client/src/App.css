@@ -358,7 +358,7 @@ img {
   }
   .login__img {
     border-radius: 3.5rem;
-    /* box-shadow: 0 24px 48px hsla(244, 75%, 36%, 0.45); */
+    box-shadow: 0 24px 48px hsla(240, 2%, 62%, 0.45);
   }
   .login__form {
     justify-self: flex-end;
