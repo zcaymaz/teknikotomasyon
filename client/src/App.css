@@ -358,7 +358,7 @@ img {
   }
   .login__img {
     border-radius: 3.5rem;
-    box-shadow: 0 24px 48px hsla(244, 75%, 36%, 0.45);
+    /* box-shadow: 0 24px 48px hsla(244, 75%, 36%, 0.45); */
   }
   .login__form {
     justify-self: flex-end;
@@ -406,4 +406,13 @@ img {
 }
 .archive-box {
   float: left !important;
+}
+.archived-button {
+  color: #fff !important;
+  background-color: #d1a507 !important;
+}
+@media (max-width :600px) {
+  .print-button {
+    display:none  !important;
+  }
 }

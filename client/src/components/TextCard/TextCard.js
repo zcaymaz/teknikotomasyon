@@ -82,7 +82,7 @@ const TextCard = (props) => {
             Düzenle
           </Button>
         </CardActions>
-        <CardActions sx={{gap:'1.5rem', justifyContent:'center'}}>
+        <CardActions className="print-button" sx={{gap:'1.5rem', justifyContent:'center'}}>
           <ServiceModal id={props.serviceId}/>
         </CardActions>
       </Grid>

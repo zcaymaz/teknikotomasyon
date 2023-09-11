@@ -89,7 +89,7 @@ export default function ServiceModal(props) {
             </center>
           </table>
           <center>
-            <Button className="receipt-print-button" onClick={handlePrint}>
+            <Button className="receipt-print-button" onClick={handlePrint} md="none">
               Yazdır
             </Button>
           </center>
