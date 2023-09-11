@@ -82,6 +82,7 @@ export default function FullWidthTabs() {
                 .put(`${apiBaseUrl}/api/service/${service._id}/archive`, { archived: true })
                 .then(() => {
                     fetchServices();
+                    fetchWorkshops();
                 })
                 .catch((error) => {
                     console.error(error);
