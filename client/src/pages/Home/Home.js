@@ -106,11 +106,19 @@ export default function FullWidthTabs() {
         <>
             <br />
             <Container maxWidth="none">
-                <AppBar position="static">
+                <AppBar  sx={{ bgcolor: '#0c5834', borderRadius: '30px 30px 0px 0px'}} position="static">
                     <Tabs
                         value={value}
                         onChange={handleChange}
-                        indicatorColor="secondary"
+                        sx={{
+                            "& button.Mui-selected": {backgroundColor: 'inherit'}
+                        }}
+                        TabIndicatorProps={{
+                            style: {
+                                backgroundColor: "#f7f4ed",
+                                height: 4,
+                            }
+                        }}
                         textColor="inherit"
                         variant="fullWidth"
                         aria-label="full width tabs example"
@@ -119,7 +127,7 @@ export default function FullWidthTabs() {
                         <Tab label="Atölye" {...a11yProps(1)} />
                     </Tabs>
                 </AppBar>
-                <Paper elevation={3} sx={{ borderRadius: "0px", marginBottom: "20px" }}>
+                <Paper elevation={3} sx={{ borderRadius: "0px", marginBottom: "20px"}}>
                     {loading ? (
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '750px' }}>
                             <CircularProgress />
@@ -171,7 +179,7 @@ export default function FullWidthTabs() {
                         </SwipeableViews>
                     )}
                 </Paper>
-            </Container>
+            </Container >
         </>
     )
 };

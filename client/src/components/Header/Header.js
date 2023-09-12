@@ -79,7 +79,7 @@ const nonLoggedRouter = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static"  sx={{bgcolor: '#0c5834'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <PrecisionManufacturingIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
