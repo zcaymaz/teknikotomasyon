@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Stack, Button, Typography, Divider } from "@mui/material";
+import { Grid, Stack, Button, Typography, Divider, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
 import axios from "axios";
 
@@ -97,24 +97,57 @@ const ServiceAdd = () => {
               />
             </Stack>
             <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
-              <FormInput
-                size="medium"
-                label="Ürün Markası"
-                name="serviceBrand"
-                id="serviceBrand"
-                value={serviceBrand}
-                required
-                onChange={(e) => setserviceBrand(e.target.value)}
-              />
-              <FormInput
-                size="medium"
-                label="Ürün"
-                name="serviceModel"
-                id="serviceModel"
-                value={serviceModel}
-                required
-                onChange={(e) => setserviceModel(e.target.value)}
-              />
+              <FormControl variant="outlined" size="medium" fullWidth>
+                <InputLabel id="serviceBrand-label">Ürün Markası</InputLabel>
+                <Select
+                  sx={{ bgcolor: 'white' }}
+                  labelId="serviceBrand-label"
+                  id="serviceBrand"
+                  label="Ürün Markası"
+                  value={serviceBrand}
+                  required
+                  onChange={(e) => setserviceBrand(e.target.value)}
+                >
+                  <MenuItem value="Arçelik">Arçelik</MenuItem>
+                  <MenuItem value="Beko">Beko</MenuItem>
+                  <MenuItem value="Bosch">Bosch</MenuItem>
+                  <MenuItem value="Siemens">Siemens</MenuItem>
+                  <MenuItem value="Profilo">Profilo</MenuItem>
+                  <MenuItem value="Vestel">Vestel</MenuItem>
+                  <MenuItem value="Regal">Regal</MenuItem>
+                  <MenuItem value="Altus">Altus</MenuItem>
+                  <MenuItem value="Finlüx">Finlüx</MenuItem>
+                  <MenuItem value="Electrolüx">Electrolüx</MenuItem>
+                  <MenuItem value="Samsung">Samsung</MenuItem>
+                  <MenuItem value="Brand3">Brand3</MenuItem>
+                  <MenuItem value="Brand3">Brand3</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl variant="outlined" size="medium" fullWidth>
+                <InputLabel id="serviceModel-label">Ürün</InputLabel>
+                <Select
+                  sx={{ bgcolor: 'white' }}
+                  labelId="serviceModel-label"
+                  id="serviceModel"
+                  label="Ürün"
+                  value={serviceModel}
+                  required
+                  onChange={(e) => setserviceModel(e.target.value)}
+                >
+                  <MenuItem value="Çamaşır Makinesi">Çamaşır Makinesi</MenuItem>
+                  <MenuItem value="Bulaşık Makinesi">Bulaşık Makinesi</MenuItem>
+                  <MenuItem value="Buzdolabı">Buzdolabı</MenuItem>
+                  <MenuItem value="Kombi">Kombi</MenuItem>
+                  <MenuItem value="Klima">Klima</MenuItem>
+                  <MenuItem value="Elektrikli Süpürge">Elektrikli Süpürge</MenuItem>
+                  <MenuItem value="Ocak">Ocak</MenuItem>
+                  <MenuItem value="Fırın">Fırın</MenuItem>
+                  <MenuItem value="Derin Dondurucu (Difriz)">Derin Dondurucu (Difriz)</MenuItem>
+                  <MenuItem value="Hermetik Sofben">Hermetik Şofben</MenuItem>
+                  <MenuItem value="Diğer">Diğer</MenuItem>
+                </Select>
+              </FormControl>
               <FormInput
                 size="medium"
                 type="number"

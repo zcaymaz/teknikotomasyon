@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Stack, Button, Typography, Divider } from "@mui/material";
+import { Grid, Stack, Button, Typography, Divider, Select, MenuItem, FormControl, InputLabel  } from "@mui/material";
 import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -34,7 +34,7 @@ const ServiceUpdate = () => {
 
   useEffect(() => {
     fetchService();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateService = async (e) => {
@@ -80,7 +80,7 @@ const ServiceUpdate = () => {
       </Grid>
       <Grid p={5} item xs={12} bgcolor="#f0f0f0">
         <form onSubmit={updateService}>
-          <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2} padding={1}>
+          <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
             <FormInput
               size="medium"
               label="Müşteri İsmi"
@@ -105,7 +105,7 @@ const ServiceUpdate = () => {
               }}
             />
           </Stack>
-          <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2} padding={1}>
+          <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
             <MultilineFormInput
               label="Açıklama"
               name="serviceDesc"
@@ -123,10 +123,61 @@ const ServiceUpdate = () => {
               onChange={(e) => setServiceAddress(e.target.value)}
             />
           </Stack>
-          <Stack direction={{xs:'col', sm:'row'}} spacing={3} gap={2} padding={1}>
-            <FormInput size="medium" label="Ürün Markası" name="serviceBrand" id="serviceBrand" value={serviceBrand} required onChange={(e) => setServiceBrand(e.target.value)} /> 
-            <FormInput size="medium" label="Ürün" name="serviceModel" id="serviceModel" value={serviceModel} required onChange={(e) => setServiceModel(e.target.value)} />
-            <FormInput size="medium"  type="number"  label="Ücret"  name="servicePrice"  id="servicePrice"  value={servicePrice}  required  onChange={(e) => setServicePrice(e.target.value)}/>
+          <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
+            <FormControl variant="outlined" size="medium" fullWidth>
+              <InputLabel id="serviceBrand-label">Ürün Markası</InputLabel>
+              <Select
+                sx={{ bgcolor: 'white' }}
+                labelId="serviceBrand-label"
+                id="serviceBrand"
+                name="serviceBrand"
+                label="Ürün Markası"
+                value={serviceBrand}
+                required
+                onChange={(e) => setServiceBrand(e.target.value)}
+              >
+                <MenuItem value="Arçelik">Arçelik</MenuItem>
+                <MenuItem value="Beko">Beko</MenuItem>
+                <MenuItem value="Bosch">Bosch</MenuItem>
+                <MenuItem value="Siemens">Siemens</MenuItem>
+                <MenuItem value="Profilo">Profilo</MenuItem>
+                <MenuItem value="Vestel">Vestel</MenuItem>
+                <MenuItem value="Regal">Regal</MenuItem>
+                <MenuItem value="Altus">Altus</MenuItem>
+                <MenuItem value="Finlüx">Finlüx</MenuItem>
+                <MenuItem value="Electrolüx">Electrolüx</MenuItem>
+                <MenuItem value="Samsung">Samsung</MenuItem>
+                <MenuItem value="Brand3">Brand3</MenuItem>
+                <MenuItem value="Brand3">Brand3</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl variant="outlined" size="medium" fullWidth>
+              <InputLabel id="serviceModel-label">Ürün</InputLabel>
+              <Select
+                sx={{ bgcolor: 'white' }}
+                labelId="serviceModel-label"
+                id="serviceModel"
+                name="serviceModel"
+                label="Ürün"
+                value={serviceModel}
+                required
+                onChange={(e) => setServiceModel(e.target.value)}
+              >
+                <MenuItem value="Çamaşır Makinesi">Çamaşır Makinesi</MenuItem>
+                <MenuItem value="Bulaşık Makinesi">Bulaşık Makinesi</MenuItem>
+                <MenuItem value="Buzdolabı">Buzdolabı</MenuItem>
+                <MenuItem value="Kombi">Kombi</MenuItem>
+                <MenuItem value="Klima">Klima</MenuItem>
+                <MenuItem value="Elektrikli Süpürge">Elektrikli Süpürge</MenuItem>
+                <MenuItem value="Ocak">Ocak</MenuItem>
+                <MenuItem value="Fırın">Fırın</MenuItem>
+                <MenuItem value="Derin Dondurucu (Difriz)">Derin Dondurucu (Difriz)</MenuItem>
+                <MenuItem value="Hermetik Sofben">Hermetik Şofben</MenuItem>
+                <MenuItem value="Diğer">Diğer</MenuItem>
+              </Select>
+            </FormControl>
+            <FormInput size="medium" type="number" label="Ücret" name="servicePrice" id="servicePrice" value={servicePrice} required onChange={(e) => setServicePrice(e.target.value)} />
             <ServiceTypeInput value={serviceType} onChange={(e) => setServiceType(e.target.value)} />
           </Stack>
           <center>
