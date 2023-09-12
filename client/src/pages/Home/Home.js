@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
-import { Grid, Typography, AppBar, Tabs, Tab, Box } from '@mui/material';
+import { Grid, Typography, AppBar, Tabs, Tab, Box, Container, Paper, CircularProgress } from '@mui/material';
 import TextCard from "../../components/TextCard/TextCard";
 import axios from "axios";
 
@@ -47,6 +47,7 @@ export default function FullWidthTabs() {
     const [value, setValue] = useState(0);
     const [services, setServices] = useState([]);
     const [workshop, setWorkshop] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const fetchServices = async () => {
         try {
@@ -55,6 +56,8 @@ export default function FullWidthTabs() {
             setServices(filteredServices.reverse());
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,6 +68,8 @@ export default function FullWidthTabs() {
             setWorkshop(filteredWorkshops.reverse());
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
     useEffect(() => {
@@ -100,63 +105,73 @@ export default function FullWidthTabs() {
     return (
         <>
             <br />
-            <AppBar position="static">
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="secondary"
-                    textColor="inherit"
-                    variant="fullWidth"
-                    aria-label="full width tabs example"
-                >
-                    <Tab label="Servisler" {...a11yProps(0)} />
-                    <Tab label="Atölye" {...a11yProps(1)} />
-                </Tabs>
-            </AppBar>
-            <SwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={value}
-                onChangeIndex={handleChangeIndex}
-            >
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                    <Grid container direction="row" justifyContent="center" gap={3}>
-                        {services.map((service) => (
-                            <TextCard
-                                serviceId={service._id}
-                                serviceDate={service.createdAt}
-                                serviceName={service.serviceName}
-                                serviceGsmno={service.serviceGsmno}
-                                serviceAddress={service.serviceAddress}
-                                serviceDesc={service.serviceDesc}
-                                serviceBrand={service.serviceBrand}
-                                serviceModel={service.serviceModel}
-                                serviceType={service.serviceType}
-                                servicePrice={service.servicePrice}
-                                onClick={() => handleCompleteService(service)}
-                            />
-                        ))}
-                    </Grid>
-                </TabPanel>
-                <TabPanel value={value} index={1} dir={theme.direction}>
-                    <Grid container direction="row" justifyContent="center" gap={3}>
-                        {workshop.map((service) => (
-                            <TextCard
-                                serviceId={service._id}
-                                serviceDate={service.createdAt}
-                                serviceName={service.serviceName}
-                                serviceGsmno={service.serviceGsmno}
-                                serviceAddress={service.serviceAddress}
-                                serviceDesc={service.serviceDesc}
-                                serviceBrand={service.serviceBrand}
-                                serviceModel={service.serviceModel}
-                                serviceType={service.serviceType}
-                                servicePrice={service.servicePrice}
-                                onClick={() => handleCompleteService(service)}
-                            />
-                        ))}
-                    </Grid>
-                </TabPanel>
-            </SwipeableViews>
+            <Container maxWidth="none">
+                <AppBar position="static">
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor="secondary"
+                        textColor="inherit"
+                        variant="fullWidth"
+                        aria-label="full width tabs example"
+                    >
+                        <Tab label="Servisler" {...a11yProps(0)} />
+                        <Tab label="Atölye" {...a11yProps(1)} />
+                    </Tabs>
+                </AppBar>
+                <Paper elevation={3} sx={{ borderRadius: "0px", marginBottom: "20px" }}>
+                    {loading ? (
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '750px' }}>
+                            <CircularProgress />
+                        </div>
+                    ) : (
+                        <SwipeableViews
+                            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                            index={value}
+                            onChangeIndex={handleChangeIndex}
+                        >
+                            <TabPanel value={value} index={0} dir={theme.direction}>
+                                <Grid container direction="row" justifyContent="center" gap={3}>
+                                    {services.map((service) => (
+                                        <TextCard
+                                            serviceId={service._id}
+                                            serviceDate={service.createdAt}
+                                            serviceName={service.serviceName}
+                                            serviceGsmno={service.serviceGsmno}
+                                            serviceAddress={service.serviceAddress}
+                                            serviceDesc={service.serviceDesc}
+                                            serviceBrand={service.serviceBrand}
+                                            serviceModel={service.serviceModel}
+                                            serviceType={service.serviceType}
+                                            servicePrice={service.servicePrice}
+                                            onClick={() => handleCompleteService(service)}
+                                        />
+                                    ))}
+                                </Grid>
+                            </TabPanel>
+                            <TabPanel value={value} index={1} dir={theme.direction}>
+                                <Grid container direction="row" justifyContent="center" gap={3}>
+                                    {workshop.map((service) => (
+                                        <TextCard
+                                            serviceId={service._id}
+                                            serviceDate={service.createdAt}
+                                            serviceName={service.serviceName}
+                                            serviceGsmno={service.serviceGsmno}
+                                            serviceAddress={service.serviceAddress}
+                                            serviceDesc={service.serviceDesc}
+                                            serviceBrand={service.serviceBrand}
+                                            serviceModel={service.serviceModel}
+                                            serviceType={service.serviceType}
+                                            servicePrice={service.servicePrice}
+                                            onClick={() => handleCompleteService(service)}
+                                        />
+                                    ))}
+                                </Grid>
+                            </TabPanel>
+                        </SwipeableViews>
+                    )}
+                </Paper>
+            </Container>
         </>
     )
 };
