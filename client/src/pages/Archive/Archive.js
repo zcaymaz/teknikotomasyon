@@ -80,6 +80,7 @@ const ArchivedServices = (props) => {
 
   useEffect(() => {
     fetchArchivedServices();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, startDate, endDate, addressFilter]);
 
   const columns = [
