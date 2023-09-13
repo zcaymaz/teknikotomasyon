@@ -28,7 +28,7 @@ function Header() {
           <Toolbar>
 
             {/* Mobil Header Started */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'none' }}}>
               <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left' }} open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' } }}>
                 <MenuItem component="a" href='/' onClick={handleCloseNavMenu}>Ana Sayfa</MenuItem>
                 <MenuItem component="a" href='/add' onClick={handleCloseNavMenu}>Servis Ekle</MenuItem>
@@ -37,10 +37,13 @@ function Header() {
               </Menu>
             </Box>
             <PrecisionManufacturingIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, textAlign: 'left' }} />
-            <Typography variant="h5" noWrap sx={{ display: { xs: 'flex', md: 'none' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', float: 'left' }}>
+            <Typography variant="h5" noWrap sx={{ display: { xs: 'none', sm: 'flex', md:'none' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', float: 'left' }}>
               TKNKOTOMSYN
             </Typography>
-            <Box sx={{ display: { xs: 'flex', md: 'none' }, bgcolor: 'red', flexDirection: 'row-reverse' }}>
+            <Typography variant="h5" noWrap sx={{ display: { xs: 'flex', sm: 'none' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', float: 'left' }}>
+              TKNKOTO
+            </Typography>
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, marginLeft: 'auto' }}>
               <IconButton size="large" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu} color="inherit">
                 <MenuIcon />
               </IconButton>
