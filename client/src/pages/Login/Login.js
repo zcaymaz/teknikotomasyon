@@ -20,7 +20,6 @@ export const Login = () => {
         `${process.env.REACT_APP_ENDPOINT_LOGIN}`,
         user,
       );
-
       if (res.status === 200 && res.data.success) {
         localStorage.setItem('name', res.data.username);
         window.location.href = '/';
@@ -31,7 +30,7 @@ export const Login = () => {
       alert(err.response.data.message);
     }
   };
-  
+
   return (
     <div class="container">
       <div class="login__content">

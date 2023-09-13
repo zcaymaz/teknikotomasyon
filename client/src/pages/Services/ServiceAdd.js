@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Stack, Button, Typography, Divider, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { Grid, Stack, Button, Typography, Divider } from "@mui/material";
 import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
 import axios from "axios";
 
@@ -17,7 +17,7 @@ const ServiceAdd = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost/teknikoto/service.php",
+        "http://localhost/teknikoto/serviceadd.php",
         {
           servicename: serviceName,
           servicegsmno: serviceGsmno,
@@ -30,7 +30,15 @@ const ServiceAdd = () => {
           username: localStorage.getItem("name")
         },
       );
-  
+      setServiceName("");
+      setServiceGsmno("");
+      setServiceAddress("");
+      setServiceDesc("");
+      setServiceBrand("");
+      setServiceModel("");
+      setServiceType("");
+      setServicePrice("");
+      window.location.href = "/";
     } catch (err) {
       alert(err.response.data.msg);
     }
