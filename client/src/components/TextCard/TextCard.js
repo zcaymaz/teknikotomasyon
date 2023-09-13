@@ -84,7 +84,7 @@ const TextCard = (props) => {
           </Button>
         </CardActions>
         <CardActions className="print-button" sx={{gap:'1.5rem', justifyContent:'center'}}>
-          <ServiceModal id={props.serviceId}/>
+          {/* <ServiceModal id={props.serviceId}/> Konsolda ki id sorunu için */}
         </CardActions>
       </Grid>
     </React.Fragment>

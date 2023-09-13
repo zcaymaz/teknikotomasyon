@@ -42,7 +42,6 @@ function a11yProps(index) {
 }
 
 export default function FullWidthTabs() {
-    const apiBaseUrl = "http://89.116.52.58:3001";
     const theme = useTheme();
     const [value, setValue] = useState(0);
     const [services, setServices] = useState([]);
@@ -51,49 +50,43 @@ export default function FullWidthTabs() {
 
     const fetchServices = async () => {
         try {
-            const res = await axios.post("http://localhost/teknikoto/servicegetbyuser.php", { username: localStorage.getItem('name') });
-            const filteredServices = res.data.services.filter((service) => service.serviceType === "Servis" && !service.isArchived);
+            const res = await axios.post(`${process.env.REACT_APP_ENDPOINT_SERVICEGETBYUSER}`, { username: localStorage.getItem('name') });
+            const allServices = res.data.services;
+    
+            const filteredServices = allServices.filter((service) => service.servicetype === "Servis");
+            const filteredWorkshops = allServices.filter((service) => service.servicetype === "Atölye");
+    
             setServices(filteredServices.reverse());
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchWorkshops = async () => {
-        try {
-            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: localStorage.getItem('name') });
-            const filteredWorkshops = res.data.filter((service) => service.serviceType === "Atölye" && !service.isArchived);
             setWorkshop(filteredWorkshops.reverse());
-            // setWorkshop(res.data)
         } catch (error) {
             console.error(error);
         } finally {
             setLoading(false);
         }
     };
+    
     useEffect(() => {
-        fetchWorkshops();
+        fetchServices();
     }, []);
+    
+    
+    // konsolda bulunan id sorunu için objectid arıyor
+    // const handleCompleteService = (service) => {
+    //     const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
+    //     const result = window.confirm(confirmMessage);
 
-    console.log(fetchServices());
-    const handleCompleteService = (service) => {
-        const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
-        const result = window.confirm(confirmMessage);
-
-        if (result) {
-            axios
-                .put(`${apiBaseUrl}/api/service/${service._id}/archive`, { archived: true })
-                .then(() => {
-                    fetchServices();
-                    fetchWorkshops();
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        }
-    };
+    //     if (result) {
+    //         axios
+    //             .put(`${apiBaseUrl}/api/service/${service._id}/archive`, { archived: true })
+    //             .then(() => {
+    //                 fetchServices();
+    //                 fetchWorkshops();
+    //             })
+    //             .catch((error) => {
+    //                 console.error(error);
+    //             });
+    //     }
+    // };
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -152,7 +145,6 @@ export default function FullWidthTabs() {
                                             serviceModel={service.servicemodel}
                                             serviceType={service.servicetype}
                                             servicePrice={service.serviceprice}
-                                            onClick={() => handleCompleteService(service)}
                                         />
                                     ))}
                                 </Grid>
@@ -161,17 +153,16 @@ export default function FullWidthTabs() {
                                 <Grid container direction="row" justifyContent="center" gap={3}>
                                     {workshop.map((service) => (
                                         <TextCard
-                                            serviceId={service._id}
-                                            serviceDate={service.createdAt}
-                                            serviceName={service.serviceName}
-                                            serviceGsmno={service.serviceGsmno}
-                                            serviceAddress={service.serviceAddress}
-                                            serviceDesc={service.serviceDesc}
-                                            serviceBrand={service.serviceBrand}
-                                            serviceModel={service.serviceModel}
-                                            serviceType={service.serviceType}
-                                            servicePrice={service.servicePrice}
-                                            onClick={() => handleCompleteService(service)}
+                                            serviceId={service.id}
+                                            serviceDate={service.creation_date}
+                                            serviceName={service.servicename}
+                                            serviceGsmno={service.servicegsmno}
+                                            serviceAddress={service.serviceaddress}
+                                            serviceDesc={service.servicedesc}
+                                            serviceBrand={service.servicebrand}
+                                            serviceModel={service.servicemodel}
+                                            serviceType={service.servicetype}
+                                            servicePrice={service.serviceprice}
                                         />
                                     ))}
                                 </Grid>

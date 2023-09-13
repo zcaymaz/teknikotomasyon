@@ -17,7 +17,7 @@ const ServiceAdd = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost/teknikoto/serviceadd.php",
+        `${process.env.REACT_APP_ENDPOINT_SERVICEADD}`,
         {
           servicename: serviceName,
           servicegsmno: serviceGsmno,
