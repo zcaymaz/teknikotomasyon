@@ -16,61 +16,63 @@ const ArchivedServices = (props) => {
 
   const fetchArchivedServices = async () => {
     try {
-      const response = await axios.post("http://89.116.52.58:3001/api/service/name", { name: localStorage.getItem('name') });
-      const filteredServices = response.data.filter((service) => service.isArchived);
+      const response = await axios.post("http://localhost/teknikoto/servicegetbyuserarchived.php", { username: localStorage.getItem('name') });
+      const filteredServices = response.data.services;
+      setArchivedServices(filteredServices.reverse());
 
-      let filteredBySearch = [...filteredServices];
-      if (searchTerm !== "") {
-        filteredBySearch = filteredServices.filter((service) =>
-          service.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          service.serviceGsmno.includes(searchTerm)
-        );
-      }
 
-      if (addressFilter !== "") {
-        filteredBySearch = filteredBySearch.filter((service) =>
-          service.serviceAddress.toLowerCase().includes(addressFilter.toLowerCase())
-        );
-      }
+      // let filteredBySearch = [...filteredServices];
+      // if (searchTerm !== "") {
+      //   filteredBySearch = filteredServices.filter((service) =>
+      //     service.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      //     service.serviceGsmno.includes(searchTerm)
+      //   );
+      // }
 
-      const startDateObject = startDate ? new Date(startDate) : null;
-      const endDateObject = endDate ? new Date(endDate) : null;
+      // if (addressFilter !== "") {
+      //   filteredBySearch = filteredBySearch.filter((service) =>
+      //     service.serviceAddress.toLowerCase().includes(addressFilter.toLowerCase())
+      //   );
+      // }
 
-      // Tarih filtresini uygulayın
-      const filteredByDate = filteredBySearch.filter((service) => {
-        const matchesSearchTerm =
-          searchTerm.trim() === "" ||
-          service.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          service.serviceGsmno.includes(searchTerm);
+      // const startDateObject = startDate ? new Date(startDate) : null;
+      // const endDateObject = endDate ? new Date(endDate) : null;
 
-        const createdAt = new Date(service.createdAt);
+      // // Tarih filtresini uygulayın
+      // const filteredByDate = filteredBySearch.filter((service) => {
+      //   const matchesSearchTerm =
+      //     searchTerm.trim() === "" ||
+      //     service.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      //     service.serviceGsmno.includes(searchTerm);
 
-        // Başlangıç ve bitiş tarihlerini kontrol edin
-        const startDateValid = !startDateObject || createdAt >= startDateObject;
-        const endDateValid = !endDateObject || createdAt <= endDateObject;
+      //   const createdAt = new Date(service.createdAt);
 
-        return matchesSearchTerm && startDateValid && endDateValid;
-      });
+      //   // Başlangıç ve bitiş tarihlerini kontrol edin
+      //   const startDateValid = !startDateObject || createdAt >= startDateObject;
+      //   const endDateValid = !endDateObject || createdAt <= endDateObject;
 
-      const sortedServices = filteredByDate.sort((a, b) => {
-        const updatedAtA = new Date(a.updatedAt);
-        const updatedAtB = new Date(b.updatedAt);
+      //   return matchesSearchTerm && startDateValid && endDateValid;
+      // });
 
-        if (updatedAtA > updatedAtB) {
-          return -1;
-        } else if (updatedAtA < updatedAtB) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      // const sortedServices = filteredByDate.sort((a, b) => {
+      //   const updatedAtA = new Date(a.updatedAt);
+      //   const updatedAtB = new Date(b.updatedAt);
 
-      const servicesWithId = sortedServices.map((service) => ({
-        ...service,
-        id: service._id,
-      }));
+      //   if (updatedAtA > updatedAtB) {
+      //     return -1;
+      //   } else if (updatedAtA < updatedAtB) {
+      //     return 1;
+      //   } else {
+      //     return 0;
+      //   }
+      // });
 
-      setArchivedServices(servicesWithId);
+      // const servicesWithId = sortedServices.map((service) => ({
+      //   ...service,
+      //   id: service.id,
+      // }));
+
+      // setArchivedServices(servicesWithId);
     } catch (error) {
       console.error(error);
     } finally {
@@ -83,7 +85,7 @@ const ArchivedServices = (props) => {
   }, [searchTerm, startDate, endDate, addressFilter]);
 
   const columns = [
-    { field: "serviceName", headerName: "Ad Soyad", flex: 1 },
+    { field: "servicename", headerName: "Ad Soyad", flex: 1 },
     {
       field: "dateRange",
       headerName: "Başlangıç/Bitiş Tarihi",
@@ -96,24 +98,24 @@ const ArchivedServices = (props) => {
         </>
       ),
     },
-    { field: "serviceGsmno", headerName: "Telefon Numarası", flex: 1 },
-    { field: "serviceAddress", headerName: "Adres", flex: 1 },
-    { field: "serviceDesc", headerName: "Açıklama", flex: 1 },
+    { field: "servicegsmno", headerName: "Telefon Numarası", flex: 1 },
+    { field: "serviceaddress", headerName: "Adres", flex: 1 },
+    { field: "servicedesc", headerName: "Açıklama", flex: 1 },
     {
       field: "serviceBrandAndModel",
       headerName: "Marka/Model",
       flex: 1,
       renderCell: (params) => (
         <>
-          {params.row.serviceBrand}
+          {params.row.servicebrand}
           <hr />
-          {params.row.serviceModel}
+          {params.row.servicemodel}
         </>
       ),
     },
-    { field: "serviceType", headerName: "Atölye/Servis", flex: 1 },
+    { field: "servicetype", headerName: "Atölye/Servis", flex: 1 },
     {
-      field: "servicePrice",
+      field: "serviceprice",
       headerName: "Ücret",
       flex: 1,
       valueFormatter: (params) => formatPrice(params.value),
@@ -191,7 +193,7 @@ const ArchivedServices = (props) => {
             rows={archivedServices}
             columns={columns}
             disableSelectionOnClick
-            getRowId={(row) => row._id}
+            getRowId={(row) => row.id}
           />
         )}
 

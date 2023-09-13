@@ -71,22 +71,21 @@ export default function FullWidthTabs() {
     
     
     // konsolda bulunan id sorunu için objectid arıyor
-    // const handleCompleteService = (service) => {
-    //     const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
-    //     const result = window.confirm(confirmMessage);
+    const handleCompleteService = (service) => {
+        const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
+        const result = window.confirm(confirmMessage);
 
-    //     if (result) {
-    //         axios
-    //             .put(`${apiBaseUrl}/api/service/${service._id}/archive`, { archived: true })
-    //             .then(() => {
-    //                 fetchServices();
-    //                 fetchWorkshops();
-    //             })
-    //             .catch((error) => {
-    //                 console.error(error);
-    //             });
-    //     }
-    // };
+        if (result) {
+            axios
+                .post("http://localhost/teknikoto/servicecompleted.php", { id: service.id } )
+                .then(() => {
+                    fetchServices();
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    };
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -145,6 +144,7 @@ export default function FullWidthTabs() {
                                             serviceModel={service.servicemodel}
                                             serviceType={service.servicetype}
                                             servicePrice={service.serviceprice}
+                                            onClick={() => handleCompleteService(service)}
                                         />
                                     ))}
                                 </Grid>
@@ -163,6 +163,7 @@ export default function FullWidthTabs() {
                                             serviceModel={service.servicemodel}
                                             serviceType={service.servicetype}
                                             servicePrice={service.serviceprice}
+                                            onClick={() => handleCompleteService(service)}
                                         />
                                     ))}
                                 </Grid>
