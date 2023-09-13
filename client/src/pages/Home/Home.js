@@ -178,7 +178,7 @@ export default function FullWidthTabs() {
                         </SwipeableViews>
                     )}
                 </Paper>
-            </Container >
+            </Container>
         </>
     )
 };
