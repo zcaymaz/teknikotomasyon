@@ -11,68 +11,12 @@ const ArchivedServices = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [addressFilter, setAddressFilter] = useState("");
   const [loading, setLoading] = useState(true);
 
   const fetchArchivedServices = async () => {
     try {
-      const response = await axios.post("http://localhost/teknikoto/servicegetbyuserarchived.php", { username: localStorage.getItem('name') });
-      const filteredServices = response.data.services;
-      setArchivedServices(filteredServices.reverse());
-
-
-      // let filteredBySearch = [...filteredServices];
-      // if (searchTerm !== "") {
-      //   filteredBySearch = filteredServices.filter((service) =>
-      //     service.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      //     service.serviceGsmno.includes(searchTerm)
-      //   );
-      // }
-
-      // if (addressFilter !== "") {
-      //   filteredBySearch = filteredBySearch.filter((service) =>
-      //     service.serviceAddress.toLowerCase().includes(addressFilter.toLowerCase())
-      //   );
-      // }
-
-      // const startDateObject = startDate ? new Date(startDate) : null;
-      // const endDateObject = endDate ? new Date(endDate) : null;
-
-      // // Tarih filtresini uygulayın
-      // const filteredByDate = filteredBySearch.filter((service) => {
-      //   const matchesSearchTerm =
-      //     searchTerm.trim() === "" ||
-      //     service.serviceName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      //     service.serviceGsmno.includes(searchTerm);
-
-      //   const createdAt = new Date(service.createdAt);
-
-      //   // Başlangıç ve bitiş tarihlerini kontrol edin
-      //   const startDateValid = !startDateObject || createdAt >= startDateObject;
-      //   const endDateValid = !endDateObject || createdAt <= endDateObject;
-
-      //   return matchesSearchTerm && startDateValid && endDateValid;
-      // });
-
-      // const sortedServices = filteredByDate.sort((a, b) => {
-      //   const updatedAtA = new Date(a.updatedAt);
-      //   const updatedAtB = new Date(b.updatedAt);
-
-      //   if (updatedAtA > updatedAtB) {
-      //     return -1;
-      //   } else if (updatedAtA < updatedAtB) {
-      //     return 1;
-      //   } else {
-      //     return 0;
-      //   }
-      // });
-
-      // const servicesWithId = sortedServices.map((service) => ({
-      //   ...service,
-      //   id: service.id,
-      // }));
-
-      // setArchivedServices(servicesWithId);
+      const response = await axios.post(`${process.env.REACT_APP_ENDPOINT_SERVICEGETBYUSERARCHIVED}`, { username: localStorage.getItem('name') });
+      setArchivedServices(response.data.services.reverse());
     } catch (error) {
       console.error(error);
     } finally {
@@ -82,27 +26,36 @@ const ArchivedServices = (props) => {
 
   useEffect(() => {
     fetchArchivedServices();
-  }, [searchTerm, startDate, endDate, addressFilter]);
+  }, []);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredServices = archivedServices.filter((service) =>
+    service.servicename.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    service.servicegsmno.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    service.serviceaddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    service.servicedesc.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const columns = [
     { field: "servicename", headerName: "Ad Soyad", flex: 1 },
-    {
-      field: "dateRange",
+    { field: "dateRange",
       headerName: "Başlangıç/Bitiş Tarihi",
       flex: 1,
       renderCell: (params) => (
         <>
-          {formatDate(params.row.createdAt)}
+          {formatDate(params.row.servicedate)}
           <br />
-          {formatDate(params.row.updatedAt)}
+          {formatDate(params.row.completion_date)}
         </>
       ),
     },
     { field: "servicegsmno", headerName: "Telefon Numarası", flex: 1 },
     { field: "serviceaddress", headerName: "Adres", flex: 1 },
     { field: "servicedesc", headerName: "Açıklama", flex: 1 },
-    {
-      field: "serviceBrandAndModel",
+    { field: "serviceBrandAndModel",
       headerName: "Marka/Model",
       flex: 1,
       renderCell: (params) => (
@@ -121,7 +74,7 @@ const ArchivedServices = (props) => {
       valueFormatter: (params) => formatPrice(params.value),
     },
     {
-      field: "actions", // Düğme sütununun alan adı (herhangi bir isim kullanabilirsiniz)
+      field: "actions",
       headerName: "İşlemler",
       flex: 0.6,
       renderCell: (params) => (
@@ -147,16 +100,9 @@ const ArchivedServices = (props) => {
           <TextField
             size="small"
             fullWidth
-            label="Ad Soyad / Telefon Ara"
+            label="Ad Soyad / Telefon / Adres / Açıklama"
             value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
-          <TextField
-            size="small"
-            fullWidth
-            label="Adres Filtrele"
-            value={addressFilter}
-            onChange={(event) => setAddressFilter(event.target.value)}
+            onChange={handleSearch}
           />
           <Grid
             container
@@ -190,7 +136,7 @@ const ArchivedServices = (props) => {
           </div>
         ) : (
           <DataGrid
-            rows={archivedServices}
+            rows={filteredServices}
             columns={columns}
             disableSelectionOnClick
             getRowId={(row) => row.id}

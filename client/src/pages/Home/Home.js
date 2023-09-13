@@ -77,7 +77,7 @@ export default function FullWidthTabs() {
 
         if (result) {
             axios
-                .post("http://localhost/teknikoto/servicecompleted.php", { id: service.id } )
+                .post(`${process.env.REACT_APP_ENDPOINT_SERVICECOMPLETED}`, { id: service.id } )
                 .then(() => {
                     fetchServices();
                 })
