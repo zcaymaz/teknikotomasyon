@@ -16,14 +16,6 @@ const ServiceAdd = () => {
   const createService = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("token"); // JWT token'ını buradan alın
-  
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`, // JWT tokenini Authorization başlığına ekleyin
-        },
-      };
-  
       await axios.post(
         "http://localhost/teknikoto/service.php",
         {
@@ -35,11 +27,10 @@ const ServiceAdd = () => {
           servicemodel: serviceModel,
           servicetype: serviceType,
           serviceprice: servicePrice,
+          username: localStorage.getItem("name")
         },
-        config // Config nesnesini isteğe ekleyin
       );
   
-      // İşlemlerinizi burada tamamlayın
     } catch (err) {
       alert(err.response.data.msg);
     }
@@ -58,7 +49,6 @@ const ServiceAdd = () => {
         <Grid p={5} item xs={12} bgcolor="#f0f0f0">
           <form onSubmit={createService}>
             <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
-              {/* Kullanıcı adı yerine JWT token'ı kullanılıyor */}
               <FormInput
                 size="medium"
                 label="Müşteri İsmi"
