@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Grid, Stack, Box, Button, CircularProgress } from "@mui/material";
+import { TextField, Grid, Stack, Box, Button, CircularProgress, Modal, IconButton } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import { Visibility as VisibilityIcon, Clear as ClearIcon } from "@mui/icons-material"; // Göz simgesi ekledik
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../components/common/FormatDate";
@@ -13,6 +14,21 @@ const ArchivedServices = (props) => {
   const [endDate, setEndDate] = useState("");
   const [addressFilter, setAddressFilter] = useState("");
   const [loading, setLoading] = useState(true);
+  const [selectedRow, setSelectedRow] = useState(null); // Seçilen satır bilgisini saklayacak state
+  const [modalOpen, setModalOpen] = useState(false);
+
+
+  // Modalı açma işlemi
+  const openModal = (row) => {
+    setSelectedRow(row);
+    setModalOpen(true);
+  };
+
+  // Modalı kapatma işlemi
+  const closeModal = () => {
+    setSelectedRow(null);
+    setModalOpen(false);
+  };
 
   const fetchArchivedServices = async () => {
     try {
@@ -84,6 +100,20 @@ const ArchivedServices = (props) => {
   }, [searchTerm, startDate, endDate, addressFilter]);
 
   const columns = [
+    {
+      flex: 0.1,
+      renderCell: (params) => (
+        <Stack direction="row" spacing={1}>
+          <Button
+            style={{ maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', color: '#008000' }}
+            component={Link}
+            onClick={() => openModal(params.row)}
+          >
+            <VisibilityIcon />
+          </Button>
+        </Stack>
+      ),
+    },
     { field: "serviceName", headerName: "Ad Soyad", flex: 1 },
     {
       field: "dateRange",
@@ -120,84 +150,129 @@ const ArchivedServices = (props) => {
       valueFormatter: (params) => formatPrice(params.value),
     },
     {
-      field: "actions", // Düğme sütununun alan adı (herhangi bir isim kullanabilirsiniz)
+      field: "actions",
       headerName: "İşlemler",
       flex: 0.6,
       renderCell: (params) => (
-        <Button
-          variant="outlined"
-          className="archived-button"
-          component={Link}
-          to={`/update/${params.row.id}`}
-        >
-          Düzenle
-        </Button>
+        <Stack direction="row" spacing={1}>
+          <Button
+            variant="outlined"
+            className="archived-button"
+            component={Link}
+            to={`/update/${params.row.id}`}
+          >
+            Düzenle
+          </Button>
+        </Stack>
       ),
     },
   ];
-
+  
   return (
     <>
-      <Box spacing={2}>
-        <Stack direction="row"
-          justifyContent="flex-start"
-          alignItems="center"
-          spacing={2} margin="2rem">
-          <TextField
-            size="small"
-            fullWidth
-            label="Ad Soyad / Telefon Ara"
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
-          <TextField
-            size="small"
-            fullWidth
-            label="Adres Filtrele"
-            value={addressFilter}
-            onChange={(event) => setAddressFilter(event.target.value)}
-          />
-          <Grid
-            container
-            direction="row"
-            justifyContent="flex-end"
+      <center>
+        <Box spacing={2} sx={{ width: '97.5%' }}>
+          <Stack direction="row"
+            justifyContent="flex-start"
             alignItems="center"
-          >
+            spacing={2} margin="2rem">
             <TextField
               size="small"
-              focused
-              label="Başlangıç Tarihi"
-              type="date"
-              value={startDate}
-              onChange={(event) => setStartDate(event.target.value)}
+              fullWidth
+              label="Ad Soyad / Telefon Ara"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
             />
             <TextField
               size="small"
-              focused
-              label="Bitiş Tarihi"
-              type="date"
-              value={endDate}
-              onChange={(event) => setEndDate(event.target.value)}
+              fullWidth
+              label="Adres Filtrele"
+              value={addressFilter}
+              onChange={(event) => setAddressFilter(event.target.value)}
             />
-          </Grid>
-        </Stack>
-      </Box>
-      <div style={{ height: "82vh", width: "100%", overflow: "auto" }}>
-        {loading ? (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '750px' }}>
-            <CircularProgress />
-          </div>
-        ) : (
-          <DataGrid
-            sx={{ bgcolor: 'white' }}
-            rows={archivedServices}
-            columns={columns}
-            disableSelectionOnClick
-            getRowId={(row) => row._id}
-          />
-        )}
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="center"
+            >
+              <TextField
+                size="small"
+                focused
+                label="Başlangıç Tarihi"
+                type="date"
+                value={startDate}
+                onChange={(event) => setStartDate(event.target.value)}
+              />
+              <TextField
+                size="small"
+                focused
+                label="Bitiş Tarihi"
+                type="date"
+                value={endDate}
+                onChange={(event) => setEndDate(event.target.value)}
+              />
+            </Grid>
+          </Stack>
+        </Box>
 
-      </div>
+        <div style={{ height: "80vh", width: "95%", overflow: "auto", borderRadius: '30px' }}>
+          {loading ? (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '750px' }}>
+              <CircularProgress />
+            </div>
+          ) : (
+            <DataGrid
+              sx={{ bgcolor: 'white' }}
+              rows={archivedServices}
+              columns={columns}
+              disableSelectionOnClick
+              getRowId={(row) => row._id}
+            />
+          )}
+        </div>
+        <br />
+
+      </center>
+
+      <Modal open={modalOpen} onClose={closeModal}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 500,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+            }}
+            onClick={closeModal}
+          >
+            <ClearIcon />
+          </IconButton>
+          {selectedRow && (
+            <>
+              <p>Ad-Soyad:{selectedRow.serviceName}</p>
+              <p>Başlangıç Tarihi: {formatDate(selectedRow.createdAt)}</p>
+              <p>Bitiş Tarihi: {formatDate(selectedRow.updatedAt)}</p>
+              <p>Telefon Numarası: {selectedRow.serviceGsmno}</p>
+              <p>Adres: {selectedRow.serviceAddress}</p>
+              <p>Açıklama: {selectedRow.serviceDesc}</p>
+              <p>Marka-Model: {selectedRow.serviceBrand}{selectedRow.serviceModel}</p>
+              <p>Marka-Model: {selectedRow.serviceType}</p>
+              <p>Marka-Model: {selectedRow.servicePrice}</p>
+            </>
+          )}
+        </Box>
+      </Modal>
     </>
   );
 };
