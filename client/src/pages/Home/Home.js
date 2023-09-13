@@ -104,8 +104,7 @@ export default function FullWidthTabs() {
     };
     return (
         <>
-            <br />
-            <Container maxWidth="none">
+            <Container maxWidth="none" sx={{marginTop: '10px'}}>
                 <AppBar  sx={{ bgcolor: '#0c5834', borderRadius: '30px 30px 0px 0px'}} position="static">
                     <Tabs
                         value={value}
