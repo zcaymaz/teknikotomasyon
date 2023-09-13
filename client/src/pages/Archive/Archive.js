@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Grid, Stack, Box, Button } from "@mui/material";
+import { TextField, Grid, Stack, Box, Button, CircularProgress } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ const ArchivedServices = (props) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [addressFilter, setAddressFilter] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchArchivedServices = async () => {
     try {
@@ -72,6 +73,8 @@ const ArchivedServices = (props) => {
       setArchivedServices(servicesWithId);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -88,7 +91,7 @@ const ArchivedServices = (props) => {
       renderCell: (params) => (
         <>
           {formatDate(params.row.createdAt)}
-          <br/>
+          <br />
           {formatDate(params.row.updatedAt)}
         </>
       ),
@@ -123,7 +126,7 @@ const ArchivedServices = (props) => {
         <Button
           variant="outlined"
           className="archived-button"
-          component={Link} 
+          component={Link}
           to={`/update/${params.row.id}`}
         >
           Düzenle
@@ -147,7 +150,7 @@ const ArchivedServices = (props) => {
             onChange={(event) => setSearchTerm(event.target.value)}
           />
           <TextField
-            size="small" 
+            size="small"
             fullWidth
             label="Adres Filtrele"
             value={addressFilter}
@@ -157,7 +160,7 @@ const ArchivedServices = (props) => {
             container
             direction="row"
             justifyContent="flex-end"
-            alignItems="center" 
+            alignItems="center"
           >
             <TextField
               size="small"
@@ -179,12 +182,19 @@ const ArchivedServices = (props) => {
         </Stack>
       </Box>
       <div style={{ height: "82vh", width: "100%", overflow: "auto" }}>
-        <DataGrid
-          rows={archivedServices}
-          columns={columns}
-          disableSelectionOnClick
-          getRowId={(row) => row._id}
-        />
+        {loading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '750px' }}>
+            <CircularProgress />
+          </div>
+        ) : (
+          <DataGrid
+            rows={archivedServices}
+            columns={columns}
+            disableSelectionOnClick
+            getRowId={(row) => row._id}
+          />
+        )}
+
       </div>
     </>
   );
