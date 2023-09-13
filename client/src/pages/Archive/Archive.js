@@ -47,7 +47,7 @@ const ArchivedServices = (props) => {
 
         // Başlangıç ve bitiş tarihlerini kontrol edin
         const startDateValid = !startDateObject || createdAt >= startDateObject;
-        const endDateValid = !endDateObject || createdAt <= endDateObject;
+        const endDateValid = !endDateObject || createdAt < new Date(endDateObject.getTime() + 86400000);;
 
         return matchesSearchTerm && startDateValid && endDateValid;
       });
@@ -188,7 +188,7 @@ const ArchivedServices = (props) => {
           </div>
         ) : (
           <DataGrid
-            sx={{bgcolor: 'white'}}
+            sx={{ bgcolor: 'white' }}
             rows={archivedServices}
             columns={columns}
             disableSelectionOnClick
