@@ -18,11 +18,11 @@ export const Login = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_ENDPOINT_LOGIN}`,
-        user, // Kullanıcı bilgilerini bir nesne olarak gönderin
+        user,
       );
 
       if (res.status === 200 && res.data.success) {
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('name', res.data.username);
         window.location.href = '/';
       } else {
         alert(res.data.message);

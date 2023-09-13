@@ -9,7 +9,7 @@ import Footer from "../components/Footer/Footer";
 import Test from "../pages/Test/Test";
 import Login from "./Login/Login";
 
-const isLogged = localStorage.getItem('token') ? true : false;
+const isLogged = localStorage.getItem('name') ? true : false;
 
 const Mainpages = () => {
   return (
