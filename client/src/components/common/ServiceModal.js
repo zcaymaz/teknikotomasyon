@@ -6,6 +6,7 @@ import { formatPrice } from "./FormatPrice";
 import { formatPhoneNumber } from "./FormatNumber";
 import { formatDate } from "./FormatDate";
 import { useReactToPrint } from "react-to-print";
+import CustomButton from "./CustomButton";
 
 const style = {
   position: "absolute",
@@ -51,14 +52,14 @@ export default function ServiceModal(props) {
 
   return (
     <>
-      <Button className="service-card-button-print" onClick={handleOpen}>
+      <CustomButton backgroundColor="teal" onClick={handleOpen}>
         Yazdır
-      </Button>
+      </CustomButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <table className="receipt-table" ref={componentRef}>
             <center>
-              <Typography sx={{ padding: '1.2rem', fontSize: '14px', fontWeight: 'bold'}}>
+              <Typography sx={{ padding: '1.2rem', fontSize: '14px', fontWeight: 'bold' }}>
                 <Typography sx={{ textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '2px', lineHeight: '10px' }}>{localStorage.getItem('name')}</Typography>
                 BEYAZ EŞYA TEKNİK SERVİS
                 <br />
@@ -89,9 +90,9 @@ export default function ServiceModal(props) {
             </center>
           </table>
           <center>
-            <Button className="receipt-print-button" onClick={handlePrint} md="none">
+            <CustomButton backgroundColor="teal" onClick={handlePrint}>
               Yazdır
-            </Button>
+            </CustomButton>
           </center>
         </Box>
       </Modal>

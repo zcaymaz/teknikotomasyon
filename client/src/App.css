@@ -9,6 +9,10 @@ body {
   background-position: center center;
 }
 
+.css-1vw5i9y-MuiButtonBase-root-MuiTab-root{
+  font-family: Poppins !important;
+}
+
 .navbar-link {
   text-decoration: none;
   color: white;

@@ -23,7 +23,7 @@ function Header() {
 
   return (
     <center>
-      <AppBar position="static" sx={{ bgcolor: '#0c5834', borderRadius: '60px', width: '97%', marginTop: '10px' }}>
+      <AppBar position="static" sx={{ bgcolor: '#0c5834', borderRadius: '60px', width: '97%', marginTop: '10px'}}>
         <Container maxWidth="xl">
           <Toolbar>
 
@@ -52,14 +52,14 @@ function Header() {
 
             {/* PC Header Started */}
             <PrecisionManufacturingIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-            <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
+            <Typography variant="h6" noWrap component="a" sx={{ mr: 2, display: { xs: 'none', md: 'flex' }, fontFamily: 'monospace', fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none' }}>
               TEKNIKOTOMASYON
             </Typography>
-            <Box sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' }, justifyContent: 'end' }}>
-              <Button href="/" sx={{ m: 1, color: 'white' }}>Ana Sayfa</Button>
-              <Button href="/add" sx={{ m: 0.5, color: 'white' }}>Servis Ekle</Button>
-              <Button href="/archive" sx={{ m: 0.5, color: 'white' }}>Arşiv</Button>
-              <Button sx={{ m: 0.5, color: 'white' }} onClick={logoutUser}>Çıkış Yap</Button>
+            <Box sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' }, justifyContent: 'end', fontFamily: 'Poppins'}}>
+              <Button href="/" sx={{ m: 1, color: 'white', fontFamily: 'Poppins' , textTransform: 'capitalize' }}>Ana Sayfa</Button>
+              <Button href="/add" sx={{ m: 0.5, color: 'white',fontFamily: 'Poppins' , textTransform: 'capitalize' }}>Servis Ekle</Button>
+              <Button href="/archive" sx={{ m: 0.5, color: 'white',fontFamily: 'Poppins', textTransform: 'capitalize'  }}>Arşiv</Button>
+              <Button sx={{ m: 0.5, color: 'white',fontFamily: 'Poppins', textTransform: 'capitalize' }} onClick={logoutUser}>Çıkış Yap</Button>
               {/* PC Header Finished */}
 
             </Box>

@@ -13,6 +13,7 @@ import ServiceModal from "../common/ServiceModal";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPhoneNumber } from "../../components/common/FormatNumber";
 import { formatPrice } from "../../components/common/FormatPrice";
+import CustomButton from "../common/CustomButton";
 
 const TextCard = (props) => {
 
@@ -75,12 +76,12 @@ const TextCard = (props) => {
           <Divider />
         </CardContent>
         <CardActions sx={{gap:'1.5rem', justifyContent:'center'}}>
-          <Button size="small" className="service-card-button" onClick={props.onClick}>
+          <CustomButton onClick={props.onClick}>
             Tamamla
-          </Button>
-          <Button size="small" className="service-card-button-update" component={Link} to={`/update/${props.serviceId}`}>
+          </CustomButton>
+          <CustomButton backgroundColor="#d1a507" component={Link} to={`/update/${props.serviceId}`}>
             Düzenle
-          </Button>
+          </CustomButton>
         </CardActions>
         <CardActions className="print-button" sx={{gap:'1.5rem', justifyContent:'center'}}>
           <ServiceModal id={props.serviceId}/>
