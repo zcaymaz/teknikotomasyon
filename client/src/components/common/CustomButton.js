@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 
-function CustomButton({ backgroundColor, onClick, children, size, href, width, height, fontSize }) {
+function CustomButton({ backgroundColor, onClick, children, size, href, width, height, fontSize, component, to }) {
     return (
         <Button sx={{
             backgroundColor: backgroundColor,
@@ -12,7 +12,7 @@ function CustomButton({ backgroundColor, onClick, children, size, href, width, h
             fontSize: fontSize ? fontSize : '15px',
             fontFamily: 'Poppins'
         }}
-            variant="contained" onClick={onClick} size={size} href={href}
+            variant="contained" onClick={onClick} size={size} href={href} component={component} to={to}
         >
             {children}
         </Button>

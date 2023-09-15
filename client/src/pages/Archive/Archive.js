@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
 import { formatPhoneNumber } from "../../components/common/FormatNumber";
+import CustomButton from "../../components/common/CustomButton";
 
 const style = {
   position: "absolute",
@@ -169,14 +170,9 @@ const ArchivedServices = (props) => {
       flex: 0.6,
       renderCell: (params) => (
         <Stack direction="row" spacing={1}>
-          <Button
-            variant="outlined"
-            className="archived-button"
-            component={Link}
-            to={`/update/${params.row.id}`}
-          >
+          <CustomButton backgroundColor="#d1a507" component={Link} to={`/update/${params.row.id}`}>
             Düzenle
-          </Button>
+          </CustomButton>
         </Stack>
       ),
     },
