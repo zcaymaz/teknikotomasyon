@@ -79,6 +79,9 @@ const TextCard = (props) => {
           <Button size="small" className="service-card-button" onClick={props.onClick}>
             Tamamla
           </Button>
+          <Button size="small" sx={{color:'white', bgcolor:'red'}} onClick={props.onClickDelete}>
+            Sil
+          </Button>
           <Button size="small" className="service-card-button-update" component={Link} to={`/update/${props.serviceId}`}>
             Düzenle
           </Button>

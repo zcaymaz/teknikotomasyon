@@ -70,12 +70,13 @@ export default function FullWidthTabs() {
     }, []);
     
     
-    // konsolda bulunan id sorunu için objectid arıyor
     const handleCompleteService = (service) => {
         const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
         const result = window.confirm(confirmMessage);
 
         if (result) {
+            setLoading(true);
+
             axios
                 .post(`${process.env.REACT_APP_ENDPOINT_SERVICECOMPLETED}`, { id: service.id } )
                 .then(() => {
@@ -83,10 +84,35 @@ export default function FullWidthTabs() {
                 })
                 .catch((error) => {
                     console.error(error);
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         }
     };
 
+    const handleDeleteService = (service) => {
+        const confirmMessage = "Servisi iptal etmek istediğinizden emin misiniz?";
+        const result = window.confirm(confirmMessage);
+    
+        if (result) {
+            setLoading(true);
+    
+            axios
+                .delete(`${process.env.REACT_APP_ENDPOINT_SERVICEDELETE}`, { data: { id: service.id } })
+                .then(() => {
+                    fetchServices();
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
+    };
+    
+    
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -145,6 +171,7 @@ export default function FullWidthTabs() {
                                             serviceType={service.servicetype}
                                             servicePrice={service.serviceprice}
                                             onClick={() => handleCompleteService(service)}
+                                            onClickDelete={() => handleDeleteService(service)}
                                         />
                                     ))}
                                 </Grid>
@@ -164,6 +191,7 @@ export default function FullWidthTabs() {
                                             serviceType={service.servicetype}
                                             servicePrice={service.serviceprice}
                                             onClick={() => handleCompleteService(service)}
+                                            onClickDelete={() => handleDeleteService(service)}
                                         />
                                     ))}
                                 </Grid>
