@@ -4,7 +4,7 @@ import image from "../../images/bg-login.png"
 
 export const Login = () => {
   const [user, setUser] = useState({
-    name: '',
+    username: '',
     password: '',
   });
 
@@ -13,31 +13,25 @@ export const Login = () => {
     setUser(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const loginSubmit = async e => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://89.116.52.58:3001/user/login', user);
-      localStorage.setItem('name', res.data.name);
-      window.location.href = '/';
+      const res = await axios.post(
+        `${process.env.REACT_APP_ENDPOINT_LOGIN}`,
+        user,
+      );
+      if (res.status === 200 && res.data.success) {
+        localStorage.setItem('name', res.data.username);
+        window.location.href = '/';
+      } else {
+        alert(res.data.message);
+      }
     } catch (err) {
-      alert(err.response.data.msg);
+      alert(err.response.data.message);
     }
   };
+
   return (
-    // <Grid container direction="row" sx={{ justifyContent: 'center', alignItems: 'center', paddingTop: '18vh', paddingBottom:'18vh' }} >
-    //       <Card className="login-card" >
-    //           <Stack paddingTop={"10%"} className='login-stack' spacing={4}>
-    //               <form onSubmit={loginSubmit}>
-    //               <Typography sx={{ color: 'black', textAlign: 'center', fontSize: '26px', padding:'1rem' }}>Üye Girişi</Typography>
-    //               <TextField label="Kullanıcı Adı" variant="outlined" type="text" name="name" required onChange={onChangeInput} 
-    //                   sx={{  width:'90%' }} />
-    //               <TextField label="Parola" variant="outlined" type="password" name="password" required onChange={onChangeInput} 
-    //                   sx={{ width: '90%', margin:'0.5rem' }} />
-    //               <Button sx={styles.button} type='submit'>Giris Yap</Button>
-    //               </form>
-    //           </Stack>
-    //       </Card>
-    //   </Grid>
     <div class="container">
       <div class="login__content">
         <img src={image} alt="girisimage" class="login__img" />
@@ -56,7 +50,7 @@ export const Login = () => {
             <div class="login__inputs">
               <div>
                 <label for="" class="login__label">Kullanıcı Adı</label>
-                <input type="text" placeholder="Kullanıcı adınızı giriniz." name="name" required onChange={onChangeInput} className="login__input" />
+                <input type="text" placeholder="Kullanıcı adınızı giriniz." name="username" required onChange={onChangeInput} className="login__input" />
               </div>
 
               <div>

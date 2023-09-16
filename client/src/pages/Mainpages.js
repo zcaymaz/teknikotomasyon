@@ -14,7 +14,6 @@ const isLogged = localStorage.getItem('name') ? true : false;
 const Mainpages = () => {
   return (
     <Router>
-
       {isLogged ? (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
           <Header />

@@ -42,7 +42,6 @@ function a11yProps(index) {
 }
 
 export default function FullWidthTabs() {
-    const apiBaseUrl = "http://89.116.52.58:3001";
     const theme = useTheme();
     const [value, setValue] = useState(0);
     const [services, setServices] = useState([]);
@@ -51,20 +50,13 @@ export default function FullWidthTabs() {
 
     const fetchServices = async () => {
         try {
-            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: localStorage.getItem('name') });
-            const filteredServices = res.data.filter((service) => service.serviceType === "Servis" && !service.isArchived);
+            const res = await axios.post(`${process.env.REACT_APP_ENDPOINT_SERVICEGETBYUSER}`, { username: localStorage.getItem('name') });
+            const allServices = res.data.services;
+    
+            const filteredServices = allServices.filter((service) => service.servicetype === "Servis");
+            const filteredWorkshops = allServices.filter((service) => service.servicetype === "Atölye");
+    
             setServices(filteredServices.reverse());
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchWorkshops = async () => {
-        try {
-            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: localStorage.getItem('name') });
-            const filteredWorkshops = res.data.filter((service) => service.serviceType === "Atölye" && !service.isArchived);
             setWorkshop(filteredWorkshops.reverse());
         } catch (error) {
             console.error(error);
@@ -72,29 +64,55 @@ export default function FullWidthTabs() {
             setLoading(false);
         }
     };
+    
     useEffect(() => {
         fetchServices();
-        fetchWorkshops();
     }, []);
-
-
+    
+    
     const handleCompleteService = (service) => {
         const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
         const result = window.confirm(confirmMessage);
 
         if (result) {
+            setLoading(true);
+
             axios
-                .put(`${apiBaseUrl}/api/service/${service._id}/archive`, { archived: true })
+                .post(`${process.env.REACT_APP_ENDPOINT_SERVICECOMPLETED}`, { id: service.id } )
                 .then(() => {
                     fetchServices();
-                    fetchWorkshops();
                 })
                 .catch((error) => {
                     console.error(error);
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         }
     };
 
+    const handleDeleteService = (service) => {
+        const confirmMessage = "Servisi iptal etmek istediğinizden emin misiniz?";
+        const result = window.confirm(confirmMessage);
+    
+        if (result) {
+            setLoading(true);
+    
+            axios
+                .delete(`${process.env.REACT_APP_ENDPOINT_SERVICEDELETE}`, { data: { id: service.id } })
+                .then(() => {
+                    fetchServices();
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
+    };
+    
+    
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -141,17 +159,18 @@ export default function FullWidthTabs() {
                                 <Grid container direction="row" justifyContent="center" gap={3}>
                                     {services.map((service) => (
                                         <TextCard
-                                            serviceId={service._id}
-                                            serviceDate={service.createdAt}
-                                            serviceName={service.serviceName}
-                                            serviceGsmno={service.serviceGsmno}
-                                            serviceAddress={service.serviceAddress}
-                                            serviceDesc={service.serviceDesc}
-                                            serviceBrand={service.serviceBrand}
-                                            serviceModel={service.serviceModel}
-                                            serviceType={service.serviceType}
-                                            servicePrice={service.servicePrice}
+                                            serviceId={service.id}
+                                            serviceDate={service.creation_date}
+                                            serviceName={service.servicename}
+                                            serviceGsmno={service.servicegsmno}
+                                            serviceAddress={service.serviceaddress}
+                                            serviceDesc={service.servicedesc}
+                                            serviceBrand={service.servicebrand}
+                                            serviceModel={service.servicemodel}
+                                            serviceType={service.servicetype}
+                                            servicePrice={service.serviceprice}
                                             onClick={() => handleCompleteService(service)}
+                                            onClickDelete={() => handleDeleteService(service)}
                                         />
                                     ))}
                                 </Grid>
@@ -160,17 +179,18 @@ export default function FullWidthTabs() {
                                 <Grid container direction="row" justifyContent="center" gap={3}>
                                     {workshop.map((service) => (
                                         <TextCard
-                                            serviceId={service._id}
-                                            serviceDate={service.createdAt}
-                                            serviceName={service.serviceName}
-                                            serviceGsmno={service.serviceGsmno}
-                                            serviceAddress={service.serviceAddress}
-                                            serviceDesc={service.serviceDesc}
-                                            serviceBrand={service.serviceBrand}
-                                            serviceModel={service.serviceModel}
-                                            serviceType={service.serviceType}
-                                            servicePrice={service.servicePrice}
+                                            serviceId={service.id}
+                                            serviceDate={service.creation_date}
+                                            serviceName={service.servicename}
+                                            serviceGsmno={service.servicegsmno}
+                                            serviceAddress={service.serviceaddress}
+                                            serviceDesc={service.servicedesc}
+                                            serviceBrand={service.servicebrand}
+                                            serviceModel={service.servicemodel}
+                                            serviceType={service.servicetype}
+                                            servicePrice={service.serviceprice}
                                             onClick={() => handleCompleteService(service)}
+                                            onClickDelete={() => handleDeleteService(service)}
                                         />
                                     ))}
                                 </Grid>
