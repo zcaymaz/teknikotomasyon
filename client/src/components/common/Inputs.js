@@ -95,17 +95,29 @@ export const SelectBrand = (props) => {
       >
         <MenuItem value="Arçelik">Arçelik</MenuItem>
         <MenuItem value="Beko">Beko</MenuItem>
+        <MenuItem value="Altus">Altus</MenuItem>
+        <MenuItem value="Grundig">Grundig</MenuItem>
         <MenuItem value="Bosch">Bosch</MenuItem>
         <MenuItem value="Siemens">Siemens</MenuItem>
         <MenuItem value="Profilo">Profilo</MenuItem>
         <MenuItem value="Vestel">Vestel</MenuItem>
-        <MenuItem value="Regal">Regal</MenuItem>
-        <MenuItem value="Altus">Altus</MenuItem>
+        <MenuItem value="Regal">Regal</MenuItem>        
         <MenuItem value="Finlüx">Finlüx</MenuItem>
         <MenuItem value="Electrolüx">Electrolüx</MenuItem>
         <MenuItem value="Samsung">Samsung</MenuItem>
-        <MenuItem value="Brand3">Brand3</MenuItem>
-        <MenuItem value="Brand3">Brand3</MenuItem>
+        <MenuItem value="Lg">Lg</MenuItem>
+        <MenuItem value="DemirDöküm">DemirDöküm</MenuItem>
+        <MenuItem value="Baymak">Baymak</MenuItem>
+        <MenuItem value="Ferroli">Ferroli</MenuItem>
+        <MenuItem value="Eca">Eca</MenuItem>
+        <MenuItem value="Buderus">Buderus</MenuItem>
+        <MenuItem value="Airfel">Airfel</MenuItem>
+        <MenuItem value="Philips">Philips</MenuItem>
+        <MenuItem value="Fantom">Fantom</MenuItem>
+        <MenuItem value="Fakir">Fakir</MenuItem>
+        <MenuItem value="Arzum">Arzum</MenuItem>
+        <MenuItem value="Dayson">Dayson</MenuItem>
+        <MenuItem value="Diğer">Diğer</MenuItem>
       </Select>
     </FormControl>
   );
