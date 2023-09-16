@@ -34,7 +34,7 @@ const ServiceUpdate = () => {
   const fetchService = async () => {
     try {
       const response = await axios.post(
-        `http://localhost/teknikoto/servicegetbyid.php`,
+        `${process.env.REACT_APP_ENDPOINT_SERVICEGETBYID}`,
         { id: id }
       );
       const serviceData = response.data.data;
@@ -56,21 +56,22 @@ const ServiceUpdate = () => {
   useEffect(() => {
     fetchService();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, []);
 
   const updateService = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://89.116.52.58:3001/api/service/${id}`, {
-        archived: false,
-        serviceName,
-        serviceGsmno,
-        serviceAddress,
-        serviceDesc,
-        serviceBrand,
-        serviceModel,
-        serviceType,
-        servicePrice,
+      await axios.put(`${process.env.REACT_APP_ENDPOINT_SERVICEUPDATE}`, {
+        servicename: serviceName,
+        servicegsmno: serviceGsmno,
+        serviceaddress: serviceAddress,
+        servicedesc: serviceDesc,
+        servicebrand: serviceBrand,
+        servicemodel: serviceModel,
+        servicetype: serviceType,
+        serviceprice: servicePrice,
+        id: id,
+        username: localStorage.getItem("name")
       });
 
       resetForm();
