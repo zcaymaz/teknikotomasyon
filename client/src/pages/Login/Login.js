@@ -32,40 +32,40 @@ export const Login = () => {
   };
 
   return (
-    <div class="container">
-      <div class="login__content">
-        <img src={image} alt="girisimage" class="login__img" />
+    <div className="container">
+      <div className="login__content">
+        <img src={image} alt="girisimage" className="login__img" />
 
-        <form action="" onSubmit={loginSubmit} class="login__form">
+        <form action="" onSubmit={loginSubmit} className="login__form">
           <div>
-            <h1 class="login__title">
+            <h1 className="login__title">
               <span>Hoşgeldiniz!</span>
             </h1>
-            <p class="login__description">
+            <p className="login__description">
               Lüften giriş yapıp devam ediniz.
             </p>
           </div>
 
           <div>
-            <div class="login__inputs">
+            <div className="login__inputs">
               <div>
-                <label for="" class="login__label">Kullanıcı Adı</label>
+                <label className="login__label">Kullanıcı Adı</label>
                 <input type="text" placeholder="Kullanıcı adınızı giriniz." name="username" required onChange={onChangeInput} className="login__input" />
               </div>
 
               <div>
-                <label for="" class="login__label">Şifre</label>
+                <label className="login__label">Şifre</label>
 
-                <div class="login__box">
-                  <input type="password" placeholder="Şifrenizi giriniz." required name="password" onChange={onChangeInput} class="login__input" id="input-pass" />
-                  <i class="ri-eye-off-line login__eye" id="input-icon"></i>
+                <div className="login__box">
+                  <input type="password" placeholder="Şifrenizi giriniz." required name="password" onChange={onChangeInput} className="login__input" id="input-pass" />
+                  <i className="ri-eye-off-line login__eye" id="input-icon"></i>
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <div class="login__buttons">
-              <button type="submit" class="login__button">Giriş Yap</button>
+            <div className="login__buttons">
+              <button type="submit" className="login__button">Giriş Yap</button>
             </div>
           </div>
         </form>
