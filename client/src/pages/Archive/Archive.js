@@ -284,14 +284,10 @@ const ArchivedServices = (props) => {
                   sx={{
                     textTransform: "uppercase",
                     fontWeight: "bold",
-                    letterSpacing: "2px",
-                    lineHeight: "10px",
                   }}
                 >
-                  {localStorage.getItem("name")}
+                  {localStorage.getItem("businessname")}
                 </Typography>
-                BEYAZ EŞYA TEKNİK SERVİS
-                <br />
                 <br />
                 {selectedRow && (
                   <>

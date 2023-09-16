@@ -116,7 +116,7 @@ export const SelectBrand = (props) => {
         <MenuItem value="Fantom">Fantom</MenuItem>
         <MenuItem value="Fakir">Fakir</MenuItem>
         <MenuItem value="Arzum">Arzum</MenuItem>
-        <MenuItem value="Dayson">Dayson</MenuItem>
+        <MenuItem value="Dyson">Dyson</MenuItem>
         <MenuItem value="Diğer">Diğer</MenuItem>
       </Select>
     </FormControl>

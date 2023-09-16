@@ -22,6 +22,7 @@ export const Login = () => {
       );
       if (res.status === 200 && res.data.success) {
         localStorage.setItem('name', res.data.username);
+        localStorage.setItem('businessname', res.data.businessname);
         window.location.href = '/';
       } else {
         alert(res.data.message);
