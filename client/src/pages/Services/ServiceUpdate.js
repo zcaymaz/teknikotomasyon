@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Grid,
   Stack,
-  Button,
   Typography,
   Divider,
   CircularProgress,
@@ -16,6 +15,7 @@ import {
 } from "../../components/common/Inputs";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import CustomButton from "../../components/common/CustomButton";
 
 const ServiceUpdate = () => {
   const { id } = useParams();
@@ -71,13 +71,14 @@ const ServiceUpdate = () => {
         id: id,
         username: localStorage.getItem("name"),
       });
-
+  
+      handleCompleteService({ id });
       resetForm();
-      window.location.href = "/";
     } catch (err) {
       console.error(err);
     }
   };
+  
 
   const resetForm = () => {
     setServiceName("");
@@ -90,15 +91,27 @@ const ServiceUpdate = () => {
     setServicePrice("");
   };
 
+  const handleCompleteService = async () => {
+    try {
+      setLoading(true);
+      await axios.post(`${process.env.REACT_APP_ENDPOINT_SERVICECOMPLETED}`, { id });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+      window.location.href = "/";
+    }
+  };
+  
   return (
     <Grid container direction="row" p={3}>
       <Grid container direction="row" justifyContent="center" pb={2}>
-        <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f" }}>
+        <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#475467" }}>
           Servis Güncelle
         </Typography>
-        <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
+        <Divider sx={{ width: "100%", border: "1px solid #F2F4F7" }} />
       </Grid>
-      <Grid p={5} item xs={12} bgcolor="#f0f0f0">
+      <Grid p={5} item xs={12} bgcolor="#F2F4F7" borderRadius="12px">
         {loading ? (
           <div
             style={{
@@ -194,11 +207,21 @@ const ServiceUpdate = () => {
                 onChange={(e) => setServiceType(e.target.value)}
               />
             </Stack>
-            <center>
-              <Button className="serviceadd-button" type="submit">
-                Güncelle
-              </Button>
-            </center>
+            <Stack
+              direction={{ xs: "col", sm: "row" }}
+              justifyContent={"center"}
+              spacing={3}
+              gap={2}
+              padding={1}
+              marginTop={3}
+            >
+                <CustomButton fontSize="16px" type="submit" width="200px" backgroundColor="#0c5834">
+                  Güncelle
+                </CustomButton>
+                <CustomButton fontSize="16px" width="300px" type="submit">
+                  Güncelle ve Tamamla
+                </CustomButton>
+            </Stack>
           </form>
         )}
       </Grid>

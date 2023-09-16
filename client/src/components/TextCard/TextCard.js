@@ -82,7 +82,7 @@ const TextCard = (props) => {
           <CustomButton backgroundColor="#d1a507" component={Link} to={`/update/${props.serviceId}`}>
             Düzenle
           </CustomButton>
-          <CustomButton backgroundColor="#000" onClick={props.onClickDelete}>
+          <CustomButton backgroundColor="#ff0000" onClick={props.onClickDelete}>
             İptal
           </CustomButton>
         </CardActions>

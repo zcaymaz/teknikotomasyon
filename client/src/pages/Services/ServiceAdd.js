@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { Grid, Stack, Button, Typography, Divider } from "@mui/material";
-import { FormInput, MultilineFormInput, ServiceTypeInput, SelectBrand, SelectModel } from "../../components/common/Inputs";
+import { Grid, Stack, Typography, Divider } from "@mui/material";
+import {
+  FormInput,
+  MultilineFormInput,
+  ServiceTypeInput,
+  SelectBrand,
+  SelectModel,
+} from "../../components/common/Inputs";
 import axios from "axios";
+import CustomButton from "../../components/common/CustomButton";
 
 const ServiceAdd = () => {
   const [serviceName, setServiceName] = useState("");
@@ -16,20 +23,17 @@ const ServiceAdd = () => {
   const createService = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        `${process.env.REACT_APP_ENDPOINT_SERVICEADD}`,
-        {
-          servicename: serviceName,
-          servicegsmno: serviceGsmno,
-          serviceaddress: serviceAddress,
-          servicedesc: serviceDesc,
-          servicebrand: serviceBrand,
-          servicemodel: serviceModel,
-          servicetype: serviceType,
-          serviceprice: servicePrice,
-          username: localStorage.getItem("name")
-        },
-      );
+      await axios.post(`${process.env.REACT_APP_ENDPOINT_SERVICEADD}`, {
+        servicename: serviceName,
+        servicegsmno: serviceGsmno,
+        serviceaddress: serviceAddress,
+        servicedesc: serviceDesc,
+        servicebrand: serviceBrand,
+        servicemodel: serviceModel,
+        servicetype: serviceType,
+        serviceprice: servicePrice,
+        username: localStorage.getItem("name"),
+      });
       setServiceName("");
       setServiceGsmno("");
       setServiceAddress("");
@@ -43,20 +47,24 @@ const ServiceAdd = () => {
       alert(err.response.data.msg);
     }
   };
-  
 
   return (
     <>
       <Grid container direction="row" p={3}>
         <Grid container direction="row" justifyContent="center" pb={2}>
-          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f" }}>
+          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#475467" }}>
             Yeni Servis Ekle
           </Typography>
-          <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
+          <Divider sx={{ width: "100%", border: "1px solid #F2F4F7" }} />
         </Grid>
-        <Grid p={5} item xs={12} bgcolor="#f0f0f0">
+        <Grid p={5} item xs={12} bgcolor="#F2F4F7" borderRadius="12px">
           <form onSubmit={createService}>
-            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
+            <Stack
+              direction={{ xs: "col", sm: "row" }}
+              spacing={3}
+              gap={2}
+              padding={1}
+            >
               <FormInput
                 size="medium"
                 label="Müşteri İsmi"
@@ -81,7 +89,12 @@ const ServiceAdd = () => {
                 }}
               />
             </Stack>
-            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
+            <Stack
+              direction={{ xs: "col", sm: "row" }}
+              spacing={3}
+              gap={2}
+              padding={1}
+            >
               <MultilineFormInput
                 label="Açıklama"
                 name="serviceDesc"
@@ -99,7 +112,12 @@ const ServiceAdd = () => {
                 onChange={(e) => setServiceAddress(e.target.value)}
               />
             </Stack>
-            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
+            <Stack
+              direction={{ xs: "col", sm: "row" }}
+              spacing={3}
+              gap={2}
+              padding={1}
+            >
               <SelectBrand
                 value={serviceBrand}
                 onChange={(e) => setServiceBrand(e.target.value)}
@@ -123,16 +141,28 @@ const ServiceAdd = () => {
                 onChange={(e) => setServiceType(e.target.value)}
               />
             </Stack>
-            <center>
-              <Button className="serviceadd-button" type="submit">
+            <Stack
+              direction={{ xs: "col", sm: "row" }}
+              justifyContent={"center"}
+              spacing={3}
+              gap={2}
+              padding={1}
+              marginTop={3}
+            >
+              <CustomButton
+                fontSize="16px"
+                type="submit"
+                width="200px"
+                backgroundColor="#0c5834"
+              >
                 Ekle
-              </Button>
-            </center>
+              </CustomButton>
+            </Stack>
           </form>
         </Grid>
       </Grid>
     </>
-  )
+  );
 };
 
 export default ServiceAdd;

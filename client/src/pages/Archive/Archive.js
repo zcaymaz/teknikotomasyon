@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
   TextField,
-  Grid,
   Stack,
   Box,
   Button,
@@ -81,29 +80,30 @@ const ArchivedServices = (props) => {
     if (!startDate && !endDate) {
       return true; // Herhangi bir tarih filtresi uygulanmamışsa, her zaman true döndür
     }
-  
+
     if (startDate && endDate) {
       // Başlangıç ve bitiş tarihleri belirtilmişse, bu aralıkta olanları filtrele
       const serviceDate = new Date(service.servicedate);
       const completionDate = new Date(service.completion_date);
       return (
-        serviceDate >= new Date(startDate) && completionDate <= new Date(endDate)
+        serviceDate >= new Date(startDate) &&
+        completionDate <= new Date(endDate)
       );
     }
-  
+
     if (startDate) {
       // Sadece başlangıç tarihi belirtilmişse, bu tarihten sonraki kayıtları filtrele
       const serviceDate = new Date(service.servicedate);
       return serviceDate >= new Date(startDate);
     }
-  
+
     if (endDate) {
       // Sadece bitiş tarihi belirtilmişse, bu tarihten önceki kayıtları filtrele
       const completionDate = new Date(service.completion_date);
       return completionDate <= new Date(endDate);
     }
   };
-  
+
   const filteredServices = archivedServices.filter(
     (service) =>
       service.servicename.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -111,14 +111,14 @@ const ArchivedServices = (props) => {
       service.serviceaddress.toLowerCase().includes(searchTerm.toLowerCase()) ||
       service.servicedesc.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
+
   const startDateFilter = startDate.trim() === "" ? null : startDate;
   const endDateFilter = endDate.trim() === "" ? null : endDate;
-  
+
   const filteredByDateServices = filteredServices.filter((service) =>
     filterByDate(service, startDateFilter, endDateFilter)
   );
-  
+
   const columns = [
     {
       flex: 0.1,
@@ -192,13 +192,19 @@ const ArchivedServices = (props) => {
   return (
     <>
       <center>
-        <Box spacing={2} sx={{ width: "97.5%" }}>
+
           <Stack
-            direction="row"
+            direction={{ xs: "col", sm: "row" }}
             justifyContent="flex-start"
             alignItems="center"
-            spacing={2}
-            margin="2rem"
+            spacing={3}
+            gap={2}
+            padding={2}
+            bgcolor={"#fff"}
+            margin={1}
+            sx={{
+              borderRadius: "25px",
+            }}
           >
             <TextField
               size="small"
@@ -207,50 +213,40 @@ const ArchivedServices = (props) => {
               value={searchTerm}
               onChange={handleSearch}
             />
-            <Grid
-              container
-              direction="row"
-              justifyContent="flex-end"
-              alignItems="center"
-            >
-              <TextField
-                size="small"
-                focused
-                label="Başlangıç Tarihi"
-                type="date"
-                value={startDate}
-                onChange={(event) => setStartDate(event.target.value)}
-              />
-              <TextField
-                size="small"
-                focused
-                label="Bitiş Tarihi"
-                type="date"
-                value={endDate}
-                onChange={(event) => setEndDate(event.target.value)}
-              />
-            </Grid>
+            <TextField
+              size="small"
+              label="Başlangıç Tarihi"
+              sx={{width:'240px'}}
+              type="date"
+              value={startDate}
+              onChange={(event) => setStartDate(event.target.value)}
+            />
+            <TextField
+              size="small"
+              label="Bitiş Tarihi"
+              sx={{width:'240px'}}
+              type="date"
+              value={endDate}
+              onChange={(event) => setEndDate(event.target.value)}
+            />
           </Stack>
-        </Box>
-        <div
-          style={{
+
+        <Stack
+          direction={{ xs: "col", sm: "row" }}
+          justifyContent="center"
+          alignItems="center"
+          spacing={3}
+          gap={2}
+          bgcolor={"#fff"}
+          margin={1}
+          sx={{
             height: "80vh",
-            width: "95%",
             overflow: "auto",
             borderRadius: "25px",
           }}
         >
           {loading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "750px",
-              }}
-            >
               <CircularProgress />
-            </div>
           ) : (
             <DataGrid
               sx={{ bgcolor: "white", minWidth: "1280px" }}
@@ -260,7 +256,7 @@ const ArchivedServices = (props) => {
               getRowId={(row) => row.id}
             />
           )}
-        </div>
+        </Stack>
         <br />
       </center>
       <Modal
