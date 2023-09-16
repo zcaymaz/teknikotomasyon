@@ -5,15 +5,13 @@ import {
   Button,
   Typography,
   Divider,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
   CircularProgress,
 } from "@mui/material";
 import {
   FormInput,
   MultilineFormInput,
+  SelectBrand,
+  SelectModel,
   ServiceTypeInput,
 } from "../../components/common/Inputs";
 import axios from "axios";
@@ -71,7 +69,7 @@ const ServiceUpdate = () => {
         servicetype: serviceType,
         serviceprice: servicePrice,
         id: id,
-        username: localStorage.getItem("name")
+        username: localStorage.getItem("name"),
       });
 
       resetForm();
@@ -173,63 +171,14 @@ const ServiceUpdate = () => {
               gap={2}
               padding={1}
             >
-              <FormControl variant="outlined" size="medium" fullWidth>
-                <InputLabel id="serviceBrand-label">Ürün Markası</InputLabel>
-                <Select
-                  sx={{ bgcolor: "white" }}
-                  labelId="serviceBrand-label"
-                  id="serviceBrand"
-                  name="serviceBrand"
-                  label="Ürün Markası"
-                  value={serviceBrand}
-                  required
-                  onChange={(e) => setServiceBrand(e.target.value)}
-                >
-                  <MenuItem value="Arçelik">Arçelik</MenuItem>
-                  <MenuItem value="Beko">Beko</MenuItem>
-                  <MenuItem value="Bosch">Bosch</MenuItem>
-                  <MenuItem value="Siemens">Siemens</MenuItem>
-                  <MenuItem value="Profilo">Profilo</MenuItem>
-                  <MenuItem value="Vestel">Vestel</MenuItem>
-                  <MenuItem value="Regal">Regal</MenuItem>
-                  <MenuItem value="Altus">Altus</MenuItem>
-                  <MenuItem value="Finlüx">Finlüx</MenuItem>
-                  <MenuItem value="Electrolüx">Electrolüx</MenuItem>
-                  <MenuItem value="Samsung">Samsung</MenuItem>
-                  <MenuItem value="Brand3">Brand3</MenuItem>
-                  <MenuItem value="Brand3">Brand3</MenuItem>
-                </Select>
-              </FormControl>
-
-              <FormControl variant="outlined" size="medium" fullWidth>
-                <InputLabel id="serviceModel-label">Ürün</InputLabel>
-                <Select
-                  sx={{ bgcolor: "white" }}
-                  labelId="serviceModel-label"
-                  id="serviceModel"
-                  name="serviceModel"
-                  label="Ürün"
-                  value={serviceModel}
-                  required
-                  onChange={(e) => setServiceModel(e.target.value)}
-                >
-                  <MenuItem value="Çamaşır Makinesi">Çamaşır Makinesi</MenuItem>
-                  <MenuItem value="Bulaşık Makinesi">Bulaşık Makinesi</MenuItem>
-                  <MenuItem value="Buzdolabı">Buzdolabı</MenuItem>
-                  <MenuItem value="Kombi">Kombi</MenuItem>
-                  <MenuItem value="Klima">Klima</MenuItem>
-                  <MenuItem value="Elektrikli Süpürge">
-                    Elektrikli Süpürge
-                  </MenuItem>
-                  <MenuItem value="Ocak">Ocak</MenuItem>
-                  <MenuItem value="Fırın">Fırın</MenuItem>
-                  <MenuItem value="Derin Dondurucu (Difriz)">
-                    Derin Dondurucu (Difriz)
-                  </MenuItem>
-                  <MenuItem value="Hermetik Sofben">Hermetik Şofben</MenuItem>
-                  <MenuItem value="Diğer">Diğer</MenuItem>
-                </Select>
-              </FormControl>
+              <SelectBrand
+                value={serviceBrand}
+                onChange={(e) => setServiceBrand(e.target.value)}
+              />
+              <SelectModel
+                value={serviceModel}
+                onChange={(e) => setServiceModel(e.target.value)}
+              />
               <FormInput
                 size="medium"
                 type="number"

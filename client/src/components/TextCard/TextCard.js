@@ -3,7 +3,6 @@ import {
   CardContent,
   Typography,
   CardActions,
-  Button,
   Grid,
   CardHeader,
   Divider,
@@ -88,7 +87,7 @@ const TextCard = (props) => {
           </CustomButton>
         </CardActions>
         <CardActions className="print-button" sx={{gap:'1.5rem', justifyContent:'center'}}>
-          {/* <ServiceModal id={props.serviceId}/> Konsolda ki id sorunu için */}
+          <ServiceModal id={props.serviceId}/>
         </CardActions>
       </Grid>
     </React.Fragment>

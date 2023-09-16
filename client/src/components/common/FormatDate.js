@@ -1,11 +1,16 @@
 export const formatDate = (dateString) => {
+  const inputDate = new Date(dateString);
+  inputDate.setHours(inputDate.getHours() + 3);
+
   const options = {
-    day: "numeric",
-    month: "numeric",
     year: "numeric",
+    month: "numeric",
+    day: "numeric",
     hour: "numeric",
     minute: "numeric",
+    second: "numeric",
   };
-  const formattedDate = new Date(dateString).toLocaleString("tr-TR", options);
+
+  const formattedDate = inputDate.toLocaleString("tr-TR", options);
   return formattedDate;
 };

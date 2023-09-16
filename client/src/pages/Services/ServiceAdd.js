@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Stack, Button, Typography, Divider } from "@mui/material";
-import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
+import { FormInput, MultilineFormInput, ServiceTypeInput, SelectBrand, SelectModel } from "../../components/common/Inputs";
 import axios from "axios";
 
 const ServiceAdd = () => {
@@ -100,22 +100,12 @@ const ServiceAdd = () => {
               />
             </Stack>
             <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
-              <FormInput
-                size="medium"
-                label="Ürün Markası"
-                name="serviceBrand"
-                id="serviceBrand"
+              <SelectBrand
                 value={serviceBrand}
-                required
                 onChange={(e) => setServiceBrand(e.target.value)}
               />
-              <FormInput
-                size="medium"
-                label="Ürün"
-                name="serviceModel"
-                id="serviceModel"
+              <SelectModel
                 value={serviceModel}
-                required
                 onChange={(e) => setServiceModel(e.target.value)}
               />
               <FormInput

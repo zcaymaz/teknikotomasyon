@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Modal, Button, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography } from "@mui/material";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { formatPrice } from "./FormatPrice";
@@ -30,10 +30,11 @@ export default function ServiceModal(props) {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get(
-        `http://89.116.52.58:3001/api/service/${id}`
+      const response = await axios.post(
+        `${process.env.REACT_APP_ENDPOINT_SERVICEGETBYID}`,
+        { id: id }
       );
-      const filteredServices = response.data;
+      const filteredServices = response.data.data;
       setService(filteredServices);
     } catch (error) {
       console.error(error);
@@ -64,28 +65,28 @@ export default function ServiceModal(props) {
                 BEYAZ EŞYA TEKNİK SERVİS
                 <br />
                 <br />
-                Fiş Tarihi: {service ? formatDate(service.createdAt) : null}
+                Fiş Tarihi: {service ? formatDate(service.creation_date) : null}
                 <br />
                 <br />
-                Ad Soyad: {service?.serviceName}
+                Ad Soyad: {service?.servicename}
                 <br />
                 <br />
-                Telefon No: {service ? formatPhoneNumber(service.serviceGsmno) : null}
+                Telefon No: {service ? formatPhoneNumber(service.servicegsmno) : null}
                 <br />
                 <br />
-                Adres: {service?.serviceAddress}
+                Adres: {service?.serviceaddress}
                 <br />
                 <br />
-                Açıklama: {service?.serviceDesc}
+                Açıklama: {service?.servicedesc}
                 <br />
                 <br />
-                Ürün Marka: {service?.serviceBrand}
+                Ürün Marka: {service?.servicebrand}
                 <br />
                 <br />
-                Ürün Model: {service?.serviceModel}
+                Ürün Model: {service?.servicemodel}
                 <br />
                 <br />
-                Tutar: {service ? formatPrice(service.servicePrice) : null}
+                Tutar: {service ? formatPrice(service.serviceprice) : null}
               </Typography>
             </center>
           </table>

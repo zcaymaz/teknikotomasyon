@@ -1,5 +1,15 @@
 import React from "react";
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
 export const FormInput = (props) => {
   return (
@@ -21,7 +31,7 @@ export const FormInput = (props) => {
 };
 export const ServiceTypeInput = ({ value, onChange }) => {
   return (
-    <FormControl component="fieldset" sx={{width:'100%',height:'50px'}}>
+    <FormControl component="fieldset" sx={{ width: "100%", height: "50px" }}>
       <FormLabel component="legend">Atölye/Servis</FormLabel>
       <RadioGroup value={value} onChange={onChange} row>
         <FormControlLabel value="Atölye" control={<Radio />} label="Atölye" />
@@ -66,5 +76,71 @@ export const MultilineFormInput = (props) => {
         disabled={props.disabled}
       />
     </>
+  );
+};
+
+export const SelectBrand = (props) => {
+  return (
+    <FormControl variant="outlined" size="medium" fullWidth>
+      <InputLabel id="serviceBrand-label">Ürün Markası</InputLabel>
+      <Select
+        sx={{ bgcolor: "white" }}
+        labelId="serviceBrand-label"
+        id="serviceBrand"
+        name="serviceBrand"
+        label="Ürün Markası"
+        required
+        value={props.value}
+        onChange={props.onChange}
+      >
+        <MenuItem value="Arçelik">Arçelik</MenuItem>
+        <MenuItem value="Beko">Beko</MenuItem>
+        <MenuItem value="Bosch">Bosch</MenuItem>
+        <MenuItem value="Siemens">Siemens</MenuItem>
+        <MenuItem value="Profilo">Profilo</MenuItem>
+        <MenuItem value="Vestel">Vestel</MenuItem>
+        <MenuItem value="Regal">Regal</MenuItem>
+        <MenuItem value="Altus">Altus</MenuItem>
+        <MenuItem value="Finlüx">Finlüx</MenuItem>
+        <MenuItem value="Electrolüx">Electrolüx</MenuItem>
+        <MenuItem value="Samsung">Samsung</MenuItem>
+        <MenuItem value="Brand3">Brand3</MenuItem>
+        <MenuItem value="Brand3">Brand3</MenuItem>
+      </Select>
+    </FormControl>
+  );
+};
+
+export const SelectModel = (props) => {
+  return (
+    <FormControl variant="outlined" size="medium" fullWidth>
+    <InputLabel id="serviceModel-label">Ürün</InputLabel>
+    <Select
+      sx={{ bgcolor: "white" }}
+      labelId="serviceModel-label"
+      id="serviceModel"
+      name="serviceModel"
+      label="Ürün"
+      required
+      value={props.value}
+      onChange={props.onChange}
+    >
+      <MenuItem value="Çamaşır Makinesi">Çamaşır Makinesi</MenuItem>
+      <MenuItem value="Bulaşık Makinesi">Bulaşık Makinesi</MenuItem>
+      <MenuItem value="Buzdolabı">Buzdolabı</MenuItem>
+      <MenuItem value="Kombi">Kombi</MenuItem>
+      <MenuItem value="Klima">Klima</MenuItem>
+      <MenuItem value="Elektrikli Süpürge">
+        Elektrikli Süpürge
+      </MenuItem>
+      <MenuItem value="Ocak">Ocak</MenuItem>
+      <MenuItem value="Fırın">Fırın</MenuItem>
+      <MenuItem value="Derin Dondurucu (Difriz)">
+        Derin Dondurucu (Difriz)
+      </MenuItem>
+      <MenuItem value="Hermetik Sofben">Hermetik Şofben</MenuItem>
+      <MenuItem value="Diğer">Diğer</MenuItem>
+    </Select>
+  </FormControl>
   );
 };
