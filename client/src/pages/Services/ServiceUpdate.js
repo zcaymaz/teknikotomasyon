@@ -56,7 +56,7 @@ const ServiceUpdate = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const updateService = async (e) => {
+  const updateService = async (e, shouldComplete) => {
     e.preventDefault();
     try {
       await axios.put(`${process.env.REACT_APP_ENDPOINT_SERVICEUPDATE}`, {
@@ -71,9 +71,14 @@ const ServiceUpdate = () => {
         id: id,
         username: localStorage.getItem("name"),
       });
-  
-      handleCompleteService({ id });
+
+      if (shouldComplete) {
+       await handleCompleteService({ id });
+      }
+
       resetForm();
+
+      window.location.href = "/";
     } catch (err) {
       console.error(err);
     }
@@ -215,10 +220,10 @@ const ServiceUpdate = () => {
               padding={1}
               marginTop={3}
             >
-                <CustomButton fontSize="16px" type="submit" width="200px" backgroundColor="#0c5834">
+                <CustomButton fontSize="16px" type="submit" width="200px" backgroundColor="#0c5834" onClick={(e) => updateService(e, false)}>
                   Güncelle
                 </CustomButton>
-                <CustomButton fontSize="16px" width="300px" type="submit">
+                <CustomButton fontSize="16px" width="300px" type="submit" onClick={(e) => updateService(e, true)}>
                   Güncelle ve Tamamla
                 </CustomButton>
             </Stack>
