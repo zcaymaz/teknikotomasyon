@@ -18,10 +18,15 @@ const TextCard = (props) => {
 
   return (
     <React.Fragment>
-      <Grid p={1} className="service-card">       
+      <Grid p={1} className="service-card">
         <CardHeader
           disableTypography
-          sx={{ textAlign: "right", height: "0px", fontSize: "16px", marginRight:"1rem" }}
+          sx={{
+            textAlign: "right",
+            height: "0px",
+            fontSize: "16px",
+            marginRight: "1rem",
+          }}
           title={"Tarih: " + formatDate(props.serviceDate)}
         />
         <CardContent>
@@ -75,19 +80,34 @@ const TextCard = (props) => {
           </Typography>
           <Divider />
         </CardContent>
-        <CardActions sx={{gap:'1.5rem', justifyContent:'center'}}>
-          <CustomButton onClick={props.onClick}>
-            Tamamla
-          </CustomButton>
-          <CustomButton backgroundColor="#d1a507" component={Link} to={`/update/${props.serviceId}`}>
+        <CardActions sx={{ gap: "1.5rem", justifyContent: "center" }}>
+          <CustomButton onClick={props.onClick}>Tamamla</CustomButton>
+          <CustomButton
+            backgroundColor="#d1a507"
+            component={Link}
+            to={`/update/${props.serviceId}`}
+          >
             Düzenle
           </CustomButton>
           <CustomButton backgroundColor="#ff0000" onClick={props.onClickDelete}>
             İptal
           </CustomButton>
         </CardActions>
-        <CardActions className="print-button" sx={{gap:'1.5rem', justifyContent:'center'}}>
-          <ServiceModal id={props.serviceId}/>
+        <CardActions
+          className="print-button"
+          sx={{ gap: "1.5rem", justifyContent: "center" }}
+        >
+          <ServiceModal
+            id={props.serviceId}
+            serviceName={props.serviceName}
+            serviceDate={formatDate(props.serviceDate)}
+            serviceGsmno={props.serviceGsmno}
+            serviceAddress={props.serviceAddress}
+            serviceDesc={props.serviceDesc}
+            serviceBrand={props.serviceBrand}
+            serviceModel={props.serviceModel}
+            servicePrice={formatPrice(props.servicePrice)}
+          />
         </CardActions>
       </Grid>
     </React.Fragment>

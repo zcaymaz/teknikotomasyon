@@ -34,8 +34,8 @@ export const ServiceTypeInput = ({ value, onChange }) => {
     <FormControl component="fieldset" sx={{ width: "100%", height: "50px" }}>
       <FormLabel component="legend">Atölye/Servis</FormLabel>
       <RadioGroup value={value} onChange={onChange} row>
-        <FormControlLabel value="Atölye" control={<Radio />} label="Atölye" />
-        <FormControlLabel value="Servis" control={<Radio />} label="Servis" />
+        <FormControlLabel required value="Atölye" control={<Radio />} label="Atölye" />
+        <FormControlLabel required value="Servis" control={<Radio />} label="Servis" />
       </RadioGroup>
     </FormControl>
   );
@@ -151,6 +151,7 @@ export const SelectModel = (props) => {
         Derin Dondurucu (Difriz)
       </MenuItem>
       <MenuItem value="Hermetik Sofben">Hermetik Şofben</MenuItem>
+      <MenuItem value="Mikrodalga">Mikrodalga</MenuItem>
       <MenuItem value="Diğer">Diğer</MenuItem>
     </Select>
   </FormControl>

@@ -1,10 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useRef, useState } from "react";
 import { Modal, Box, Typography } from "@mui/material";
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import { formatPrice } from "./FormatPrice";
-import { formatPhoneNumber } from "./FormatNumber";
-import { formatDate } from "./FormatDate";
 import { useReactToPrint } from "react-to-print";
 import CustomButton from "./CustomButton";
 
@@ -22,28 +17,19 @@ const style = {
 };
 
 export default function ServiceModal(props) {
-  const { id } = props;
+  const {
+    serviceName,
+    serviceDate,
+    serviceGsmno,
+    serviceAddress,
+    serviceDesc,
+    serviceBrand,
+    serviceModel,
+    servicePrice,
+  } = props;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [service, setService] = useState();
-
-  const fetchServices = async () => {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_ENDPOINT_SERVICEGETBYID}`,
-        { id: id }
-      );
-      const filteredServices = response.data.data;
-      setService(filteredServices);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchServices();
-  }, []);
 
   const componentRef = useRef();
 
@@ -61,30 +47,32 @@ export default function ServiceModal(props) {
           <table className="receipt-table" ref={componentRef}>
             <center>
               <Typography sx={{ padding: '1.2rem', fontSize: '14px', fontWeight: 'bold' }}>
-                <Typography sx={{ textTransform: 'uppercase', fontWeight: 'bold',}}>{localStorage.getItem('businessname')}</Typography>
+                <Typography sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
+                  {localStorage.getItem('businessname')}
+                </Typography>
                 <br />
-                Fiş Tarihi: {service ? formatDate(service.creation_date) : null}
-                <br />
-                <br />
-                Ad Soyad: {service?.servicename}
-                <br />
-                <br />
-                Telefon No: {service ? formatPhoneNumber(service.servicegsmno) : null}
+                Fiş Tarihi: {serviceDate}
                 <br />
                 <br />
-                Adres: {service?.serviceaddress}
+                Ad Soyad: {serviceName}
                 <br />
                 <br />
-                Açıklama: {service?.servicedesc}
+                Telefon No: {serviceGsmno}
                 <br />
                 <br />
-                Ürün Marka: {service?.servicebrand}
+                Adres: {serviceAddress}
                 <br />
                 <br />
-                Ürün Model: {service?.servicemodel}
+                Açıklama: {serviceDesc}
                 <br />
                 <br />
-                Tutar: {service ? formatPrice(service.serviceprice) : null}
+                Ürün Marka: {serviceBrand}
+                <br />
+                <br />
+                Ürün Model: {serviceModel}
+                <br />
+                <br />
+                Tutar: {servicePrice}
               </Typography>
             </center>
           </table>
