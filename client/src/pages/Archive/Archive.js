@@ -167,7 +167,7 @@ const ArchivedServices = (props) => {
     {
       field: "actions",
       headerName: "İşlemler",
-      flex: 0.6,
+      flex: 0.8,
       renderCell: (params) => (
         <Stack direction="row" spacing={1}>
           <CustomButton backgroundColor="#d1a507" component={Link} to={`/update/${params.row.id}`}>
@@ -182,40 +182,56 @@ const ArchivedServices = (props) => {
     <>
       <center>
         <Box spacing={2} sx={{ width: '97.5%' }}>
-          <Stack direction="row"
-            justifyContent="flex-start"
-            alignItems="center"
-            spacing={2} margin="2rem">
-            <TextField
-              size="small"
-              fullWidth
-              label="Ad Soyad / Telefon Ara"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-            />
-            <TextField
-              size="small"
-              fullWidth
-              label="Adres Filtrele"
-              value={addressFilter}
-              onChange={(event) => setAddressFilter(event.target.value)}
-            />
-            <Grid
-              container
-              direction="row"
-              justifyContent="flex-end"
-              alignItems="center"
-            >
+          <Grid
+            container
+            marginTop="1rem"
+            marginBottom="1rem"
+            sx={{ width: '95%' }}
+            justifyContent="center"
+            spacing={2}>
+            <Grid item
+              xs={6}>
               <TextField
                 size="small"
+                fullWidth
+                label="Ad Soyad / Telefon Ara"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={6}>
+              <TextField
+                size="small"
+                fullWidth
+                label="Adres Filtrele"
+                value={addressFilter}
+                onChange={(event) => setAddressFilter(event.target.value)}
+              />
+            </Grid>
+            <Grid
+              item
+              alignItems="center"
+              md={4}
+              xs={6}>
+              <TextField
+                size="small"
+                fullWidth
                 focused
                 label="Başlangıç Tarihi"
                 type="date"
                 value={startDate}
                 onChange={(event) => setStartDate(event.target.value)}
               />
+            </Grid>
+            <Grid item
+              alignItems="center"
+              md={4}
+              xs={6}>
               <TextField
                 size="small"
+                fullWidth
                 focused
                 label="Bitiş Tarihi"
                 type="date"
@@ -223,7 +239,7 @@ const ArchivedServices = (props) => {
                 onChange={(event) => setEndDate(event.target.value)}
               />
             </Grid>
-          </Stack>
+          </Grid>
         </Box>
 
         <div style={{ height: "80vh", width: "95%", overflow: "auto", borderRadius: '25px' }}>

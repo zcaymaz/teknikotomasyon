@@ -25,7 +25,7 @@ body {
 }
 
 .service-card-label {
-  font-size: 14px;
+  font-size: 18px;
   color: #3e3e3e;
 }
 
@@ -485,4 +485,8 @@ img {
   .print-button {
     display: none !important;
   }
+}
+
+.service-card-phone-number {
+  text-decoration: none;
 }

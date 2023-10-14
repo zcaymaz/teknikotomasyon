@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Modal, Button, Box, Typography } from "@mui/material";
+import { Modal, Box, Typography } from "@mui/material";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { formatPrice } from "./FormatPrice";
