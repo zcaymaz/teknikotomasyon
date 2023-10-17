@@ -77,6 +77,26 @@ export default function FullWidthTabs() {
         fetchWorkshops();
     }, []);
 
+    const handleDeleteService = (service) => {
+        const confirmMessage = "Servisi iptal etmek istediğinizden emin misiniz?";
+        const result = window.confirm(confirmMessage);
+    
+        if (result) {
+            setLoading(true);
+    
+            axios
+                .delete(`http://localhost:3001/api/service/${service._id}`)
+                .then(() => {
+                    fetchServices();
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
+    };
 
     const handleCompleteService = (service) => {
         const confirmMessage = "Servisi tamamlamak istediğinizden emin misiniz?";
@@ -152,6 +172,7 @@ export default function FullWidthTabs() {
                                             serviceType={service.serviceType}
                                             servicePrice={service.servicePrice}
                                             onClick={() => handleCompleteService(service)}
+                                            onClickDelete={() => handleDeleteService(service)}
                                         />
                                     ))}
                                 </Grid>
@@ -171,6 +192,7 @@ export default function FullWidthTabs() {
                                             serviceType={service.serviceType}
                                             servicePrice={service.servicePrice}
                                             onClick={() => handleCompleteService(service)}
+                                            onClickDelete={() => handleDeleteService(service)}
                                         />
                                     ))}
                                 </Grid>

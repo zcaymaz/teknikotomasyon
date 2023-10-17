@@ -7,7 +7,8 @@ router.route('/service')
 
 router.route('/service/:id')
     .get(ServiceCtrl.getServiceById)
-    .put(ServiceCtrl.updateServiceData);
+    .put(ServiceCtrl.updateServiceData)
+    .delete(ServiceCtrl.deleteService);
 
 router.route('/service/:id/archive')
     .put(ServiceCtrl.updateService)

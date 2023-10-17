@@ -76,15 +76,16 @@ const ServiceCtrl = {
         } catch (err) {
           return res.status(500).json({ msg: err.message });
         }
-    }
-    // deleteTask: async (req, res) => {
-    //     try {
-    //         await Task.findByIdAndDelete(req.params.id)
-    //         res.json({ msg: "Task Silindi." })
-    //     } catch (err) {
-    //         return res.status(500).json({ msg: 'ksadkalsmdklasd' })
-    //     }
-    // },
+    },
+
+    deleteService: async (req, res) => {
+        try {
+            await Service.findByIdAndDelete(req.params.id)
+            res.json({ msg: "Task Silindi." })
+        } catch (err) {
+            return res.status(500).json({ msg: 'Error Message' })
+        }
+    },
     // updateTask: async (req, res) => {
     //     try {
     //         const { name, useremail, title, address, price, description, type, images, roomnumber, saletype, features, squaremeters } = req.body;
