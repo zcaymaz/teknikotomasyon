@@ -1,10 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Modal, Box, Typography } from "@mui/material";
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import { formatPrice } from "./FormatPrice";
-import { formatPhoneNumber } from "./FormatNumber";
-import { formatDate } from "./FormatDate";
+import React, { useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import CustomButton from "./CustomButton";
 
@@ -22,27 +18,19 @@ const style = {
 };
 
 export default function ServiceModal(props) {
-  const { id } = props;
+  const {
+    serviceName,
+    serviceDate,
+    serviceGsmno,
+    serviceAddress,
+    serviceDesc,
+    serviceBrand,
+    serviceModel,
+    servicePrice,
+  } = props;
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [service, setService] = useState();
-
-  const fetchServices = async () => {
-    try {
-      const response = await axios.get(
-        `http://89.116.52.58:3001/api/service/${id}`
-      );
-      const filteredServices = response.data;
-      setService(filteredServices);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchServices();
-  }, []);
 
   const componentRef = useRef();
 
@@ -64,28 +52,28 @@ export default function ServiceModal(props) {
                 BEYAZ EŞYA TEKNİK SERVİS
                 <br />
                 <br />
-                Fiş Tarihi: {service ? formatDate(service.createdAt) : null}
+                Fiş Tarihi: {serviceDate}
                 <br />
                 <br />
-                Ad Soyad: {service?.serviceName}
+                Ad Soyad: {serviceName}
                 <br />
                 <br />
-                Telefon No: {service ? formatPhoneNumber(service.serviceGsmno) : null}
+                Telefon No: {serviceGsmno}
                 <br />
                 <br />
-                Adres: {service?.serviceAddress}
+                Adres: {serviceAddress}
                 <br />
                 <br />
-                Açıklama: {service?.serviceDesc}
+                Açıklama: {serviceDesc}
                 <br />
                 <br />
-                Ürün Marka: {service?.serviceBrand}
+                Ürün Marka: {serviceBrand}
                 <br />
                 <br />
-                Ürün Model: {service?.serviceModel}
+                Ürün Model: {serviceModel}
                 <br />
                 <br />
-                Tutar: {service ? formatPrice(service.servicePrice) : null}
+                Tutar: {servicePrice}
               </Typography>
             </center>
           </table>
