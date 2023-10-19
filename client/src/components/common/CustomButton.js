@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 
-function CustomButton({ backgroundColor, onClick, children, size, href, width, height, fontSize, component, to }) {
+function CustomButton({ backgroundColor, onClick, children, size, href, width, height, fontSize, component, to, type }) {
     return (
         <Button sx={{
             backgroundColor: backgroundColor,

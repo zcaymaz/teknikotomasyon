@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Grid, Stack, Button, Typography, Divider, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { Grid, Stack, Typography, Divider, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
 import axios from "axios";
+import CustomButton from "../../components/common/CustomButton";
 
 const ServiceAdd = () => {
   const [serviceName, setserviceName] = useState("");
@@ -46,7 +47,7 @@ const ServiceAdd = () => {
     <>
       <Grid container direction="row" p={3}>
         <Grid container direction="row" justifyContent="center" pb={2}>
-          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f" }}>
+          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '40px'}} >
             Servis Ekle
           </Typography>
           <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
@@ -163,11 +164,24 @@ const ServiceAdd = () => {
                 onChange={(e) => setserviceType(e.target.value)}
               />
             </Stack>
-            <center>
-              <Button className="serviceadd-button" type="submit">
+            <Stack
+              direction={{ xs: "col", sm: "row" }}
+              justifyContent={"center"}
+              spacing={3}
+              gap={2}
+              padding={1}
+              marginTop={3}
+            >
+              <CustomButton
+                fontSize="16px"
+                width="200px"
+                backgroundColor="#0c5834"
+                type="submit"
+                onClick={createService}
+              >
                 Ekle
-              </Button>
-            </center>
+              </CustomButton>
+            </Stack>
           </form>
         </Grid>
       </Grid>

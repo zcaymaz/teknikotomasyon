@@ -181,7 +181,7 @@ const ArchivedServices = (props) => {
   return (
     <>
       <center>
-        <Box spacing={2} sx={{ width: '97.5%' }}>
+        <Box spacing={2} sx={{ width: '97.5%', marginTop: {xs: '60px' , sm: '70px'}}}>
           <Grid
             container
             marginTop="1rem"

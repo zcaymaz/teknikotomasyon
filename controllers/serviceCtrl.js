@@ -81,7 +81,7 @@ const ServiceCtrl = {
     deleteService: async (req, res) => {
         try {
             await Service.findByIdAndDelete(req.params.id)
-            res.json({ msg: "Task Silindi." })
+            res.json({ msg: "Servis Silindi." })
         } catch (err) {
             return res.status(500).json({ msg: 'Error Message' })
         }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Stack, Button, Typography, Divider, Select, MenuItem, FormControl, InputLabel  } from "@mui/material";
+import { Grid, Stack, Typography, Divider, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
 import axios from "axios";
+import CustomButton from "../../components/common/CustomButton";
 import { useParams } from "react-router-dom";
 
 const ServiceUpdate = () => {
@@ -37,27 +38,36 @@ const ServiceUpdate = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const updateService = async (e) => {
+  const updateService = async (e, shouldComplete) => {
     e.preventDefault();
     try {
-      await axios.put(`http://89.116.52.58:3001/api/service/${id}`, {
-        archived: false,
-        serviceName,
-        serviceGsmno,
-        serviceAddress,
-        serviceDesc,
-        serviceBrand,
-        serviceModel,
-        serviceType,
-        servicePrice,
-      });
+        if (shouldComplete && !window.confirm("Girmiş olduğunuz bilgileri onaylayıp, servisi arşive gönderme işlemini tamamlamak istediğinize emin misiniz?")) {
+            return;
+        }
 
-      resetForm();
-      window.location.href = "/";
+        await axios.put(`http://89.116.52.58:3001/api/service/${id}`, {
+            archived: false,
+            serviceName,
+            serviceGsmno,
+            serviceAddress,
+            serviceDesc,
+            serviceBrand,
+            serviceModel,
+            serviceType,
+            servicePrice,
+        });
+
+        if (shouldComplete) {
+            await handleCompleteService({ id });
+        }
+
+        resetForm();
+        window.location.href = "/";
     } catch (err) {
-      console.error(err);
+        console.error(err);
     }
-  };
+};
+
 
   const resetForm = () => {
     setServiceName("");
@@ -70,10 +80,20 @@ const ServiceUpdate = () => {
     setServicePrice("");
   };
 
+  const handleCompleteService = async () => {
+    try {
+      await axios.put(`http://localhost:3001/api/service/${id}/archive`, { archived: true });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      window.location.href = "/";
+    }
+  };
+
   return (
     <Grid container direction="row" p={3}>
       <Grid container direction="row" justifyContent="center" pb={2}>
-        <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f" }}>
+        <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '40px'}}>
           Servis Güncelle
         </Typography>
         <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
@@ -180,11 +200,21 @@ const ServiceUpdate = () => {
             <FormInput size="medium" type="number" label="Ücret" name="servicePrice" id="servicePrice" value={servicePrice} required onChange={(e) => setServicePrice(e.target.value)} />
             <ServiceTypeInput value={serviceType} onChange={(e) => setServiceType(e.target.value)} />
           </Stack>
-          <center>
-            <Button className="serviceadd-button" type="submit">
+          <Stack
+            direction={{ xs: "col", sm: "row" }}
+            justifyContent={"center"}
+            spacing={3}
+            gap={2}
+            padding={1}
+            marginTop={3}
+          >
+            <CustomButton fontSize="16px" width="300px" type="submit" onClick={(e) => updateService(e, true)}>
+              Arşive Gönder
+            </CustomButton>
+            <CustomButton fontSize="16px" type="submit" width="200px" backgroundColor="#0c5834" onClick={(e) => updateService(e, false)}>
               Güncelle
-            </Button>
-          </center>
+            </CustomButton>
+          </Stack>
         </form>
       </Grid>
     </Grid>
