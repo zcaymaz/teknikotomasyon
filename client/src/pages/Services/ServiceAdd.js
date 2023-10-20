@@ -1,47 +1,42 @@
 import React, { useState } from "react";
-import { Grid, Stack, Typography, Divider } from "@mui/material";
-import {
-  FormInput,
-  MultilineFormInput,
-  ServiceTypeInput,
-  SelectBrand,
-  SelectModel,
-} from "../../components/common/Inputs";
+import { Grid, Stack, Typography, Divider, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
 import axios from "axios";
 import CustomButton from "../../components/common/CustomButton";
 
 const ServiceAdd = () => {
-  const [serviceName, setServiceName] = useState("");
-  const [serviceGsmno, setServiceGsmno] = useState("");
-  const [serviceAddress, setServiceAddress] = useState("");
-  const [serviceDesc, setServiceDesc] = useState("");
-  const [serviceBrand, setServiceBrand] = useState("");
-  const [serviceModel, setServiceModel] = useState("");
-  const [serviceType, setServiceType] = useState("");
-  const [servicePrice, setServicePrice] = useState("");
+  const [serviceName, setserviceName] = useState("");
+  const [serviceGsmno, setserviceGsmno] = useState("");
+  const [serviceAddress, setserviceAddress] = useState("");
+  const [serviceDesc, setserviceDesc] = useState("");
+  const [serviceBrand, setserviceBrand] = useState("");
+  const [serviceModel, setserviceModel] = useState("");
+  const [serviceType, setserviceType] = useState("");
+  const [servicePrice, setservicePrice] = useState("");
 
   const createService = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_ENDPOINT_SERVICEADD}`, {
-        servicename: serviceName,
-        servicegsmno: serviceGsmno,
-        serviceaddress: serviceAddress,
-        servicedesc: serviceDesc,
-        servicebrand: serviceBrand,
-        servicemodel: serviceModel,
-        servicetype: serviceType,
-        serviceprice: servicePrice,
-        username: localStorage.getItem("name"),
+      await axios.post("http://89.116.52.58:3001/api/service/", {
+        name: localStorage.getItem('name'),
+        serviceName: serviceName,
+        serviceGsmno: serviceGsmno,
+        serviceAddress: serviceAddress,
+        serviceDesc: serviceDesc,
+        serviceBrand: serviceBrand,
+        serviceModel: serviceModel,
+        serviceType: serviceType,
+        servicePrice: servicePrice,
       });
-      setServiceName("");
-      setServiceGsmno("");
-      setServiceAddress("");
-      setServiceDesc("");
-      setServiceBrand("");
-      setServiceModel("");
-      setServiceType("");
-      setServicePrice("");
+
+      setserviceName("");
+      setserviceGsmno("");
+      setserviceAddress("");
+      setserviceDesc("");
+      setserviceBrand("");
+      setserviceModel("");
+      setserviceType("");
+      setservicePrice("");
       window.location.href = "/";
     } catch (err) {
       alert(err.response.data.msg);
@@ -52,19 +47,14 @@ const ServiceAdd = () => {
     <>
       <Grid container direction="row" p={3}>
         <Grid container direction="row" justifyContent="center" pb={2}>
-          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#475467" }}>
-            Yeni Servis Ekle
+          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '50px'}} >
+            Servis Ekle
           </Typography>
-          <Divider sx={{ width: "100%", border: "1px solid #F2F4F7" }} />
+          <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
         </Grid>
-        <Grid p={5} item xs={12} bgcolor="#F2F4F7" borderRadius="12px">
+        <Grid p={5} item xs={12} bgcolor="#f0f0f0">
           <form onSubmit={createService}>
-            <Stack
-              direction={{ xs: "col", sm: "row" }}
-              spacing={3}
-              gap={2}
-              padding={1}
-            >
+            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
               <FormInput
                 size="medium"
                 label="Müşteri İsmi"
@@ -72,7 +62,7 @@ const ServiceAdd = () => {
                 id="serviceName"
                 value={serviceName}
                 required
-                onChange={(e) => setServiceName(e.target.value)}
+                onChange={(e) => setserviceName(e.target.value)}
               />
               <FormInput
                 size="medium"
@@ -84,24 +74,19 @@ const ServiceAdd = () => {
                 required
                 onChange={(e) => {
                   if (e.target.value.length <= 11) {
-                    setServiceGsmno(e.target.value);
+                    setserviceGsmno(e.target.value);
                   }
                 }}
               />
             </Stack>
-            <Stack
-              direction={{ xs: "col", sm: "row" }}
-              spacing={3}
-              gap={2}
-              padding={1}
-            >
+            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
               <MultilineFormInput
                 label="Açıklama"
                 name="serviceDesc"
                 id="serviceDesc"
                 value={serviceDesc}
                 required
-                onChange={(e) => setServiceDesc(e.target.value)}
+                onChange={(e) => setserviceDesc(e.target.value)}
               />
               <MultilineFormInput
                 label="Adres"
@@ -109,23 +94,61 @@ const ServiceAdd = () => {
                 id="serviceAddress"
                 value={serviceAddress}
                 required
-                onChange={(e) => setServiceAddress(e.target.value)}
+                onChange={(e) => setserviceAddress(e.target.value)}
               />
             </Stack>
-            <Stack
-              direction={{ xs: "col", sm: "row" }}
-              spacing={3}
-              gap={2}
-              padding={1}
-            >
-              <SelectBrand
-                value={serviceBrand}
-                onChange={(e) => setServiceBrand(e.target.value)}
-              />
-              <SelectModel
-                value={serviceModel}
-                onChange={(e) => setServiceModel(e.target.value)}
-              />
+            <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
+              <FormControl variant="outlined" size="medium" fullWidth>
+                <InputLabel id="serviceBrand-label">Ürün Markası</InputLabel>
+                <Select
+                  sx={{ bgcolor: 'white' }}
+                  labelId="serviceBrand-label"
+                  id="serviceBrand"
+                  label="Ürün Markası"
+                  value={serviceBrand}
+                  required
+                  onChange={(e) => setserviceBrand(e.target.value)}
+                >
+                  <MenuItem value="Arçelik">Arçelik</MenuItem>
+                  <MenuItem value="Beko">Beko</MenuItem>
+                  <MenuItem value="Bosch">Bosch</MenuItem>
+                  <MenuItem value="Siemens">Siemens</MenuItem>
+                  <MenuItem value="Profilo">Profilo</MenuItem>
+                  <MenuItem value="Vestel">Vestel</MenuItem>
+                  <MenuItem value="Regal">Regal</MenuItem>
+                  <MenuItem value="Altus">Altus</MenuItem>
+                  <MenuItem value="Finlüx">Finlüx</MenuItem>
+                  <MenuItem value="Electrolüx">Electrolüx</MenuItem>
+                  <MenuItem value="Samsung">Samsung</MenuItem>
+                  <MenuItem value="Brand3">Brand3</MenuItem>
+                  <MenuItem value="Brand3">Brand3</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl variant="outlined" size="medium" fullWidth>
+                <InputLabel id="serviceModel-label">Ürün</InputLabel>
+                <Select
+                  sx={{ bgcolor: 'white' }}
+                  labelId="serviceModel-label"
+                  id="serviceModel"
+                  label="Ürün"
+                  value={serviceModel}
+                  required
+                  onChange={(e) => setserviceModel(e.target.value)}
+                >
+                  <MenuItem value="Çamaşır Makinesi">Çamaşır Makinesi</MenuItem>
+                  <MenuItem value="Bulaşık Makinesi">Bulaşık Makinesi</MenuItem>
+                  <MenuItem value="Buzdolabı">Buzdolabı</MenuItem>
+                  <MenuItem value="Kombi">Kombi</MenuItem>
+                  <MenuItem value="Klima">Klima</MenuItem>
+                  <MenuItem value="Elektrikli Süpürge">Elektrikli Süpürge</MenuItem>
+                  <MenuItem value="Ocak">Ocak</MenuItem>
+                  <MenuItem value="Fırın">Fırın</MenuItem>
+                  <MenuItem value="Derin Dondurucu (Difriz)">Derin Dondurucu (Difriz)</MenuItem>
+                  <MenuItem value="Hermetik Sofben">Hermetik Şofben</MenuItem>
+                  <MenuItem value="Diğer">Diğer</MenuItem>
+                </Select>
+              </FormControl>
               <FormInput
                 size="medium"
                 type="number"
@@ -134,11 +157,11 @@ const ServiceAdd = () => {
                 id="servicePrice"
                 value={servicePrice}
                 required
-                onChange={(e) => setServicePrice(e.target.value)}
+                onChange={(e) => setservicePrice(e.target.value)}
               />
               <ServiceTypeInput
                 value={serviceType}
-                onChange={(e) => setServiceType(e.target.value)}
+                onChange={(e) => setserviceType(e.target.value)}
               />
             </Stack>
             <Stack
@@ -151,9 +174,10 @@ const ServiceAdd = () => {
             >
               <CustomButton
                 fontSize="16px"
-                type="submit"
                 width="200px"
                 backgroundColor="#0c5834"
+                type="submit"
+                onClick={createService}
               >
                 Ekle
               </CustomButton>
@@ -162,7 +186,7 @@ const ServiceAdd = () => {
         </Grid>
       </Grid>
     </>
-  );
+  )
 };
 
 export default ServiceAdd;

@@ -12,7 +12,7 @@ function CustomButton({ backgroundColor, onClick, children, size, href, width, h
             fontSize: fontSize ? fontSize : '15px',
             fontFamily: 'Poppins'
         }}
-            variant="contained" type={type} className='custom-button' onClick={onClick} size={size} href={href} component={component} to={to}
+            variant="contained" onClick={onClick} size={size} href={href} component={component} to={to}
         >
             {children}
         </Button>

@@ -13,6 +13,7 @@ import { formatDate } from "../../components/common/FormatDate";
 import { formatPhoneNumber } from "../../components/common/FormatNumber";
 import { formatPrice } from "../../components/common/FormatPrice";
 import CustomButton from "../common/CustomButton";
+import { User, Phone, MapPin, Paperclip, ScanBarcode, Puzzle, ArrowRightLeft, Banknote } from "lucide-react";
 
 const TextCard = (props) => {
 
@@ -21,82 +22,71 @@ const TextCard = (props) => {
       <Grid p={1} className="service-card">
         <CardHeader
           disableTypography
-          sx={{
-            textAlign: "right",
-            height: "0px",
-            fontSize: "16px",
-            marginRight: "1rem",
-          }}
+          sx={{ textAlign: "right", height: "0px", fontSize: "16px", marginRight: "1rem" }}
           title={"Tarih: " + formatDate(props.serviceDate)}
         />
         <CardContent>
-          {props.key}
           <Typography p={0.5} className="service-card-content">
-            <span className="service-card-label">Ad Soyad: </span>
+            <span className="service-card-label"><User size={18} /> Ad Soyad: </span>
             <br />
             {props.serviceName}
           </Typography>
           <Divider />
           <Typography p={0.5} className="service-card-content">
-            <span className="service-card-label">Tel No: </span>
+            <span className="service-card-label"><Phone size={18} /> Tel No: </span>
             <br />
-            {formatPhoneNumber(props.serviceGsmno)}
+            <a className="service-card-phone-number" href={`tel:${props.serviceGsmno}`}>{formatPhoneNumber(props.serviceGsmno)}</a>
           </Typography>
           <Divider />
           <Typography p={0.5} className="service-card-content">
-            <span className="service-card-label">Adres: </span>
+            <span className="service-card-label"><MapPin size={18} /> Adres: </span>
             <br />
             {props.serviceAddress}
           </Typography>
           <Divider />
           <Typography p={0.5} className="service-card-content">
-            <span className="service-card-label">Açıklama: </span>
+            <span className="service-card-label"><Paperclip size={18} /> Açıklama: </span>
             <br />
             {props.serviceDesc}
           </Typography>
           <Divider />
           <Typography p={0.5} className="service-card-content">
-            <span className="service-card-label">Marka: </span>
+            <span className="service-card-label"><ScanBarcode size={18} /> Marka: </span>
             <br />
             {props.serviceBrand}
           </Typography>
           <Divider />
           <Typography p={0.5} className="service-card-content">
-            <span className="service-card-label">Ürün Modeli: </span>
+            <span className="service-card-label"><Puzzle size={18} /> Ürün Modeli: </span>
             <br />
             {props.serviceModel}
           </Typography>
           <Divider />
           <Typography p={0.5} className="service-card-content">
-            <span className="service-card-label">Atölye/Servis: </span>
+            <span className="service-card-label"><ArrowRightLeft size={18} /> Atölye/Servis: </span>
             <br />
             {props.serviceType}
           </Typography>
           <Divider />
           <Typography p={0.5} className="service-card-content">
-            <span className="service-card-label">Ücret: </span>
+            <span className="service-card-label"><Banknote size={18} /> Ücret: </span>
             <br />
             {formatPrice(props.servicePrice)}
           </Typography>
           <Divider />
         </CardContent>
-        <CardActions sx={{ gap: "1.5rem", justifyContent: "center" }}>
-          <CustomButton onClick={props.onClick}>Tamamla</CustomButton>
-          <CustomButton
-            backgroundColor="#d1a507"
-            component={Link}
-            to={`/update/${props.serviceId}`}
-          >
+        <CardActions sx={{ gap: '1.5rem', justifyContent: 'center' }}>
+          <CustomButton onClick={props.onClick}>
+            Tamamla
+          </CustomButton>
+          <CustomButton backgroundColor="#d1a507" component={Link} to={`/update/${props.serviceId}`}>
             Düzenle
           </CustomButton>
           <CustomButton backgroundColor="#ff0000" onClick={props.onClickDelete}>
             İptal
           </CustomButton>
         </CardActions>
-        <CardActions
-          className="print-button"
-          sx={{ gap: "1.5rem", justifyContent: "center" }}
-        >
+        <CardActions className="print-button" sx={{ gap: '1.5rem', justifyContent: 'center' }}>
           <ServiceModal
             id={props.serviceId}
             serviceName={props.serviceName}

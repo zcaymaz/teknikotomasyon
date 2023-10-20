@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Modal, Box, Typography } from "@mui/material";
+import React, { useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import CustomButton from "./CustomButton";
 
@@ -47,9 +48,9 @@ export default function ServiceModal(props) {
           <table className="receipt-table" ref={componentRef}>
             <center>
               <Typography sx={{ padding: '1.2rem', fontSize: '14px', fontWeight: 'bold' }}>
-                <Typography sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
-                  {localStorage.getItem('businessname')}
-                </Typography>
+                <Typography sx={{ textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '2px', lineHeight: '10px' }}>{localStorage.getItem('name')}</Typography>
+                BEYAZ EŞYA TEKNİK SERVİS
+                <br />
                 <br />
                 Fiş Tarihi: {serviceDate}
                 <br />

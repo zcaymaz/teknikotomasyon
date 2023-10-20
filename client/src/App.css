@@ -12,9 +12,7 @@ body {
 .css-1vw5i9y-MuiButtonBase-root-MuiTab-root{
   font-family: Poppins !important;
 }
-.custom-button:hover {
-  background-color:var(--second-color) !important;
-}
+
 .navbar-link {
   text-decoration: none;
   color: white;
@@ -27,7 +25,7 @@ body {
 }
 
 .service-card-label {
-  font-size: 14px;
+  font-size: 18px;
   color: #3e3e3e;
 }
 
@@ -487,4 +485,8 @@ img {
   .print-button {
     display: none !important;
   }
+}
+
+.service-card-phone-number {
+  text-decoration: none;
 }
