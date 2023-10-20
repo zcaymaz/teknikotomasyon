@@ -47,7 +47,7 @@ const ServiceAdd = () => {
     <>
       <Grid container direction="row" p={3}>
         <Grid container direction="row" justifyContent="center" pb={2}>
-          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '40px'}} >
+          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '50px'}} >
             Servis Ekle
           </Typography>
           <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />

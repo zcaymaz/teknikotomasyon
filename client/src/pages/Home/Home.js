@@ -85,7 +85,7 @@ export default function FullWidthTabs() {
             setLoading(true);
     
             axios
-                .delete(`http://localhost:3001/api/service/${service._id}`)
+                .delete(`${apiBaseUrl}/api/service/${service._id}`)
                 .then(() => {
                     fetchServices();
                 })
@@ -124,7 +124,7 @@ export default function FullWidthTabs() {
     };
     return (
         <>
-            <Container maxWidth="none" sx={{marginTop: {xs: '60px' , sm: '70px'}}}>
+            <Container maxWidth="none" sx={{marginTop: {xs: '75px' , sm: '85px'}}}>
                 <AppBar  sx={{ bgcolor: '#0c5834', borderRadius: '30px 30px 0px 0px'}} position="static">
                     <Tabs
                         value={value}

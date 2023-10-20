@@ -23,7 +23,7 @@ function Header() {
 
   return (
     <center>
-      <AppBar position="fixed" sx={{ bgcolor: '#0c5834', borderRadius: '60px', width: '100%', zIndex: 1000 }}>
+      <AppBar position="fixed" sx={{ bgcolor: '#0c5834', borderRadius: '60px', width: '97%', zIndex: 1000, right: '0', left: '0', margin: '0 auto', marginTop: '10px' }}>
         <Container maxWidth="xl">
           <Toolbar>
 

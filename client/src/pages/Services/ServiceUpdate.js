@@ -6,6 +6,7 @@ import CustomButton from "../../components/common/CustomButton";
 import { useParams } from "react-router-dom";
 
 const ServiceUpdate = () => {
+  const apiBaseUrl = "http://89.116.52.58:3001";
   const { id } = useParams();
   const [serviceName, setServiceName] = useState("");
   const [serviceGsmno, setServiceGsmno] = useState("");
@@ -82,7 +83,7 @@ const ServiceUpdate = () => {
 
   const handleCompleteService = async () => {
     try {
-      await axios.put(`http://localhost:3001/api/service/${id}/archive`, { archived: true });
+      await axios.put(`${apiBaseUrl}/api/service/${id}/archive`, { archived: true });
     } catch (error) {
       console.error(error);
     } finally {
@@ -93,7 +94,7 @@ const ServiceUpdate = () => {
   return (
     <Grid container direction="row" p={3}>
       <Grid container direction="row" justifyContent="center" pb={2}>
-        <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '40px'}}>
+        <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '50px'}}>
           Servis Güncelle
         </Typography>
         <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
