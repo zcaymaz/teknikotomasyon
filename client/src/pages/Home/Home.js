@@ -88,6 +88,7 @@ export default function FullWidthTabs() {
                 .delete(`${apiBaseUrl}/api/service/${service._id}`)
                 .then(() => {
                     fetchServices();
+                    fetchWorkshops();
                 })
                 .catch((error) => {
                     console.error(error);

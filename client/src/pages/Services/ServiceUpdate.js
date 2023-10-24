@@ -204,6 +204,7 @@ const ServiceUpdate = () => {
           <Stack
             direction={{ xs: "col", sm: "row" }}
             justifyContent={"center"}
+            alignItems={"center"}
             spacing={3}
             gap={2}
             padding={1}
