@@ -21,11 +21,11 @@ export const FormInput = (props) => {
 };
 export const ServiceTypeInput = ({ value, onChange }) => {
   return (
-    <FormControl component="fieldset" sx={{width:'100%',height:'50px'}}>
+    <FormControl component="fieldset" sx={{ width: '100%', height: '50px' }}>
       <FormLabel component="legend">Atölye/Servis</FormLabel>
       <RadioGroup value={value} onChange={onChange} row>
-        <FormControlLabel value="Atölye" control={<Radio />} label="Atölye" />
-        <FormControlLabel value="Servis" control={<Radio />} label="Servis" />
+        <FormControlLabel value="Atölye" control={<Radio required />} label="Atölye" />
+        <FormControlLabel value="Servis" control={<Radio required />} label="Servis" />
       </RadioGroup>
     </FormControl>
   );
