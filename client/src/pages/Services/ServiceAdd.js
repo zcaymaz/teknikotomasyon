@@ -47,7 +47,7 @@ const ServiceAdd = () => {
     <>
       <Grid container direction="row" p={3}>
         <Grid container direction="row" justifyContent="center" pb={2}>
-          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '50px'}} >
+          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '50px' }} >
             Servis Ekle
           </Typography>
           <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
@@ -111,17 +111,26 @@ const ServiceAdd = () => {
                 >
                   <MenuItem value="Arçelik">Arçelik</MenuItem>
                   <MenuItem value="Beko">Beko</MenuItem>
+                  <MenuItem value="Altus">Altus</MenuItem>
+                  <MenuItem value="Grundig">Grundig</MenuItem>
                   <MenuItem value="Bosch">Bosch</MenuItem>
                   <MenuItem value="Siemens">Siemens</MenuItem>
                   <MenuItem value="Profilo">Profilo</MenuItem>
                   <MenuItem value="Vestel">Vestel</MenuItem>
                   <MenuItem value="Regal">Regal</MenuItem>
-                  <MenuItem value="Altus">Altus</MenuItem>
                   <MenuItem value="Finlüx">Finlüx</MenuItem>
+                  <MenuItem value="Ariston">Ariston</MenuItem>
+                  <MenuItem value="Indesit">İndesit</MenuItem>
                   <MenuItem value="Electrolüx">Electrolüx</MenuItem>
                   <MenuItem value="Samsung">Samsung</MenuItem>
-                  <MenuItem value="Brand3">Brand3</MenuItem>
-                  <MenuItem value="Brand3">Brand3</MenuItem>
+                  <MenuItem value="Baymak">Baymak</MenuItem>
+                  <MenuItem value="Demirdöküm">Demirdöküm</MenuItem>
+                  <MenuItem value="Viessman">Viessman</MenuItem>
+                  <MenuItem value="Ferroli">Ferroli</MenuItem>
+                  <MenuItem value="Buderus">Buderus</MenuItem>
+                  <MenuItem value="Vaillant">Vaillant</MenuItem>
+                  <MenuItem value="Airfel">Airfel</MenuItem>
+                  <MenuItem value="Protherm">Protherm</MenuItem>
                 </Select>
               </FormControl>
 
