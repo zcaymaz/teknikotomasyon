@@ -177,7 +177,6 @@ const ServiceAdd = () => {
                 width="200px"
                 backgroundColor="#0c5834"
                 type="submit"
-                onClick={createService}
               >
                 Ekle
               </CustomButton>

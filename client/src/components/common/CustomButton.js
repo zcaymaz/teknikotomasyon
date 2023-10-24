@@ -10,9 +10,9 @@ function CustomButton({ backgroundColor, onClick, children, size, href, width, h
             width: width,
             height: height,
             fontSize: fontSize ? fontSize : '15px',
-            fontFamily: 'Poppins'
+            fontFamily: 'Poppins',
         }}
-            variant="contained" onClick={onClick} size={size} href={href} component={component} to={to}
+            variant="contained" onClick={onClick} size={size} href={href} component={component} to={to} type={type}
         >
             {children}
         </Button>
