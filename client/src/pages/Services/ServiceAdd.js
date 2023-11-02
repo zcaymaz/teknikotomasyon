@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Stack, Typography, Divider, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { Grid, Stack, Typography, Divider, FormControl, Autocomplete, TextField } from "@mui/material";
 import { FormInput, MultilineFormInput, ServiceTypeInput } from "../../components/common/Inputs";
 import axios from "axios";
 import CustomButton from "../../components/common/CustomButton";
@@ -99,64 +99,82 @@ const ServiceAdd = () => {
             </Stack>
             <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
               <FormControl variant="outlined" size="medium" fullWidth>
-                <InputLabel id="serviceBrand-label">Ürün Markası</InputLabel>
-                <Select
-                  sx={{ bgcolor: 'white' }}
-                  labelId="serviceBrand-label"
+                <Autocomplete
+                  sx={{bgcolor: 'white'}}
                   id="serviceBrand"
-                  label="Ürün Markası"
+                  options={[
+                    "Arçelik",
+                    "Beko",
+                    "Altus",
+                    "Grundig",
+                    "Bosch",
+                    "Siemens",
+                    "Profilo",
+                    "Vestel",
+                    "Regal",
+                    "Finlüx",
+                    "Ariston",
+                    "İndesit",
+                    "Electrolüx",
+                    "Samsung",
+                    "Baymak",
+                    "Demirdöküm",
+                    "Viessman",
+                    "Ferroli",
+                    "Buderus",
+                    "Vaillant",
+                    "Airfel",
+                    "Protherm",
+                  ]}
                   value={serviceBrand}
-                  required
-                  onChange={(e) => setserviceBrand(e.target.value)}
-                >
-                  <MenuItem value="Arçelik">Arçelik</MenuItem>
-                  <MenuItem value="Beko">Beko</MenuItem>
-                  <MenuItem value="Altus">Altus</MenuItem>
-                  <MenuItem value="Grundig">Grundig</MenuItem>
-                  <MenuItem value="Bosch">Bosch</MenuItem>
-                  <MenuItem value="Siemens">Siemens</MenuItem>
-                  <MenuItem value="Profilo">Profilo</MenuItem>
-                  <MenuItem value="Vestel">Vestel</MenuItem>
-                  <MenuItem value="Regal">Regal</MenuItem>
-                  <MenuItem value="Finlüx">Finlüx</MenuItem>
-                  <MenuItem value="Ariston">Ariston</MenuItem>
-                  <MenuItem value="Indesit">İndesit</MenuItem>
-                  <MenuItem value="Electrolüx">Electrolüx</MenuItem>
-                  <MenuItem value="Samsung">Samsung</MenuItem>
-                  <MenuItem value="Baymak">Baymak</MenuItem>
-                  <MenuItem value="Demirdöküm">Demirdöküm</MenuItem>
-                  <MenuItem value="Viessman">Viessman</MenuItem>
-                  <MenuItem value="Ferroli">Ferroli</MenuItem>
-                  <MenuItem value="Buderus">Buderus</MenuItem>
-                  <MenuItem value="Vaillant">Vaillant</MenuItem>
-                  <MenuItem value="Airfel">Airfel</MenuItem>
-                  <MenuItem value="Protherm">Protherm</MenuItem>
-                </Select>
+                  onChange={(e, newValue) => setserviceBrand(newValue)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Ürün Markası"
+                      variant="outlined"
+                      required
+                    />
+                  )}
+                  freeSolo
+                  onInputChange={(e, newValue) => {
+                    setserviceBrand(newValue);
+                  }}
+                />
               </FormControl>
 
               <FormControl variant="outlined" size="medium" fullWidth>
-                <InputLabel id="serviceModel-label">Ürün</InputLabel>
-                <Select
-                  sx={{ bgcolor: 'white' }}
-                  labelId="serviceModel-label"
+                <Autocomplete
+                  sx={{bgcolor: 'white'}}
                   id="serviceModel"
-                  label="Ürün"
+                  options={[
+                    "Çamaşır Makinesi",
+                    "Bulaşık Makinesi",
+                    "Buzdolabı",
+                    "Kombi",
+                    "Klima",
+                    "Elektrikli Süpürge",
+                    "Ocak",
+                    "Fırın",
+                    "Derin Dondurucu (Difriz)",
+                    "Hermetik Şofben",
+                    "Diğer",
+                  ]}
                   value={serviceModel}
-                  required
-                  onChange={(e) => setserviceModel(e.target.value)}
-                >
-                  <MenuItem value="Çamaşır Makinesi">Çamaşır Makinesi</MenuItem>
-                  <MenuItem value="Bulaşık Makinesi">Bulaşık Makinesi</MenuItem>
-                  <MenuItem value="Buzdolabı">Buzdolabı</MenuItem>
-                  <MenuItem value="Kombi">Kombi</MenuItem>
-                  <MenuItem value="Klima">Klima</MenuItem>
-                  <MenuItem value="Elektrikli Süpürge">Elektrikli Süpürge</MenuItem>
-                  <MenuItem value="Ocak">Ocak</MenuItem>
-                  <MenuItem value="Fırın">Fırın</MenuItem>
-                  <MenuItem value="Derin Dondurucu (Difriz)">Derin Dondurucu (Difriz)</MenuItem>
-                  <MenuItem value="Hermetik Sofben">Hermetik Şofben</MenuItem>
-                  <MenuItem value="Diğer">Diğer</MenuItem>
-                </Select>
+                  onChange={(e, newValue) => setserviceModel(newValue)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Ürün"
+                      variant="outlined"
+                      required
+                    />
+                  )}
+                  freeSolo
+                  onInputChange={(e, newValue) => {
+                    setserviceModel(newValue);
+                  }}
+                />
               </FormControl>
               <FormInput
                 size="medium"
@@ -183,7 +201,7 @@ const ServiceAdd = () => {
             >
               <CustomButton
                 fontSize="16px"
-                width="200px"
+                width="300px"
                 backgroundColor="#0c5834"
                 type="submit"
               >
