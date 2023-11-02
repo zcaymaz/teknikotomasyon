@@ -45,14 +45,14 @@ const ServiceAdd = () => {
 
   return (
     <>
-      <Grid container direction="row" p={3}>
+      <Grid container direction="row" p={2}>
         <Grid container direction="row" justifyContent="center" pb={2}>
-          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#0f0f0f", marginTop: '50px' }} >
-            Servis Ekle
+          <Typography pt={2} pb={1} sx={{ fontSize: "32px", color: "#475467", marginTop: '80px' }} >
+            Yeni Servis Ekle
           </Typography>
-          <Divider sx={{ width: "100%", border: "1px solid #dedede" }} />
+          <Divider sx={{ width: "100%", border: "1px solid #f2f4f7" }} />
         </Grid>
-        <Grid p={5} item xs={12} bgcolor="#f0f0f0">
+        <Grid p={5} item xs={12} bgcolor="#f2f4f7">
           <form onSubmit={createService}>
             <Stack direction={{ xs: 'col', sm: 'row' }} spacing={3} gap={2} padding={1}>
               <FormInput
