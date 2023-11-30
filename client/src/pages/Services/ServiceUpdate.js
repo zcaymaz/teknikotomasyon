@@ -150,7 +150,7 @@ const ServiceUpdate = () => {
             <FormControl variant="outlined" size="medium" fullWidth>
               <Autocomplete
                 id="serviceBrand"
-                sx={{bgcolor: 'white'}}
+                sx={{ bgcolor: 'white' }}
                 options={[
                   "Arçelik",
                   "Beko",
@@ -195,7 +195,7 @@ const ServiceUpdate = () => {
             <FormControl variant="outlined" size="medium" fullWidth>
               <Autocomplete
                 id="serviceModel"
-                sx={{bgcolor: 'white'}}
+                sx={{ bgcolor: 'white' }}
                 options={[
                   "Çamaşır Makinesi",
                   "Bulaşık Makinesi",
@@ -225,7 +225,45 @@ const ServiceUpdate = () => {
                 }}
               />
             </FormControl>
+            <FormControl variant="outlined" size="medium" fullWidth>
+              <Autocomplete
+                sx={{ bgcolor: 'white' }}
+                id="serviceModel"
+                options={[
+                  "15 Gün",
+                  "1 Ay",
+                  "3 Ay",
+                  "6 Ay",
+                  "1 Yıl"
+                ]}
+                // value={serviceModel}
+                // onChange={(e, newValue) => setserviceModel(newValue)}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Garanti"
+                    variant="outlined"
+                    required
+                  />
+                )}
+                freeSolo
+                onInputChange={(e, newValue) => {
+                  // setserviceModel(newValue)
+                  ;
+                }}
+              />
+            </FormControl>
             <FormInput size="medium" type="number" label="Ücret" name="servicePrice" id="servicePrice" value={servicePrice} required onChange={(e) => setServicePrice(e.target.value)} />
+            <FormInput
+              size="medium"
+              type="text"
+              label="Teknisyen"
+              // name="servicePrice"
+              // id="servicePrice"
+              // value={servicePrice}
+              required
+            // onChange={(e) => setservicePrice(e.target.value)}
+            />
             <ServiceTypeInput value={serviceType} onChange={(e) => setServiceType(e.target.value)} />
           </Stack>
           <Stack

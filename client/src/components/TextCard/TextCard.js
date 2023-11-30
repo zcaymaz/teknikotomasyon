@@ -13,7 +13,7 @@ import { formatDate } from "../../components/common/FormatDate";
 import { formatPhoneNumber } from "../../components/common/FormatNumber";
 import { formatPrice } from "../../components/common/FormatPrice";
 import CustomButton from "../common/CustomButton";
-import { User, Phone, MapPin, Paperclip, ScanBarcode, Puzzle, ArrowRightLeft, Banknote } from "lucide-react";
+import { User, UserCog, Phone, MapPin, Paperclip, ScanBarcode, Puzzle, ArrowRightLeft, Banknote } from "lucide-react";
 
 const TextCard = (props) => {
 
@@ -64,6 +64,12 @@ const TextCard = (props) => {
           <Divider />
           <Typography p={0.5} className="service-card-content">
             <span className="service-card-label"><ArrowRightLeft size={18} /> Atölye/Servis: </span>
+            <br />
+            {props.serviceType}
+          </Typography>
+          <Divider />
+          <Typography p={0.5} className="service-card-content">
+            <span className="service-card-label"><UserCog size={18} /> Teknisyen: </span>
             <br />
             {props.serviceType}
           </Typography>

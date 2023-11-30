@@ -4,6 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Visibility as VisibilityIcon, Clear as ClearIcon } from "@mui/icons-material";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useReactToPrint } from "react-to-print";
 import { formatDate } from "../../components/common/FormatDate";
 import { formatPrice } from "../../components/common/FormatPrice";
 import { formatPhoneNumber } from "../../components/common/FormatNumber";
@@ -113,6 +114,10 @@ const ArchivedServices = (props) => {
     fetchArchivedServices();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, startDate, endDate, addressFilter]);
+  
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const columns = [
     {
@@ -157,17 +162,27 @@ const ArchivedServices = (props) => {
         </>
       ),
     },
-    { field: "serviceType", headerName: "Atölye/Servis", flex: 1 },
+    { field: "serviceType", headerName: "Atölye/Servis", flex: 0.9 },
     {
       field: "servicePrice",
       headerName: "Ücret",
-      flex: 1,
+      flex: 0.7,
       valueFormatter: (params) => formatPrice(params.value),
+    },
+    {
+      field: "serviceTeknisyen",
+      headerName: "Teknisyen",
+      flex: 0.9,
+    },
+    {
+      field: "serviceGaranti",
+      headerName: "Garanti",
+      flex: 0.7,
     },
     {
       field: "actions",
       headerName: "İşlemler",
-      flex: 0.8,
+      flex: 0.9,
       renderCell: (params) => (
         <Stack direction="row" spacing={1}>
           <CustomButton backgroundColor="#d1a507" component={Link} to={`/update/${params.row.id}`}>
@@ -181,7 +196,7 @@ const ArchivedServices = (props) => {
   return (
     <>
       <center>
-        <Box spacing={2} sx={{ width: '97.5%', marginTop: {xs: '65px' , sm: '75px'}}}>
+        <Box spacing={2} sx={{ width: '97.5%', marginTop: { xs: '65px', sm: '75px' } }}>
           <Grid
             container
             marginTop="1rem"
@@ -303,6 +318,11 @@ const ArchivedServices = (props) => {
                     <br />
                     <br />
                     Tutar: {selectedRow ? formatPrice(selectedRow.servicePrice) : null}
+                    <br />
+                    <br />
+                    <CustomButton backgroundColor="teal" onClick={handlePrint}>
+                      Yazdır
+                    </CustomButton>
                   </>
                 )}
               </Typography>
