@@ -6,7 +6,7 @@ import CustomButton from "../../components/common/CustomButton";
 import { useParams } from "react-router-dom";
 
 const ServiceUpdate = () => {
-  const apiBaseUrl = "http://89.116.52.58:3001";
+  const apiBaseUrl = "http://localhost:3001";
   const { id } = useParams();
   const [serviceName, setServiceName] = useState("");
   const [serviceGsmno, setServiceGsmno] = useState("");
@@ -20,7 +20,7 @@ const ServiceUpdate = () => {
 
   const fetchService = async () => {
     try {
-      const response = await axios.get(`http://89.116.52.58:3001/api/service/${id}`);
+      const response = await axios.get(`http://localhost:3001/api/service/${id}`);
       const serviceData = response.data;
       setServiceName(serviceData.serviceName);
       setServiceGsmno(serviceData.serviceGsmno);
@@ -48,7 +48,7 @@ const ServiceUpdate = () => {
         return;
       }
 
-      await axios.put(`http://89.116.52.58:3001/api/service/${id}`, {
+      await axios.put(`http://localhost:3001/api/service/${id}`, {
         archived: false,
         serviceName,
         serviceGsmno,

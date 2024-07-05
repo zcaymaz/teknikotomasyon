@@ -16,8 +16,8 @@ export const Login = () => {
   const loginSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://89.116.52.58:3001/user/login', user);
-      localStorage.setItem('name', res.data.name);
+      const res = await axios.post('http://localhost:3001/user/login', user);
+      localStorage.setItem('token', res.data.token);
       window.location.href = '/';
     } catch (err) {
       alert(err.response.data.msg);

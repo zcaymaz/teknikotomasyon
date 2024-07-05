@@ -48,7 +48,7 @@ const ArchivedServices = (props) => {
 
   const fetchArchivedServices = async () => {
     try {
-      const response = await axios.post("http://89.116.52.58:3001/api/service/name", { name: localStorage.getItem('name') });
+      const response = await axios.post("http://localhost:3001/api/service/name", { name: localStorage.getItem('name') });
       const filteredServices = response.data.filter((service) => service.isArchived);
 
       let filteredBySearch = [...filteredServices];

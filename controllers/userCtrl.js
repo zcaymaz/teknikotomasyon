@@ -39,32 +39,26 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    login: async (req, res) =>{
+    login: async (req, res) => {
         try {
-            const {name, password} = req.body;
-
-            const user = await Users.findOne({name})
-            if(!user) return res.status(400).json({msg: "Kullanıcı Bulunamadı."})
-
+            const { name, password } = req.body;
+    
+            const user = await Users.findOne({ name })
+            if (!user) return res.status(400).json({ msg: "Kullanıcı Bulunamadı." })
+    
             const isMatch = await bcrypt.compare(password, user.password)
-            if(!isMatch) return res.status(400).json({msg: "Şifre yanlış."})
+            if (!isMatch) return res.status(400).json({ msg: "Şifre yanlış." })
+    
+            const userObject = user.toObject();
 
-            // If login success , create access token and refresh token
-            // const accesstoken = createAccessToken({id: user._id})
-            // const refreshtoken = createRefreshToken({id: user._id})
-
-            // res.cookie('refreshtoken', refreshtoken, {
-            //     httpOnly: true,
-            //     path: 'http://localhost:3001/user/refresh_token',
-            //     maxAge: 7*24*60*60*1000 // 7d
-            // })
-
-            res.json({ name:user.name })
-
+            const accesstoken = jwt.sign(userObject, process.env.ACCESS_TOKEN_SECRET)
+            res.json({ token: accesstoken })
+    
         } catch (err) {
-            return res.status(500).json({msg: err.message})
+            return res.status(500).json({ msg: err.message })
         }
     },
+    
     logout: async (req, res) =>{
         try {
             res.clearCookie('refreshtoken', {path: 'http://localhost:3001/user/refresh_token'})
@@ -127,12 +121,12 @@ const userCtrl = {
  }
 
 
-const createAccessToken = (user) =>{
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '11m'})
-}
-const createRefreshToken = (user) =>{
-    return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '7d'})
-}
+// const createAccessToken = (user) =>{
+//     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '11m'})
+// }
+// const createRefreshToken = (user) =>{
+//     return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '7d'})
+// }
 
 module.exports = userCtrl
 

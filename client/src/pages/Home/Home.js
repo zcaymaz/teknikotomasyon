@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Typography, AppBar, Tabs, Tab, Box, Container, Paper, CircularProgress } from '@mui/material';
 import TextCard from "../../components/TextCard/TextCard";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 
 function TabPanel(props) {
@@ -42,16 +43,19 @@ function a11yProps(index) {
 }
 
 export default function FullWidthTabs() {
-    const apiBaseUrl = "http://89.116.52.58:3001";
+    const apiBaseUrl = "http://localhost:3001";
     const theme = useTheme();
     const [value, setValue] = useState(0);
     const [services, setServices] = useState([]);
     const [workshop, setWorkshop] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+
     const fetchServices = async () => {
         try {
-            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: localStorage.getItem('name') });
+            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: decodedToken.name });
             const filteredServices = res.data.filter((service) => service.serviceType === "Servis" && !service.isArchived);
             setServices(filteredServices.reverse());
         } catch (error) {
@@ -63,7 +67,7 @@ export default function FullWidthTabs() {
 
     const fetchWorkshops = async () => {
         try {
-            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: localStorage.getItem('name') });
+            const res = await axios.post(`${apiBaseUrl}/api/service/name`, { name: decodedToken.name });
             const filteredWorkshops = res.data.filter((service) => service.serviceType === "Atölye" && !service.isArchived);
             setWorkshop(filteredWorkshops.reverse());
         } catch (error) {

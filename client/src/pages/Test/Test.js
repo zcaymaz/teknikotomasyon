@@ -199,7 +199,7 @@ const ArchivedServices = () => {
 
   const fetchArchivedServices = async () => {
     try {
-      await axios.post(`http://89.116.52.58:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterService(res.data) });
+      await axios.post(`http://localhost:3001/api/service/name`, { name: localStorage.getItem('name') }).then((res) => { setNonFilterService(res.data) });
       const filteredServices = nonFilterService.filter((service) => service.isArchived);
       const sortedServices = filteredServices.sort((a, b) => {
         const updatedAtA = new Date(a.updatedAt);
@@ -227,7 +227,7 @@ const ArchivedServices = () => {
   const handleSearch = async () => {
     if (searchTerm !== "") {
       try {
-        const response = await axios.get("http://89.116.52.58:3001/api/service/");
+        const response = await axios.get("http://localhost:3001/api/service/");
         const filteredServices = response.data.filter(
           (service) =>
             service.isArchived &&
